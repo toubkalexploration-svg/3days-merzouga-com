@@ -26,7 +26,7 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
 
   return (
     <div className="mx-auto max-w-7xl">
-      <div className="relative overflow-hidden rounded-md bg-[#f1dfbf] shadow-[0_22px_70px_rgba(32,25,19,0.14)]">
+      <div className="relative overflow-hidden rounded-lg bg-[#f1dfbf] shadow-[0_24px_80px_rgba(32,25,19,0.16)] ring-1 ring-white/80">
         <div className="relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
           <Image
             src={activeImage}
@@ -69,8 +69,8 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
             key={image}
             type="button"
             onClick={() => setActiveIndex(index)}
-            className={`relative aspect-[4/3] overflow-hidden rounded-md border-2 bg-[#f1dfbf] transition sm:h-20 sm:w-28 ${
-              index === activeIndex ? "border-[#b5532f]" : "border-transparent opacity-75 hover:opacity-100"
+            className={`relative aspect-[4/3] overflow-hidden rounded-md border-2 bg-[#f1dfbf] shadow-sm transition sm:h-20 sm:w-28 ${
+              index === activeIndex ? "border-[#b5532f] opacity-100 shadow-[0_10px_24px_rgba(181,83,47,0.18)]" : "border-white opacity-75 hover:opacity-100"
             }`}
             aria-label={`Show image ${index + 1}`}
           >

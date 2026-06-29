@@ -87,9 +87,9 @@ export const tours: Tour[] = [
       "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1000&q=78",
     ],
     summary:
-      "A complete Marrakech to Fes desert route with Ait Ben Haddou, Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and a Sahara camp night.",
+      "A complete 3-day Marrakech to Fes desert tour via Merzouga, with Ait Ben Haddou, Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and a Sahara camp night.",
     positioning:
-      "Best for travelers who want to connect Marrakech and Fes through the Sahara instead of returning by the same road.",
+      "Best for travelers who want to travel from Marrakech to Fes through the Sahara Desert instead of returning by the same road.",
     route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Fes"],
     highlights: [
       "Cross the High Atlas Mountains by the Tizi n'Tichka Pass",
@@ -149,17 +149,22 @@ export const tours: Tour[] = [
         answer:
           "Yes. The camel trek across the Erg Chebbi dunes is included, with sunset on the dunes and one night in a traditional Berber desert camp.",
       },
+      {
+        question: "How much driving is involved on this Marrakech to Fes desert tour?",
+        answer:
+          "Expect long but scenic travel days. The route is designed with mountain viewpoints, kasbahs, Dades Valley, Todra Gorge, Ziz Valley, and short comfort stops to break up the road time.",
+      },
       ...commonFaqs,
     ],
     seo: {
       title: "3-Day Marrakech to Fes Desert Tour via Merzouga",
       description:
-        "Book a 3-day Marrakech to Fes desert tour through Ait Ben Haddou, Dades Valley, Todra Gorge, Merzouga, Erg Chebbi camel trek, and Sahara camp.",
+        "Book a 3-day Marrakech to Fes desert tour via Merzouga, Ait Ben Haddou, Dades Valley, Todra Gorge, Erg Chebbi camel trek, and Sahara desert camp.",
     },
   },
   {
-    slug: "3-day-merzouga-desert-tour",
-    title: "3-Day Merzouga Desert Tour",
+    slug: "3-day-marrakech-to-merzouga-desert-tour",
+    title: "3-Day Marrakech to Merzouga Desert Tour",
     shortTitle: "3-Day Merzouga Tour",
     duration: "3 days / 2 nights",
     startingPrice: 115,
@@ -173,9 +178,9 @@ export const tours: Tour[] = [
       "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1000&q=78",
     ],
     summary:
-      "Our signature Marrakech to Merzouga desert tour with Dades Valley, Todra Gorge, camel trekking, and a night below the Erg Chebbi dunes.",
+      "Our classic 3-day Marrakech to Merzouga desert tour with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and a Sahara camp night.",
     positioning:
-      "The best first Merzouga tour from Marrakech for travelers who want the full Sahara experience in three carefully organized days.",
+      "The best first Merzouga tour from Marrakech for travelers who want the full Sahara Desert experience in three carefully organized days.",
     route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Draa Valley"],
     highlights: [
       "Visit Ait Ben Haddou and Ouarzazate on the way south",
@@ -189,7 +194,7 @@ export const tours: Tour[] = [
         day: "Day 1",
         title: "Marrakech to Dades Valley",
         description:
-          "Start your 3-day Merzouga desert tour from Marrakech by crossing the High Atlas Mountains and the Tizi n'Tichka road toward Ait Ben Haddou. After the kasbah visit, continue to Ouarzazate for Taourirt Kasbah, one of the most important historic stops on the route, then travel through palm valleys and the Valley of Roses. Arrive in Dades Valley in time for a light walk near the river and Dades Gorges before dinner at your hotel or kasbah.",
+          "Start your 3-day Marrakech to Merzouga desert tour by crossing the High Atlas Mountains and the Tizi n'Tichka road toward Ait Ben Haddou. After the kasbah visit, continue to Ouarzazate for Taourirt Kasbah, one of the most important historic stops on the route, then travel through palm valleys and the Valley of Roses. Arrive in Dades Valley in time for a light walk near the river and Dades Gorges before dinner at your hotel or kasbah.",
         stops: ["High Atlas", "Ait Ben Haddou", "Taourirt Kasbah", "Dades Valley", "Dades Gorges"],
       },
       {
@@ -221,17 +226,27 @@ export const tours: Tour[] = [
         answer:
           "Yes. Three days is the classic route for travelers who want Erg Chebbi dunes, Dades Valley, Todra Gorge, and a real desert camp without adding extra nights.",
       },
+      {
+        question: "Does this 3-day Merzouga tour return to Marrakech?",
+        answer:
+          "Yes. This itinerary starts in Marrakech and returns to Marrakech on day three, usually through pre-Sahara valleys, oasis landscapes, and the High Atlas road.",
+      },
+      {
+        question: "Can I upgrade the Merzouga desert camp?",
+        answer:
+          "Yes. Standard and upgraded camp options can be arranged depending on availability, including more comfortable tents and private bathroom options when requested in advance.",
+      },
       ...commonFaqs,
     ],
     seo: {
-      title: "3-Day Merzouga Desert Tour from Marrakech",
+      title: "3-Day Marrakech to Merzouga Desert Tour",
       description:
-        "Book the specialist 3-day Merzouga desert tour from Marrakech with Dades Valley, Todra Gorge, camel trekking, Erg Chebbi camp, and flexible private options.",
+        "Book the specialist 3-day Marrakech to Merzouga desert tour with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, Sahara camp, and private options.",
     },
   },
   {
-    slug: "4-day-merzouga-desert-adventure",
-    title: "4-Day Merzouga Desert Adventure",
+    slug: "4-day-marrakech-to-merzouga-desert-tour",
+    title: "4-Day Marrakech to Merzouga Desert Tour",
     shortTitle: "4-Day Merzouga Adventure",
     duration: "4 days / 3 nights",
     startingPrice: 185,
@@ -245,9 +260,9 @@ export const tours: Tour[] = [
       "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1000&q=78",
     ],
     summary:
-      "A slower premium Merzouga adventure with more time for valleys, gorges, desert culture, sunrise dunes, and relaxed private pacing.",
+      "A slower 4-day Marrakech to Merzouga desert adventure with more time for valleys, gorges, desert culture, sunrise dunes, and relaxed private pacing.",
     positioning:
-      "Best for travelers who want the Merzouga route to feel immersive rather than rushed, with more time in the desert and southern valleys.",
+      "Best for travelers who want the Marrakech to Merzouga route to feel immersive rather than rushed, with more time in the Sahara and southern valleys.",
     route: ["Marrakech", "Skoura", "Dades Valley", "Todra Gorge", "Merzouga", "Ouarzazate"],
     highlights: [
       "A calmer four-day pace with richer stops",
@@ -300,12 +315,22 @@ export const tours: Tour[] = [
         answer:
           "Four days reduces the rush, gives more space for Dades Valley, Todra Gorge, and Merzouga, and works especially well for private tours and families.",
       },
+      {
+        question: "What happens on the Merzouga desert discovery day?",
+        answer:
+          "The extra desert day can include Khamlia village, Rissani, nomad-area tracks, palm groves, relaxed dune time, or optional adventure activities depending on your interests.",
+      },
+      {
+        question: "Is this 4-day tour better for families?",
+        answer:
+          "Yes. The slower pace helps families, photographers, and travelers who want fewer rushed transitions between the Atlas Mountains, valleys, gorges, and desert camp.",
+      },
       ...commonFaqs,
     ],
     seo: {
-      title: "4-Day Merzouga Desert Adventure from Marrakech",
+      title: "4-Day Marrakech to Merzouga Desert Tour",
       description:
-        "Premium 4-day Merzouga desert adventure from Marrakech with Dades Valley, Todra Gorge, Erg Chebbi camp, desert discovery, and private tour options.",
+        "Book a premium 4-day Merzouga desert adventure from Marrakech with Dades Valley, Todra Gorge, Erg Chebbi camp, desert discovery, and private tour options.",
     },
   },
 ];

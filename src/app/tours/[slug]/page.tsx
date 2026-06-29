@@ -54,6 +54,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: tour.seo.title,
     description: tour.seo.description,
+    keywords: [
+      tour.title,
+      tour.shortTitle,
+      "Marrakech to Merzouga desert tour",
+      "Merzouga desert tour from Marrakech",
+      "Erg Chebbi camel trek",
+      "Sahara desert camp Morocco",
+      "Dades Valley Todra Gorge tour",
+    ],
     alternates: {
       canonical: `/tours/${tour.slug}`,
     },
@@ -86,7 +95,7 @@ export default async function TourPage({ params }: PageProps) {
       "@context": "https://schema.org",
       "@type": "TouristTrip",
       name: tour.title,
-      description: tour.summary,
+      description: `${tour.summary} ${tour.positioning}`,
       url: `${siteUrl}/tours/${tour.slug}`,
       image: tour.gallery,
       itinerary: tour.route.join(" - "),
@@ -130,31 +139,31 @@ export default async function TourPage({ params }: PageProps) {
       <section className="relative isolate min-h-[68svh] overflow-hidden bg-[#132028] text-white">
         <Image
           src={tour.heroImage}
-          alt={`${tour.title} from Marrakech`}
+          alt={`${tour.title} from Marrakech with Erg Chebbi desert scenery`}
           fill
           priority
           loading="eager"
           sizes="100vw"
           className="-z-20 object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.9),rgba(19,32,40,0.58)_54%,rgba(19,32,40,0.2)),linear-gradient(0deg,rgba(19,32,40,0.62),rgba(19,32,40,0.08))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.92),rgba(19,32,40,0.62)_54%,rgba(19,32,40,0.2)),linear-gradient(0deg,rgba(19,32,40,0.68),rgba(19,32,40,0.06))]" />
         <div className="mx-auto flex min-h-[68svh] max-w-7xl items-end px-4 pb-10 pt-16 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <Link href="/tours" className="text-sm font-black text-white/70 transition hover:text-white">Back to tours</Link>
-            <p className="mt-6 text-xs font-black uppercase tracking-[0.24em] text-[#e8b86f]">{tour.duration}</p>
+            <p className="mt-6 text-xs font-black uppercase tracking-[0.24em] text-[#e8b86f]">{tour.duration} from Marrakech</p>
             <h1 className="mt-4 text-3xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">{tour.title}</h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/80">{tour.positioning}</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href="#booking" className="rounded-full bg-[#b5532f] px-6 py-3 text-center text-sm font-black text-white transition hover:bg-[#8f3e27]">Book this tour</a>
-              <a href="#itinerary" className="rounded-full border border-white/45 px-6 py-3 text-center text-sm font-black text-white transition hover:border-white hover:bg-white/10">View itinerary</a>
+              <a href="#booking" className="rounded-full bg-[#b5532f] px-6 py-3 text-center text-sm font-black text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] transition hover:-translate-y-0.5 hover:bg-[#8f3e27]">Book this tour</a>
+              <a href="#itinerary" className="rounded-full border border-white/45 bg-white/5 px-6 py-3 text-center text-sm font-black text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white hover:bg-white/15">View itinerary</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-12 sm:px-6 lg:px-8">
+      <section className="bg-white/80 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <SectionHeading eyebrow="Tour description" title="A carefully paced desert itinerary.">
+          <SectionHeading eyebrow="Tour description" title={`${tour.shortTitle} from Marrakech.`}>
             <p>{tour.summary}</p>
           </SectionHeading>
         </div>
@@ -166,12 +175,12 @@ export default async function TourPage({ params }: PageProps) {
 
       <section className="px-4 py-16 sm:px-6 lg:px-8" id="itinerary">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-          <SectionHeading eyebrow="Itinerary" title="Day by day.">
-            <p>{tour.summary}</p>
+          <SectionHeading eyebrow="Detailed itinerary" title="Day-by-day Sahara route.">
+            <p>Follow the full route from Marrakech through southern Morocco, with planned stops, overnight stays, desert camp time, and the key landscapes that make this Merzouga tour worth the journey.</p>
           </SectionHeading>
           <div className="grid gap-5">
             {tour.itinerary.map((day, index) => (
-              <details key={day.day} open={index === 0} className="group rounded-md border border-stone-200 bg-white p-5 transition hover:border-[#d9c39e] sm:p-6">
+              <details key={day.day} open={index === 0} className="group rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_14px_42px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#d9c39e] sm:p-6">
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4 [&::-webkit-details-marker]:hidden">
                   <span>
                     <span className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">{day.day}</span>
@@ -182,7 +191,7 @@ export default async function TourPage({ params }: PageProps) {
                 <div className="mt-4 border-t border-stone-200 pt-4">
                   <p className="leading-7 text-[#6d6256]">{day.description}</p>
                   <ul className="mt-5 flex flex-wrap gap-2">
-                    {day.stops.map((stop) => <li key={stop} className="rounded-full bg-[#f1dfbf] px-3 py-2 text-xs font-black">{stop}</li>)}
+                    {day.stops.map((stop) => <li key={stop} className="rounded-full bg-[#f1dfbf] px-3 py-2 text-xs font-black text-[#5b3a24] ring-1 ring-[#e1c28c]">{stop}</li>)}
                   </ul>
                 </div>
               </details>
@@ -193,12 +202,12 @@ export default async function TourPage({ params }: PageProps) {
 
       <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
-          <div className="rounded-md bg-[#fbf7ef] p-6">
-            <h2 className="text-xl font-black">Included</h2>
+          <div className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
+            <h2 className="text-xl font-black">Included in this Merzouga tour</h2>
             <ul className="mt-5 grid gap-3">{tour.included.map((item) => <li key={item} className="border-t border-stone-200 pt-3 font-bold text-[#6d6256]">{item}</li>)}</ul>
           </div>
-          <div className="rounded-md bg-[#fbf7ef] p-6">
-            <h2 className="text-xl font-black">Excluded</h2>
+          <div className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
+            <h2 className="text-xl font-black">Not included</h2>
             <ul className="mt-5 grid gap-3">{tour.excluded.map((item) => <li key={item} className="border-t border-stone-200 pt-3 font-bold text-[#6d6256]">{item}</li>)}</ul>
           </div>
         </div>
@@ -207,12 +216,12 @@ export default async function TourPage({ params }: PageProps) {
       <section className="px-4 py-16 sm:px-6 lg:px-8" id="booking">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
           <div>
-            <SectionHeading eyebrow="Pricing" title="The price updates with your group size.">
-              <p>The larger the group, the lower the price per person. Select your number of travelers to see the live estimate before sending your request.</p>
+            <SectionHeading eyebrow="Tour pricing" title="Private desert tour price by group size.">
+              <p>The larger the group, the lower the price per person. Select your number of travelers to estimate the cost of this Marrakech to Merzouga desert tour before sending your request.</p>
             </SectionHeading>
-            <div className="mt-7 overflow-hidden rounded-md border border-stone-200 bg-white">
+            <div className="mt-7 overflow-hidden rounded-lg border border-stone-200 bg-white shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
               {tour.priceTiers.map((tier) => (
-                <div key={`${tier.minPeople}-${tier.maxPeople}`} className="grid grid-cols-2 border-t border-stone-200 p-4 first:border-t-0">
+                <div key={`${tier.minPeople}-${tier.maxPeople}`} className="grid grid-cols-2 border-t border-stone-200 p-4 first:border-t-0 odd:bg-[#fffaf3]">
                   <span className="font-bold text-[#6d6256]">{formatPeopleRange(tier.minPeople, tier.maxPeople)}</span>
                   <strong className="text-right">&euro;{tier.pricePerPerson} pp</strong>
                 </div>
@@ -225,10 +234,10 @@ export default async function TourPage({ params }: PageProps) {
 
       <section className="bg-white px-4 py-16 sm:px-6 lg:px-8" id="faq">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.7fr_1.3fr]">
-          <SectionHeading eyebrow="FAQ" title="Before you book." />
+          <SectionHeading eyebrow="Merzouga tour FAQ" title="Questions before you book." />
           <div className="grid gap-3">
             {tour.faqs.map((item) => (
-              <details key={item.question} className="rounded-2xl border border-stone-200 bg-[#fbf7ef] p-5">
+              <details key={item.question} className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-5 shadow-sm transition hover:border-[#d8b778]">
                 <summary className="cursor-pointer font-black">{item.question}</summary>
                 <p className="mt-4 leading-8 text-[#6d6256]">{item.answer}</p>
               </details>

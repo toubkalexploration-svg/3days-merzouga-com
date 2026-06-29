@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { Footer } from "./components/Footer";
 import "./globals.css";
 
@@ -18,11 +19,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Merzouga Desert Tours from Marrakech | 3 Days Merzouga",
+    default: "Marrakech to Merzouga Desert Tours | 3 Days Merzouga",
     template: "%s | 3 Days Merzouga",
   },
   description:
-    "Premium Merzouga Desert Tours from Marrakech by local specialists focused on Dades Valley, Todra Gorge, Erg Chebbi, comfortable transport, and authentic Sahara camps.",
+    "Book Marrakech to Merzouga desert tours with local specialists. Compare 3-day and 4-day Sahara itineraries, Erg Chebbi camel treks, Dades Valley, Todra Gorge, private transport, and desert camps.",
   applicationName: "3 Days Merzouga",
   authors: [{ name: "3 Days Merzouga" }],
   creator: "3 Days Merzouga",
@@ -30,14 +31,18 @@ export const metadata: Metadata = {
   keywords: [
     "Merzouga tour",
     "Merzouga from Marrakech",
+    "Marrakech to Merzouga desert tour",
     "Marrakech to Merzouga 3 day desert tour",
     "3 days Marrakech to Merzouga",
+    "Marrakech to Fes desert tour",
     "Merzouga 3 day tour",
     "Dades Valley tour",
     "Todra Gorge tour",
     "Erg Chebbi camel trek",
     "Sahara desert camp Morocco",
     "private desert tour Morocco",
+    "shared Merzouga desert tour",
+    "luxury desert camp Merzouga",
   ],
   alternates: {
     canonical: "/",
@@ -47,9 +52,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "3 Days Merzouga",
-    title: "Merzouga Desert Tours from Marrakech | 3 Days Merzouga",
+    title: "Marrakech to Merzouga Desert Tours | 3 Days Merzouga",
     description:
-      "A specialist Morocco desert tour company dedicated to premium Merzouga tours from Marrakech.",
+      "Compare focused Morocco Sahara tours from Marrakech to Merzouga, including Erg Chebbi camel trekking, Dades Valley, Todra Gorge, private options, and desert camp nights.",
     images: [
       {
         url: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&h=630&q=80",
@@ -61,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Merzouga Desert Tours from Marrakech | 3 Days Merzouga",
+    title: "Marrakech to Merzouga Desert Tours | 3 Days Merzouga",
     description:
-      "Plan a focused Merzouga desert trip with Dades Valley, Todra Gorge, camel trekking, and Erg Chebbi camps.",
+      "Plan a focused Merzouga desert trip from Marrakech with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and Sahara camp nights.",
     images: [
       "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&h=630&q=80",
     ],
@@ -95,6 +100,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#fbf7ef] text-[#201913]">
         {children}
         <Footer />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
