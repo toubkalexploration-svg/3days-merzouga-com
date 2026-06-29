@@ -34,7 +34,7 @@ export default function ContactPage() {
               </p>
             </SectionHeading>
             <div className="mt-8 grid gap-4 text-sm font-bold">
-              <a href="https://wa.me/212600000000" className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-[#b5532f]">WhatsApp: +212 600 000 000</a>
+              <a href="https://wa.me/2126" className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-[#b5532f]">WhatsApp: +212 600 000 000</a>
               <a href="mailto:info@3days-merzouga.com" className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-[#b5532f]">Email: info@3days-merzouga.com</a>
               <div className="rounded-2xl border border-stone-200 bg-white p-5">Social: Instagram / Facebook</div>
             </div>
