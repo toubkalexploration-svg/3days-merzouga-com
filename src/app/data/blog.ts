@@ -2,6 +2,7 @@ import { photos } from "./site";
 
 export type BlogPost = {
   slug: string;
+  title: string;
   excerpt: string;
   publishedAt: string;
   readingTime: string;
