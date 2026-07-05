@@ -6,6 +6,7 @@ import { JsonLd } from "./components/JsonLd";
 import { SectionHeading } from "./components/SectionHeading";
 import { TourCard } from "./components/TourCard";
 import { contactEmail, contactPhoneDisplay } from "./data/contact";
+import { photos } from "./data/site";
 import { siteUrl, tours } from "./data/tours";
 
 export const metadata: Metadata = {
@@ -73,8 +74,8 @@ export default function Home() {
       <Header />
       <section className="relative isolate min-h-[76svh] overflow-hidden bg-[#132028] text-white">
         <Image
-          src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1900&q=82"
-          alt="Golden Erg Chebbi dunes near Merzouga at sunset"
+          src={photos.camelCaravanSunset.src}
+          alt={photos.camelCaravanSunset.alt}
           fill
           priority
           loading="eager"

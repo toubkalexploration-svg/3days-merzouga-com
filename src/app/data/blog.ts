@@ -1,6 +1,7 @@
+import { photos } from "./site";
+
 export type BlogPost = {
   slug: string;
-  title: string;
   excerpt: string;
   publishedAt: string;
   readingTime: string;
@@ -26,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2026-06-29",
     readingTime: "5 min read",
     heroImage:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1800&q=82",
+      photos.camelCaravanSunset.src,
     sourceName: "GetYourGuide Marrakech to Merzouga tour listings",
     sourceUrl: "https://www.getyourguide.com/s/?q=Marrakech%20Merzouga%203%20days",
     secondarySources: [

@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import type { SiteImage } from "../data/site";
 
 type TourImageSliderProps = {
   title: string;
-  images: string[];
+  images: SiteImage[];
 };
 
 export function TourImageSlider({ title, images }: TourImageSliderProps) {
@@ -29,8 +30,8 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
       <div className="relative overflow-hidden rounded-lg bg-[#f1dfbf] shadow-[0_24px_80px_rgba(32,25,19,0.16)] ring-1 ring-white/80">
         <div className="relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
           <Image
-            src={activeImage}
-            alt={`${title} image ${activeIndex + 1}`}
+            src={activeImage.src}
+            alt={activeImage.alt || `${title} image ${activeIndex + 1}`}
             fill
             sizes="(max-width: 1024px) 100vw, 1200px"
             className="object-cover"
@@ -66,7 +67,7 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
       <div className="mt-4 grid grid-cols-3 gap-3 sm:flex sm:flex-wrap">
         {images.map((image, index) => (
           <button
-            key={image}
+            key={image.src}
             type="button"
             onClick={() => setActiveIndex(index)}
             className={`relative aspect-[4/3] overflow-hidden rounded-md border-2 bg-[#f1dfbf] shadow-sm transition sm:h-20 sm:w-28 ${
@@ -74,7 +75,7 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
             }`}
             aria-label={`Show image ${index + 1}`}
           >
-            <Image src={image} alt="" fill sizes="112px" className="object-cover" />
+            <Image src={image.src} alt="" fill sizes="112px" className="object-cover" />
           </button>
         ))}
       </div>

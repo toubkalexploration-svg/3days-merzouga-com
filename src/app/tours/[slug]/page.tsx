@@ -7,7 +7,9 @@ import { Header } from "../../components/Header";
 import { JsonLd } from "../../components/JsonLd";
 import { SectionHeading } from "../../components/SectionHeading";
 import { TourImageSlider } from "../../components/TourImageSlider";
-import { getTourBySlug, siteUrl, tours } from "../../data/tours";
+import { TourRouteMap } from "../../components/TourRouteMap";
+import { siteName } from "../../data/site";
+import { getRelatedTours, getTourBySlug, siteUrl, tours } from "../../data/tours";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -70,6 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: tour.seo.title,
       description: tour.seo.description,
       url: `${siteUrl}/tours/${tour.slug}`,
+      siteName,
       type: "website",
       images: [{ url: tour.heroImage, width: 1200, height: 630, alt: tour.title }],
     },
@@ -90,6 +93,8 @@ export default async function TourPage({ params }: PageProps) {
     notFound();
   }
 
+  const relatedTours = getRelatedTours(tour.slug);
+
   const schema = [
     {
       "@context": "https://schema.org",
@@ -97,7 +102,7 @@ export default async function TourPage({ params }: PageProps) {
       name: tour.title,
       description: `${tour.summary} ${tour.positioning}`,
       url: `${siteUrl}/tours/${tour.slug}`,
-      image: tour.gallery,
+      image: tour.gallery.map((image) => image.src),
       itinerary: tour.route.join(" - "),
       offers: tour.priceTiers.map((tier) => ({
         "@type": "Offer",
@@ -169,6 +174,36 @@ export default async function TourPage({ params }: PageProps) {
         </div>
       </section>
 
+      <section className="px-4 pb-4 pt-2 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
+          <div className="grid gap-8">
+            {tour.experience.map((block) => (
+              <article key={block.heading}>
+                <h2 className="text-xl font-black tracking-tight text-[#201913] sm:text-2xl">{block.heading}</h2>
+                {block.body.map((paragraph, index) => (
+                  <p key={index} className="mt-4 leading-8 text-[#6d6256]">{paragraph}</p>
+                ))}
+              </article>
+            ))}
+          </div>
+          <aside className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)] lg:sticky lg:top-6">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">Is this tour right for you?</p>
+            <h2 className="mt-3 text-lg font-black tracking-tight text-[#201913]">Best for</h2>
+            <ul className="mt-4 grid gap-3">
+              {tour.bestFor.map((item) => (
+                <li key={item} className="flex gap-3 border-t border-stone-200 pt-3 text-sm font-bold leading-6 text-[#6d6256] first:border-t-0 first:pt-0">
+                  <span aria-hidden="true" className="mt-1 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-[#b5532f] text-[9px] font-black text-white">+</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a href="#booking" className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b5532f]">
+              Check price &amp; book
+            </a>
+          </aside>
+        </div>
+      </section>
+
       <section className="px-4 py-14 sm:px-6 lg:px-8" id="gallery">
         <TourImageSlider title={tour.title} images={tour.gallery} />
       </section>
@@ -196,6 +231,17 @@ export default async function TourPage({ params }: PageProps) {
                 </div>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-4 sm:px-6 lg:px-8" id="route-map">
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading eyebrow="The journey" title="Your route from Marrakech, mapped.">
+            <p>See the full path of this tour at a glance: where you start, every pause along the way, and the approximate driving distance from Marrakech to each stop.</p>
+          </SectionHeading>
+          <div className="mt-7">
+            <TourRouteMap route={tour.route} duration={tour.duration} overnightStops={tour.overnightStops} />
           </div>
         </div>
       </section>
@@ -241,6 +287,33 @@ export default async function TourPage({ params }: PageProps) {
                 <summary className="cursor-pointer font-black">{item.question}</summary>
                 <p className="mt-4 leading-8 text-[#6d6256]">{item.answer}</p>
               </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading eyebrow="Compare other routes" title="Not quite the right fit? See the other Sahara tours.">
+            <p>Each Marrakech to Merzouga itinerary solves a different travel need. Compare the pace, the ending city, and the time you have before you book.</p>
+          </SectionHeading>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {relatedTours.map((related) => (
+              <Link
+                key={related.slug}
+                href={`/tours/${related.slug}`}
+                className="group flex flex-col justify-between gap-4 rounded-lg border border-stone-200 bg-white p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#d8b778]"
+              >
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">{related.duration}</p>
+                  <h3 className="mt-3 text-lg font-black tracking-tight text-[#201913]">{related.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#6d6256]">{related.positioning}</p>
+                </div>
+                <span className="inline-flex items-center text-sm font-black text-[#132028] transition group-hover:text-[#b5532f]">
+                  View this tour
+                  <span aria-hidden="true" className="ml-2">-&gt;</span>
+                </span>
+              </Link>
             ))}
           </div>
         </div>

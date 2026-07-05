@@ -34,7 +34,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: post.excerpt,
       url: `${siteUrl}/blog/${post.slug}`,
       type: "article",
+      publishedTime: post.publishedAt,
+      modifiedTime: post.publishedAt,
       images: [{ url: post.heroImage, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.heroImage],
     },
   };
 }
@@ -54,6 +62,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     description: post.excerpt,
     image: post.heroImage,
     datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
     author: {
       "@type": "Organization",
       name: "3 Days Merzouga",

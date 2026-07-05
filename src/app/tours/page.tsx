@@ -5,6 +5,7 @@ import { Header } from "../components/Header";
 import { JsonLd } from "../components/JsonLd";
 import { SectionHeading } from "../components/SectionHeading";
 import { TourCard } from "../components/TourCard";
+import { defaultOgImage, photos, siteName } from "../data/site";
 import { siteUrl, tours } from "../data/tours";
 
 export const metadata: Metadata = {
@@ -23,6 +24,22 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/tours",
+  },
+  openGraph: {
+    title: "Marrakech to Merzouga Desert Tours",
+    description:
+      "Compare Marrakech to Merzouga desert tours, including Marrakech to Fes, 3-day Merzouga, and 4-day Erg Chebbi Sahara routes.",
+    url: `${siteUrl}/tours`,
+    siteName,
+    type: "website",
+    images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "Marrakech to Merzouga desert tours" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Marrakech to Merzouga Desert Tours",
+    description:
+      "Compare Marrakech to Merzouga desert tours with Erg Chebbi camel trekking, Sahara camps, Dades Valley, and Todra Gorge.",
+    images: [defaultOgImage],
   },
 };
 
@@ -48,8 +65,8 @@ export default function ToursPage() {
       <Header />
       <section className="relative isolate overflow-hidden bg-[#132028] px-4 py-20 text-white sm:px-6 lg:px-8">
         <Image
-          src="https://images.unsplash.com/photo-1548018560-c7196548e84d?auto=format&fit=crop&w=1800&q=82"
-          alt="Sahara desert dunes on a Merzouga tour from Marrakech"
+          src={photos.camelCaravanSunset.src}
+          alt={photos.camelCaravanSunset.alt}
           fill
           priority
           sizes="100vw"

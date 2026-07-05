@@ -1,22 +1,30 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "./data/blog";
+import { siteUrl } from "./data/site";
 import { tours } from "./data/tours";
 
-const siteUrl = "https://3days-merzouga.com";
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/tours", "/blog", "/faq", "/contact", "/booking-policy"];
+  const lastUpdated = new Date();
+
+  const staticPages = [
+    { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/tours", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/contact", priority: 0.9, changeFrequency: "monthly" as const },
+    { path: "/faq", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/booking-policy", priority: 0.55, changeFrequency: "yearly" as const },
+  ];
 
   return [
-    ...staticPages.map((path) => ({
-      url: `${siteUrl}${path}`,
-      lastModified: new Date("2026-06-29"),
-      changeFrequency: "weekly" as const,
-      priority: path === "" ? 1 : 0.85,
+    ...staticPages.map((page) => ({
+      url: `${siteUrl}${page.path}`,
+      lastModified: lastUpdated,
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
     })),
     ...tours.map((tour) => ({
       url: `${siteUrl}/tours/${tour.slug}`,
-      lastModified: new Date("2026-06-29"),
+      lastModified: lastUpdated,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),

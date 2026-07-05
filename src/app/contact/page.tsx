@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { JsonLd } from "../components/JsonLd";
 import { SectionHeading } from "../components/SectionHeading";
 import { contactEmail, contactMailtoUrl, contactPhoneDisplay, contactWhatsAppUrl } from "../data/contact";
-import { siteUrl } from "../data/tours";
+import { defaultOgImage, siteName, siteUrl } from "../data/site";
 
 export const metadata: Metadata = {
   title: "Book a Marrakech to Merzouga Desert Tour",
@@ -17,6 +17,22 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/contact",
+  },
+  openGraph: {
+    title: "Book a Marrakech to Merzouga Desert Tour",
+    description:
+      "Contact 3 Days Merzouga to plan a private or shared Marrakech to Merzouga desert tour, Sahara camp, camel trek, or custom Morocco route.",
+    url: `${siteUrl}/contact`,
+    siteName,
+    type: "website",
+    images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "Book a Marrakech to Merzouga desert tour" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book a Marrakech to Merzouga Desert Tour",
+    description:
+      "Contact 3 Days Merzouga for private or shared Marrakech to Merzouga desert tour planning.",
+    images: [defaultOgImage],
   },
 };
 

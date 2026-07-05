@@ -5,7 +5,7 @@ import { Header } from "../components/Header";
 import { JsonLd } from "../components/JsonLd";
 import { SectionHeading } from "../components/SectionHeading";
 import { blogPosts } from "../data/blog";
-import { siteUrl } from "../data/tours";
+import { defaultOgImage, siteName, siteUrl } from "../data/site";
 
 export const metadata: Metadata = {
   title: "Morocco Desert Tour Blog",
@@ -13,6 +13,22 @@ export const metadata: Metadata = {
     "Read practical Morocco desert tour guides about Marrakech to Merzouga routes, Erg Chebbi camel trekking, Sahara camps, and private desert tour planning.",
   alternates: {
     canonical: "/blog",
+  },
+  openGraph: {
+    title: "Morocco Desert Tour Blog",
+    description:
+      "Practical Marrakech to Merzouga desert tour guides covering Sahara camps, Erg Chebbi camel trekking, private routes, and timing.",
+    url: `${siteUrl}/blog`,
+    siteName,
+    type: "website",
+    images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "Morocco Sahara desert tour blog" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Morocco Desert Tour Blog",
+    description:
+      "Practical Marrakech to Merzouga desert tour guides for planning Sahara camps, camel trekking, and private desert routes.",
+    images: [defaultOgImage],
   },
 };
 

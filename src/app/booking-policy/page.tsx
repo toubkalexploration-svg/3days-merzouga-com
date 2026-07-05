@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "../components/Header";
 import { SectionHeading } from "../components/SectionHeading";
+import { defaultOgImage, siteName, siteUrl } from "../data/site";
 
 export const metadata: Metadata = {
   title: "Merzouga Tour Booking and Refund Policy",
@@ -14,6 +15,22 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/booking-policy",
+  },
+  openGraph: {
+    title: "Merzouga Tour Booking and Refund Policy",
+    description:
+      "Booking, refund, cancellation, included services, and custom tour terms for Marrakech to Merzouga desert tours.",
+    url: `${siteUrl}/booking-policy`,
+    siteName,
+    type: "website",
+    images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "Merzouga desert tour booking policy" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Merzouga Tour Booking and Refund Policy",
+    description:
+      "Booking, refund, cancellation, and custom tour terms for Marrakech to Merzouga desert tours.",
+    images: [defaultOgImage],
   },
 };
 

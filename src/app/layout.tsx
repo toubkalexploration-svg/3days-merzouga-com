@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { Footer } from "./components/Footer";
+import { defaultOgImage, siteName, siteUrl } from "./data/site";
 import "./globals.css";
-
-const siteUrl = "https://3days-merzouga.com";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,13 +50,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "3 Days Merzouga",
+    siteName,
     title: "Marrakech to Merzouga Desert Tours | 3 Days Merzouga",
     description:
       "Compare focused Morocco Sahara tours from Marrakech to Merzouga, including Erg Chebbi camel trekking, Dades Valley, Todra Gorge, private options, and desert camp nights.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&h=630&q=80",
+        url: defaultOgImage,
         width: 1200,
         height: 630,
         alt: "Golden Sahara dunes for a Merzouga desert tour",
@@ -70,7 +69,7 @@ export const metadata: Metadata = {
     description:
       "Plan a focused Merzouga desert trip from Marrakech with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and Sahara camp nights.",
     images: [
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&h=630&q=80",
+      defaultOgImage,
     ],
   },
   robots: {
