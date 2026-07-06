@@ -59,22 +59,52 @@ export default function BlogPage() {
             </p>
           </SectionHeading>
 
-          <div className="mt-9 grid gap-6 lg:grid-cols-3">
-            {blogPosts.map((post) => (
-              <article key={post.slug} className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-[0_18px_55px_rgba(32,25,19,0.08)]">
-                <div className="relative aspect-[16/10] bg-[#f1dfbf]">
-                  <Image src={post.heroImage} alt={post.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
-                </div>
-                <div className="p-5">
-                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#b5532f]">{post.readingTime}</p>
-                  <h2 className="mt-3 text-xl font-black leading-tight text-[#201913]">{post.title}</h2>
-                  <p className="mt-3 text-sm leading-7 text-[#6d6256]">{post.excerpt}</p>
-                  <Link href={`/blog/${post.slug}`} className="mt-5 inline-flex rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b5532f]">
-                    Read guide
+          <div className="mt-9 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.map((post) => {
+              const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+
+              return (
+                <article
+                  key={post.slug}
+                  className="group flex flex-col rounded-2xl border border-stone-200/80 bg-white/70 p-3 transition duration-300 hover:-translate-y-1 hover:border-[#e8b86f] hover:bg-white hover:shadow-[0_26px_60px_rgba(32,25,19,0.12)]"
+                >
+                  <Link href={`/blog/${post.slug}`} className="relative block aspect-[16/9] overflow-hidden rounded-xl bg-[#f1dfbf]">
+                    <Image
+                      src={post.heroImage}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full bg-white/92 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#b5532f] shadow-[0_8px_20px_rgba(32,25,19,0.14)] backdrop-blur">
+                      Guide
+                    </span>
                   </Link>
-                </div>
-              </article>
-            ))}
+                  <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
+                    <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#9c8a70]">
+                      <time dateTime={post.publishedAt}>{formattedDate}</time>
+                      <span aria-hidden="true" className="text-[#d8c39e]">&bull;</span>
+                      <span>{post.readingTime}</span>
+                    </p>
+                    <h2 className="mt-3 text-xl font-black leading-snug tracking-tight text-[#201913] transition group-hover:text-[#b5532f]">
+                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                    </h2>
+                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-[#6d6256]">{post.excerpt}</p>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="mt-5 inline-flex items-center gap-2 border-t border-stone-200 pt-4 text-sm font-black text-[#b5532f] transition group-hover:gap-3"
+                    >
+                      Read guide
+                      <span aria-hidden="true">-&gt;</span>
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

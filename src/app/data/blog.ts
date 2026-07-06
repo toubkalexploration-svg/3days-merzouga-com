@@ -7,12 +7,6 @@ export type BlogPost = {
   publishedAt: string;
   readingTime: string;
   heroImage: string;
-  sourceName: string;
-  sourceUrl: string;
-  secondarySources: {
-    label: string;
-    url: string;
-  }[];
   sections: {
     heading: string;
     body: string[];
@@ -29,18 +23,6 @@ export const blogPosts: BlogPost[] = [
     readingTime: "5 min read",
     heroImage:
       photos.camelCaravanSunset.src,
-    sourceName: "GetYourGuide Marrakech to Merzouga tour listings",
-    sourceUrl: "https://www.getyourguide.com/s/?q=Marrakech%20Merzouga%203%20days",
-    secondarySources: [
-      {
-        label: "Viator Marrakech to Merzouga tour listings",
-        url: "https://www.viator.com/searchResults/all?text=Marrakech%20Merzouga%203%20days",
-      },
-      {
-        label: "Erg Chebbi travel context",
-        url: "https://en.wikipedia.org/wiki/Erg_Chebbi",
-      },
-    ],
     sections: [
       {
         heading: "Why this route is so popular",
@@ -82,18 +64,6 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2026-07-01",
     readingTime: "6 min read",
     heroImage: photos.groupCamelTrek.src,
-    sourceName: "GetYourGuide Marrakech to Merzouga tour listings",
-    sourceUrl: "https://www.getyourguide.com/s/?q=Marrakech%20Merzouga%20desert%20tour",
-    secondarySources: [
-      {
-        label: "Viator Merzouga desert tour listings",
-        url: "https://www.viator.com/searchResults/all?text=Merzouga%20desert%20tour",
-      },
-      {
-        label: "Merzouga geography and climate context",
-        url: "https://en.wikipedia.org/wiki/Merzouga",
-      },
-    ],
     sections: [
       {
         heading: "The short answer",
@@ -147,18 +117,6 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2026-07-03",
     readingTime: "6 min read",
     heroImage: photos.travelerDunes.src,
-    sourceName: "Viator Merzouga desert tour listings",
-    sourceUrl: "https://www.viator.com/searchResults/all?text=Merzouga%20desert%20tour",
-    secondarySources: [
-      {
-        label: "GetYourGuide Marrakech to Merzouga tour listings",
-        url: "https://www.getyourguide.com/s/?q=Marrakech%20Merzouga%20desert%20tour",
-      },
-      {
-        label: "Erg Chebbi and Sahara context",
-        url: "https://en.wikipedia.org/wiki/Erg_Chebbi",
-      },
-    ],
     sections: [
       {
         heading: "Pack for a big temperature swing",

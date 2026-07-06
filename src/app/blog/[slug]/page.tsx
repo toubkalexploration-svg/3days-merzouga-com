@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Header } from "../../components/Header";
 import { JsonLd } from "../../components/JsonLd";
 import { getBlogPostBySlug, blogPosts } from "../../data/blog";
-import { siteUrl } from "../../data/tours";
+import { getTourBySlug, siteUrl } from "../../data/tours";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -54,6 +54,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) {
     notFound();
   }
+
+  const featuredTour = getTourBySlug("3-day-marrakech-to-merzouga-desert-tour");
 
   const schema = [
     {
@@ -122,20 +124,24 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
 
             <aside className="rounded-lg border border-stone-200 bg-[#fffaf3] p-5 shadow-[0_14px_42px_rgba(32,25,19,0.06)] lg:sticky lg:top-24">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">Research sources</p>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">Recommended tour</p>
+              <h2 className="mt-3 text-lg font-black leading-tight text-[#201913]">
+                {featuredTour?.title ?? "3-Day Marrakech to Merzouga Desert Tour"}
+              </h2>
               <p className="mt-3 text-sm leading-7 text-[#6d6256]">
-                This guide is original content informed by common route patterns found on major tour marketplaces.
+                Our classic Sahara loop that starts and ends in Marrakech, with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and a desert camp night.
               </p>
-              <div className="mt-5 grid gap-3 text-sm font-bold">
-                <a href={post.sourceUrl} rel="nofollow noopener" target="_blank" className="text-[#132028] underline decoration-[#e8b86f] decoration-2 underline-offset-4 transition hover:text-[#b5532f]">
-                  {post.sourceName}
-                </a>
-                {post.secondarySources.map((source) => (
-                  <a key={source.url} href={source.url} rel="nofollow noopener" target="_blank" className="text-[#132028] underline decoration-[#e8b86f] decoration-2 underline-offset-4 transition hover:text-[#b5532f]">
-                    {source.label}
-                  </a>
-                ))}
-              </div>
+              {featuredTour ? (
+                <p className="mt-4 text-sm font-black text-[#132028]">
+                  From &euro;{featuredTour.startingPrice} per person
+                </p>
+              ) : null}
+              <Link
+                href="/tours/3-day-marrakech-to-merzouga-desert-tour"
+                className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b5532f]"
+              >
+                View this tour
+              </Link>
             </aside>
           </div>
         </section>
