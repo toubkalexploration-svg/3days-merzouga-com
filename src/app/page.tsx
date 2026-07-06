@@ -39,9 +39,19 @@ const reasons = [
 const schema = [
   {
     "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "3 Days Merzouga",
+    url: siteUrl,
+    inLanguage: "en",
+    publisher: { "@type": "Organization", name: "3 Days Merzouga", url: siteUrl },
+  },
+  {
+    "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness", "TravelAgency"],
     name: "3 Days Merzouga",
     url: siteUrl,
+    logo: `${siteUrl}/logo-transparent.png`,
+    image: `${siteUrl}/logo-transparent.png`,
     description:
       "Specialist Morocco desert tour company focused on Marrakech to Merzouga desert tours.",
     telephone: contactPhoneDisplay,

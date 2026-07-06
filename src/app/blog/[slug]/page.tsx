@@ -55,24 +55,42 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    image: post.heroImage,
-    datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
-    author: {
-      "@type": "Organization",
-      name: "3 Days Merzouga",
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      image: post.heroImage,
+      datePublished: post.publishedAt,
+      dateModified: post.publishedAt,
+      mainEntityOfPage: { "@type": "WebPage", "@id": `${siteUrl}/blog/${post.slug}` },
+      author: {
+        "@type": "Organization",
+        name: "3 Days Merzouga",
+        url: siteUrl,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "3 Days Merzouga",
+        url: siteUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/logo-transparent.png`,
+        },
+      },
+      url: `${siteUrl}/blog/${post.slug}`,
     },
-    publisher: {
-      "@type": "Organization",
-      name: "3 Days Merzouga",
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${siteUrl}/blog` },
+        { "@type": "ListItem", position: 3, name: post.title, item: `${siteUrl}/blog/${post.slug}` },
+      ],
     },
-    url: `${siteUrl}/blog/${post.slug}`,
-  };
+  ];
 
   return (
     <main>
@@ -109,11 +127,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                 This guide is original content informed by common route patterns found on major tour marketplaces.
               </p>
               <div className="mt-5 grid gap-3 text-sm font-bold">
-                <a href={post.sourceUrl} className="text-[#132028] underline decoration-[#e8b86f] decoration-2 underline-offset-4 transition hover:text-[#b5532f]">
+                <a href={post.sourceUrl} rel="nofollow noopener" target="_blank" className="text-[#132028] underline decoration-[#e8b86f] decoration-2 underline-offset-4 transition hover:text-[#b5532f]">
                   {post.sourceName}
                 </a>
                 {post.secondarySources.map((source) => (
-                  <a key={source.url} href={source.url} className="text-[#132028] underline decoration-[#e8b86f] decoration-2 underline-offset-4 transition hover:text-[#b5532f]">
+                  <a key={source.url} href={source.url} rel="nofollow noopener" target="_blank" className="text-[#132028] underline decoration-[#e8b86f] decoration-2 underline-offset-4 transition hover:text-[#b5532f]">
                     {source.label}
                   </a>
                 ))}
