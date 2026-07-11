@@ -47,7 +47,7 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
               <button
                 type="button"
                 onClick={goToPrevious}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/35 bg-black/25 text-lg font-black transition hover:bg-white hover:text-[#201913]"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/35 bg-black/25 text-lg font-black transition hover:bg-white hover:text-slate-950"
                 aria-label="Previous image"
               >
                 &lt;
@@ -55,7 +55,7 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
               <button
                 type="button"
                 onClick={goToNext}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/35 bg-black/25 text-lg font-black transition hover:bg-white hover:text-[#201913]"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/35 bg-black/25 text-lg font-black transition hover:bg-white hover:text-slate-950"
                 aria-label="Next image"
               >
                 &gt;
@@ -71,7 +71,7 @@ export function TourImageSlider({ title, images }: TourImageSliderProps) {
             type="button"
             onClick={() => setActiveIndex(index)}
             className={`relative aspect-[4/3] overflow-hidden rounded-md border-2 bg-[#f1dfbf] shadow-sm transition sm:h-20 sm:w-28 ${
-              index === activeIndex ? "border-[#b5532f] opacity-100 shadow-[0_10px_24px_rgba(181,83,47,0.18)]" : "border-white opacity-75 hover:opacity-100"
+              index === activeIndex ? "border-[#b8793c] opacity-100 shadow-[0_10px_24px_rgba(184,121,60,0.18)]" : "border-white opacity-75 hover:opacity-100"
             }`}
             aria-label={`Show image ${index + 1}`}
           >

@@ -75,12 +75,12 @@ export default function BlogPage() {
                   <Link href={`/blog/${post.slug}`} className="relative block aspect-[16/9] overflow-hidden rounded-xl bg-[#f1dfbf]">
                     <Image
                       src={post.heroImage}
-                      alt={post.title}
+                      alt={post.heroImageAlt}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
                     />
-                    <span className="absolute left-3 top-3 rounded-full bg-white/92 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#b5532f] shadow-[0_8px_20px_rgba(32,25,19,0.14)] backdrop-blur">
+                    <span className="absolute left-3 top-3 rounded-full bg-white/92 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#b8793c] shadow-[0_8px_20px_rgba(32,25,19,0.14)] backdrop-blur">
                       Guide
                     </span>
                   </Link>
@@ -90,13 +90,13 @@ export default function BlogPage() {
                       <span aria-hidden="true" className="text-[#d8c39e]">&bull;</span>
                       <span>{post.readingTime}</span>
                     </p>
-                    <h2 className="mt-3 text-xl font-black leading-snug tracking-tight text-[#201913] transition group-hover:text-[#b5532f]">
+                    <h2 className="mt-3 text-xl font-black leading-snug tracking-tight text-slate-950 transition group-hover:text-[#b8793c]">
                       <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h2>
-                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-[#6d6256]">{post.excerpt}</p>
+                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-800">{post.excerpt}</p>
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="mt-5 inline-flex items-center gap-2 border-t border-stone-200 pt-4 text-sm font-black text-[#b5532f] transition group-hover:gap-3"
+                      className="mt-5 inline-flex items-center gap-2 border-t border-stone-200 pt-4 text-sm font-black text-[#b8793c] transition group-hover:gap-3"
                     >
                       Read guide
                       <span aria-hidden="true">-&gt;</span>

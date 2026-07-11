@@ -43,21 +43,21 @@ export function ReviewSlider({ reviews }: ReviewSliderProps) {
 
   return (
     <div className="mt-10 mx-auto max-w-4xl">
-      <figure className="overflow-hidden rounded-md border border-stone-200 bg-[#fbf7ef] shadow-[0_18px_55px_rgba(32,25,19,0.08)]">
+      <figure className="overflow-hidden rounded-md border border-stone-200 bg-white shadow-[0_18px_55px_rgba(32,25,19,0.08)]">
         <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[auto_1fr] md:items-start">
           <div className="grid h-16 w-16 place-items-center rounded-full bg-[#132028] text-xl font-black text-[#e8b86f]">
             {String(activeIndex + 1).padStart(2, "0")}
           </div>
           <div>
-            <div className="text-sm font-black tracking-[0.22em] text-[#b5532f]" aria-label="5 star review">
+            <div className="text-sm font-black tracking-[0.22em] text-[#b8793c]" aria-label="5 star review">
               *****
             </div>
-            <blockquote className="mt-4 text-lg font-black leading-8 text-[#201913] sm:text-xl sm:leading-9">
+            <blockquote className="mt-4 text-lg font-black leading-8 text-slate-950 sm:text-xl sm:leading-9">
               &ldquo;{activeReview.quote}&rdquo;
             </blockquote>
             <figcaption className="mt-6 border-t border-stone-200 pt-5">
-              <strong className="block text-[#201913]">{activeReview.name}</strong>
-              <span className="text-sm font-bold text-[#6d6256]">{activeReview.meta}</span>
+              <strong className="block text-slate-950">{activeReview.name}</strong>
+              <span className="text-sm font-bold text-slate-800">{activeReview.meta}</span>
             </figcaption>
           </div>
         </div>
@@ -66,7 +66,7 @@ export function ReviewSlider({ reviews }: ReviewSliderProps) {
         <button
           type="button"
           onClick={showPreviousReview}
-          className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-black text-[#201913] transition hover:border-[#b5532f] hover:bg-[#fbf7ef] hover:text-[#b5532f]"
+          className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-black text-slate-950 transition hover:border-[#b8793c] hover:bg-white hover:text-[#b8793c]"
           aria-label="Previous review"
         >
           &lt;
@@ -78,7 +78,7 @@ export function ReviewSlider({ reviews }: ReviewSliderProps) {
               type="button"
               onClick={() => setActiveIndex(index)}
               className={`h-2.5 rounded-full transition ${
-                index === activeIndex ? "w-8 bg-[#b5532f]" : "w-2.5 bg-stone-300 hover:bg-stone-400"
+                index === activeIndex ? "w-8 bg-[#b8793c]" : "w-2.5 bg-stone-300 hover:bg-stone-400"
               }`}
               aria-label={`Show review from ${review.name}`}
               aria-current={index === activeIndex}
@@ -88,7 +88,7 @@ export function ReviewSlider({ reviews }: ReviewSliderProps) {
         <button
           type="button"
           onClick={showNextReview}
-          className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-black text-[#201913] transition hover:border-[#b5532f] hover:bg-[#fbf7ef] hover:text-[#b5532f]"
+          className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-black text-slate-950 transition hover:border-[#b8793c] hover:bg-white hover:text-[#b8793c]"
           aria-label="Next review"
         >
           &gt;

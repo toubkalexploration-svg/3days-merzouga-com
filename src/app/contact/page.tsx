@@ -66,8 +66,8 @@ export default function ContactPage() {
               </p>
             </SectionHeading>
             <div className="mt-8 grid gap-4 text-sm font-bold">
-              <a href={contactWhatsAppUrl} className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#b5532f]">WhatsApp: {contactPhoneDisplay}</a>
-              <a href={contactMailtoUrl} className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#b5532f]">Email: {contactEmail}</a>
+              <a href={contactWhatsAppUrl} className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#b8793c]">WhatsApp: {contactPhoneDisplay}</a>
+              <a href={contactMailtoUrl} className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#b8793c]">Email: {contactEmail}</a>
               <div className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)]">Social: Instagram / Facebook</div>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function ContactPage() {
               <label className="grid gap-2 text-sm font-bold text-white/75">Preferred date<input name="Date" type="date" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
             </div>
             <label className="grid gap-2 text-sm font-bold text-white/75">Tour request<textarea name="Message" rows={6} placeholder="Tour name, group size, hotel or riad, pickup city, private or shared tour, camp preference, and custom route requests" className="rounded-md border border-white/10 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
-            <button className="min-h-12 rounded-full bg-[#b5532f] px-6 font-black shadow-[0_16px_34px_rgba(181,83,47,0.25)] transition hover:-translate-y-0.5 hover:bg-[#8f3e27]" type="submit">Send Desert Tour Request</button>
+            <button className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black shadow-[0_16px_34px_rgba(184,121,60,0.25)] transition hover:-translate-y-0.5 hover:bg-[#96612f]" type="submit">Send Desert Tour Request</button>
           </form>
         </div>
       </section>

@@ -11,13 +11,14 @@ export function SectionHeading({ eyebrow, title, children, center = false, level
 
   return (
     <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <p className="inline-flex rounded-full border border-[#e8d2ad] bg-white/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#b5532f] shadow-sm">
+      <p className="text-xs font-black uppercase tracking-[0.25em] text-brand-terracotta">
         {eyebrow}
       </p>
-      <Heading className="mt-4 text-2xl font-black leading-tight tracking-tight text-[#201913] sm:text-3xl lg:text-4xl">
+      <Heading className="mt-3 text-3xl font-black uppercase leading-tight tracking-normal text-brand-slate sm:text-4xl">
         {title}
       </Heading>
-      {children ? <div className="mt-5 text-base leading-8 text-[#6d6256]">{children}</div> : null}
+      <div className={center ? "mx-auto mt-4 h-1 w-12 bg-brand-terracotta" : "mt-4 h-1 w-12 bg-brand-terracotta"} />
+      {children ? <div className="mt-5 text-base leading-8 text-slate-800">{children}</div> : null}
     </div>
   );
 }

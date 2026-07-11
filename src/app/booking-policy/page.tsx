@@ -60,7 +60,7 @@ export default function BookingPolicyPage() {
           <div className="mt-10 grid gap-6">
             <section className="rounded-lg border border-stone-200 bg-white/95 p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
               <h2 className="text-2xl font-black">Refund and cancellation policy</h2>
-              <ul className="mt-5 grid gap-4 leading-8 text-[#6d6256]">
+              <ul className="mt-5 grid gap-4 leading-8 text-slate-800">
                 <li>Full refund if cancelled at least 7 days before departure.</li>
                 <li>Tours booked only 2-3 days before departure may still be cancelled for a full refund before the tour starts.</li>
                 <li>For bookings made earlier than 4 days before departure, cancellations made less than 4 days before departure receive a 50% refund because transportation, accommodation, and logistics have already been organized.</li>
@@ -68,14 +68,14 @@ export default function BookingPolicyPage() {
             </section>
             <section className="rounded-lg border border-stone-200 bg-white/95 p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
               <h2 className="text-2xl font-black">Private and custom desert tours</h2>
-              <p className="mt-5 leading-8 text-[#6d6256]">
+              <p className="mt-5 leading-8 text-slate-800">
                 Marrakech to Merzouga itineraries can be customized on request. We can adapt hotel level, desert camp category, route stops, pickup time, private pacing, and extra nights in Merzouga, Dades Valley, or other southern Morocco stops.
               </p>
             </section>
             <section className="rounded-lg border border-stone-200 bg-white/95 p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
               <h2 className="text-2xl font-black">Common services included</h2>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                {included.map((item) => <li key={item} className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-4 font-bold text-[#201913]">{item}</li>)}
+                {included.map((item) => <li key={item} className="rounded-lg border border-stone-200 bg-white p-4 font-bold text-slate-950">{item}</li>)}
               </ul>
             </section>
           </div>

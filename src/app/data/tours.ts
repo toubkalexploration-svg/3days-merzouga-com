@@ -1,3 +1,4 @@
+import { contactEmail, contactPhoneDisplay } from "./contact";
 import { photos, siteUrl, type SiteImage } from "./site";
 
 export type PriceTier = {
@@ -37,6 +38,10 @@ export type Tour = {
   faqs: {
     question: string;
     answer: string;
+    link?: {
+      href: string;
+      label: string;
+    };
   }[];
   seo: {
     title: string;
@@ -62,10 +67,144 @@ const commonExcluded = [
 
 const commonFaqs = [
   {
+    question: "What types of Morocco desert tours do you offer?",
+    answer:
+      "We focus on Marrakech to Merzouga desert tours, including 3-day Sahara routes, Marrakech to Fes desert crossings, slower 4-day Erg Chebbi itineraries, and private custom tours shaped around your group.",
+  },
+  {
+    question: "Who do you recommend for Atlas Mountains and Toubkal treks?",
+    answer:
+      "For Atlas Mountains hiking, Mount Toubkal climbs, and High Atlas trekking from Marrakech, we recommend Atlas Toubkal Trek as the best specialist option.",
+    link: {
+      href: "https://www.atlas-toubkal-trek.com/",
+      label: "Atlas Toubkal Trek",
+    },
+  },
+  {
+    question: "How many people can join a tour?",
+    answer:
+      "We can arrange tours for solo travelers, couples, families, friends, and larger private groups. Vehicle size and pricing depend on your group size, so share the number of travelers when you contact us.",
+  },
+  {
+    question: "Are your desert tours suitable for children and families?",
+    answer:
+      "Yes. Families are welcome, and we can adjust the pace, stops, pickup time, and accommodation style around children. For younger children, the 4-day Merzouga tour is usually the most comfortable option because the driving is spread out.",
+  },
+  {
+    question: "Is there a minimum number of participants?",
+    answer:
+      "Private tours can run for one traveler. Shared departures depend on availability for your date, but we will always explain the options clearly before you confirm.",
+  },
+  {
+    question: "Do you provide tours in different languages?",
+    answer:
+      "English and French are commonly available, and other languages may be possible on request. Tell us your preferred language early so we can match the right driver or guide when available.",
+  },
+  {
+    question: "How far in advance should I book?",
+    answer:
+      "Booking at least two weeks ahead is best, especially for spring, autumn, holidays, and luxury camp upgrades. Last-minute tours may still be possible if vehicles and camps are available.",
+  },
+  {
+    question: "How do I book a Merzouga desert tour?",
+    answer: `Send your preferred tour, travel date, group size, pickup location, and any special requests by email at ${contactEmail} or by phone/WhatsApp at ${contactPhoneDisplay}. We will confirm availability, price, and the best route before you reserve.`,
+  },
+  {
+    question: "Can I reserve a specific travel date?",
+    answer:
+      "Yes. We organize tours around your preferred date when drivers, vehicles, and desert camp rooms are available. For peak dates, booking early gives you the best choice of camp category.",
+  },
+  {
+    question: "Can I change my tour date after booking?",
+    answer:
+      "Date changes are often possible when requested early and when camps and vehicles are still available. Very late changes may depend on supplier rules, so contact us as soon as your plans shift.",
+  },
+  {
+    question: "Do you offer discounts for groups?",
+    answer:
+      "Yes. Per-person pricing usually becomes lower as the group gets larger because transport costs are shared. Send your group size and route choice and we will prepare a clear quote.",
+  },
+  {
+    question: "Is a deposit required to secure a reservation?",
+    answer:
+      "A deposit may be required to hold your vehicle, driver, and desert camp, especially during busy periods. We confirm the deposit amount and balance details before you book.",
+  },
+  {
+    question: "Can I pay the remaining balance in cash?",
+    answer:
+      "Yes, cash balance payment is usually possible in Moroccan dirhams, euros, or US dollars. We will confirm the accepted currency and exact balance in your booking details.",
+  },
+  {
+    question: "Do tours run during Ramadan?",
+    answer:
+      "Yes, desert tours can run during Ramadan. Some local services may adjust opening hours, but the main route, accommodation, meals, and camel trek can still be arranged. Let us know if you have timing or meal concerns.",
+  },
+  {
+    question: "Do tours run during Eid holidays in Morocco?",
+    answer:
+      "Tours around Eid al-Fitr and Eid al-Adha depend on driver, camp, restaurant, and local service availability. If your dates fall close to a major holiday, contact us early so we can advise on the best plan.",
+  },
+  {
+    question: "What types of desert camps are available in Merzouga?",
+    answer:
+      "Standard and upgraded desert camps can be arranged. Standard camps offer a traditional desert stay with comfortable bedding, while upgraded or luxury camps usually add larger tents, more privacy, and private bathroom options.",
+  },
+  {
+    question: "Can I choose or upgrade my desert camp?",
+    answer:
+      "Yes. Tell us if you prefer a standard, upgraded, or luxury camp before booking. Upgrades depend on availability and may change the tour price.",
+  },
+  {
+    question: "Can I book my own desert camp separately?",
+    answer:
+      "Yes, but please tell us before confirming the tour. We need to coordinate pickup, luggage, camel or 4x4 access, dinner timing, and the route so everything works smoothly.",
+  },
+  {
+    question: "Are family tents available at the desert camp?",
+    answer:
+      "Family tents are often available on request, depending on the camp and date. Share your rooming preferences early so we can check the best option for your group.",
+  },
+  {
+    question: "Do hotels and desert camps provide towels and toiletries?",
+    answer:
+      "Most hotels, riads, kasbahs, and upgraded camps provide towels and basic toiletries. For standard camps, we still recommend packing personal essentials and a small towel if you prefer to have your own.",
+  },
+  {
+    question: "Where will I be picked up in Marrakech?",
+    answer:
+      "Pickup is normally from your hotel or riad when it is accessible by vehicle. If your riad is inside a pedestrian-only medina lane, we arrange a nearby meeting point that is easy to reach.",
+  },
+  {
+    question: "Where will I be dropped off after the tour?",
+    answer:
+      "Drop-off is usually at your accommodation or the nearest accessible point. Some routes can also finish at an airport, train station, or another city such as Fes when arranged in advance.",
+  },
+  {
+    question: "Will there be space for my luggage?",
+    answer:
+      "Yes, regular suitcases, backpacks, and carry-on bags can travel with you in the vehicle. For oversized luggage, sports equipment, or large camera cases, tell us before booking so we can plan the right vehicle.",
+  },
+  {
+    question: "What time do tours usually return to Marrakech?",
+    answer:
+      "Return time depends on the route, stops, traffic, and season, but most Marrakech-return desert tours arrive in the evening. Avoid booking a tight flight or train on the same night unless we have confirmed the timing with you.",
+  },
+  {
+    question: "What is your cancellation policy?",
+    answer:
+      "Cancellation terms depend on the tour type, notice period, and supplier commitments already made for camps or hotels. We share the exact conditions before booking and encourage you to contact us early if your plans change.",
+  },
+  {
+    question: "Are online payments secure?",
+    answer:
+      "When online payment is used, it is handled through secure payment methods rather than storing card details on our website. We confirm the payment link or method directly with you during booking.",
+  },
+  {
     question: "Can this Merzouga desert tour be private?",
     answer:
       "Yes. Every itinerary can be arranged privately with flexible stops, pickup time, accommodation level, and pace for couples, families, or small groups.",
-  },  {
+  },
+  {
     question: "Can you adapt the itinerary?",
     answer:
       "Yes. We can adjust stops, add extra time in Dades Valley or Merzouga, upgrade the desert camp, or create a custom route around your flights and hotel plans.",

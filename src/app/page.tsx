@@ -82,7 +82,7 @@ export default function Home() {
     <main className="min-h-screen">
       <JsonLd data={schema} />
       <Header />
-      <section className="relative isolate min-h-[76svh] overflow-hidden bg-[#132028] text-white">
+      <section className="relative isolate flex min-h-[86svh] items-center justify-center overflow-hidden bg-brand-slate text-white">
         <Image
           src={photos.camelCaravanSunset.src}
           alt={photos.camelCaravanSunset.alt}
@@ -92,62 +92,50 @@ export default function Home() {
           sizes="100vw"
           className="-z-20 object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.9),rgba(19,32,40,0.62)_46%,rgba(19,32,40,0.2)),linear-gradient(0deg,rgba(19,32,40,0.68),rgba(19,32,40,0.04))]" />
-        <div className="mx-auto grid min-h-[76svh] max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_0.72fr] lg:px-8">
-          <div className="max-w-3xl text-center sm:text-left">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-[#e8b86f]">Morocco Sahara tour company</p>
-            <h1 className="mt-4 text-4xl font-black uppercase leading-[1] tracking-tight sm:text-5xl lg:text-6xl">
-              Marrakech to Merzouga desert tours
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <p className="mb-6 inline-flex items-center rounded-full bg-brand-slate/70 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-orange-100 shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-sm">
+              Morocco Sahara tour company
+            </p>
+            <h1 className="mx-auto max-w-4xl text-4xl font-black uppercase leading-[1.12] tracking-normal text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.65)] sm:text-5xl md:text-6xl">
+              Marrakech to <span className="text-brand-terracotta">Merzouga</span> desert tours
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-white/82">
+            <p className="mx-auto mt-6 max-w-2xl text-base font-semibold leading-relaxed text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)] md:text-lg">
               Compare focused 3-day and 4-day Sahara tours from Marrakech to Merzouga, including Dades Valley, Todra Gorge, Erg Chebbi camel trekking, comfortable transport, private or shared options, and authentic desert camp nights.
             </p>
-            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row sm:justify-start">
-              <Link href="/contact" className="rounded-full bg-[#b5532f] px-6 py-3 text-center text-sm font-black text-white shadow-[0_18px_40px_rgba(0,0,0,0.26)] transition hover:-translate-y-0.5 hover:bg-[#8f3e27]">
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link href="/contact" className="w-full rounded-xl border border-brand-terracotta bg-brand-terracotta px-8 py-4 text-center text-sm font-black uppercase tracking-wider text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] ring-2 ring-white/20 transition-all duration-300 hover:scale-105 hover:bg-brand-terracotta-dark sm:w-auto">
                 Book Now
               </Link>
-              <Link href="/tours" className="rounded-full border border-white/45 bg-white/5 px-6 py-3 text-center text-sm font-black text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white hover:bg-white/15">
+              <Link href="/tours" className="w-full rounded-xl border border-brand-terracotta bg-brand-terracotta px-8 py-4 text-center text-sm font-black uppercase tracking-wider text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] ring-2 ring-white/20 transition-all duration-300 hover:scale-105 hover:bg-brand-terracotta-dark sm:w-auto">
                 View Tours
               </Link>
             </div>
-            <dl className="mt-8 grid gap-px overflow-hidden rounded-xl border border-white/15 bg-white/15 text-sm backdrop-blur sm:grid-cols-3">
-              <div className="bg-[#132028]/55 p-3"><dt className="text-[11px] font-black uppercase text-white/55">Focus</dt><dd className="mt-1 font-black">Merzouga tours</dd></div>
-              <div className="bg-[#132028]/55 p-3"><dt className="text-[11px] font-black uppercase text-white/55">Route</dt><dd className="mt-1 font-black">Marrakech to Sahara</dd></div>
-              <div className="bg-[#132028]/55 p-3"><dt className="text-[11px] font-black uppercase text-white/55">Style</dt><dd className="mt-1 font-black">Small groups</dd></div>
-            </dl>
           </div>
-          <aside className="hidden rounded-lg border border-white/15 bg-white/12 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur lg:block">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#e8b86f]">Route snapshot</p>
-            <div className="mt-5 grid gap-3">
-              {[
-                ["01", "High Atlas", "Tizi n'Tichka road and mountain villages"],
-                ["02", "Kasbahs and valleys", "Ait Ben Haddou, Dades Valley, Todra Gorge"],
-                ["03", "Erg Chebbi dunes", "Camel trek, sunset, Sahara desert camp"],
-              ].map(([number, title, text]) => (
-                <div key={title} className="grid grid-cols-[auto_1fr] gap-4 rounded-md bg-[#132028]/62 p-4 ring-1 ring-white/10">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[#b5532f] text-xs font-black text-white">{number}</span>
-                  <span>
-                    <strong className="block text-lg font-black text-white">{title}</strong>
-                    <span className="mt-1 block text-sm leading-6 text-white/65">{text}</span>
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className="rounded-md bg-white p-4 text-[#201913]">
-                <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#6d6256]">Tours from</p>
-                <p className="mt-1 text-2xl font-black text-[#b5532f]">&euro;115</p>
-              </div>
-              <div className="rounded-md bg-white p-4 text-[#201913]">
-                <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#6d6256]">Duration</p>
-                <p className="mt-1 text-2xl font-black text-[#132028]">3-4 days</p>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
 
-      <section className="bg-white/80 px-4 py-16 sm:px-6 lg:px-8" id="about">
+      <section className="relative z-10 mx-4 -mt-10 rounded-2xl border-y border-slate-100 bg-white py-10 shadow-[0_24px_80px_rgba(28,45,55,0.04)] lg:mx-auto lg:max-w-7xl" aria-label="Tour highlights">
+        <div className="mx-auto grid gap-8 px-6 md:grid-cols-3">
+          {[
+            ["Local desert experts", "Native Moroccan driving team for the Atlas and Sahara road"],
+            ["Erg Chebbi camps", "Camel trekking, sunset dunes, and Merzouga camp nights"],
+            ["Flexible planning", "Private routes, small groups, and clear custom support"],
+          ].map(([title, text], index) => (
+            <div key={title} className={`flex items-center gap-4 ${index === 1 ? "md:border-x md:border-slate-100 md:px-8" : ""}`}>
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-terracotta/10 text-sm font-black text-brand-terracotta">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+              <div>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-slate-800">{title}</h2>
+                <p className="mt-0.5 text-xs leading-5 text-slate-800">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-background px-4 py-24 sm:px-6 lg:px-8" id="about">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
           <SectionHeading eyebrow="Welcome to 3 Days Merzouga" title="A local team for clear, comfortable Sahara travel.">
             <p>
@@ -156,21 +144,21 @@ export default function Home() {
           </SectionHeading>
           <div className="grid gap-4 sm:grid-cols-2">
             {trustItems.map((item, index) => (
-              <div key={item} className="rounded-lg border border-stone-200 bg-[linear-gradient(180deg,#fffaf3,#fbf7ef)] p-6 shadow-[0_14px_40px_rgba(32,25,19,0.06)] transition hover:-translate-y-1 hover:border-[#d8b778]">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-[#132028] text-sm font-black text-[#e8b86f]">0{index + 1}</span>
-                <p className="mt-4 text-base font-black leading-snug text-[#201913]">{item}</p>
+              <div key={item} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_4px_30px_rgba(28,45,55,0.02)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(28,45,55,0.06)]">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-terracotta/10 text-sm font-black text-brand-terracotta">0{index + 1}</span>
+                <p className="mt-4 text-base font-bold leading-snug text-slate-800">{item}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8" id="tours">
+      <section className="bg-white px-4 py-24 sm:px-6 lg:px-8" id="tours">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Merzouga Desert Tours" title="Choose your Marrakech to Merzouga desert tour.">
+          <SectionHeading eyebrow="Merzouga Desert Tours" title="Choose your Marrakech to Merzouga desert tour." center>
             <p>Find the Sahara itinerary that fits your time: a 3-day Marrakech to Fes desert tour, a classic 3-day Marrakech to Merzouga desert tour, or a slower 4-day private Sahara trip with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and desert camp accommodation.</p>
           </SectionHeading>
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {tours.map((tour, index) => <TourCard key={tour.slug} tour={tour} priority={index === 0} />)}
           </div>
         </div>
@@ -186,7 +174,7 @@ export default function Home() {
           <div className="mt-7 grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 shadow-[0_22px_70px_rgba(0,0,0,0.16)] sm:grid-cols-2 lg:grid-cols-4">
             {reasons.map(([title, text], index) => (
               <div key={title} className="bg-[#132028] p-4 transition hover:bg-[#182a34] sm:p-5">
-                <div className="mb-4 grid h-9 w-9 place-items-center rounded-full bg-[#b5532f] text-xs font-black text-white shadow-[0_10px_24px_rgba(181,83,47,0.28)]">{String(index + 1).padStart(2, "0")}</div>
+                <div className="mb-4 grid h-9 w-9 place-items-center rounded-full bg-[#b8793c] text-xs font-black text-white shadow-[0_10px_24px_rgba(184,121,60,0.28)]">{String(index + 1).padStart(2, "0")}</div>
                 <h3 className="text-base font-black">{title}</h3>
                 <p className="mt-2 text-sm leading-6 text-white/62">{text}</p>
               </div>
@@ -199,13 +187,13 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <article className="grid gap-6 rounded-lg border border-stone-200 bg-white/95 p-7 shadow-[0_20px_65px_rgba(32,25,19,0.1)] ring-1 ring-white/80 md:grid-cols-[1fr_auto] md:items-center">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#b5532f]">Private custom tours</p>
-              <h2 className="mt-3 text-2xl font-black tracking-tight text-[#201913] sm:text-3xl">Need a private Morocco desert tour?</h2>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-[#6d6256]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#b8793c]">Private custom tours</p>
+              <h2 className="mt-3 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">Need a private Morocco desert tour?</h2>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-800">
                 Tell us your dates, route idea, hotel level, camp style, and group needs. We can shape a private Marrakech to Merzouga desert tour with tailored pacing, family comfort, solo traveler support, and extra nights where they make sense.
               </p>
             </div>
-            <Link href="/contact" className="inline-flex justify-center rounded-full bg-[#132028] px-6 py-3 text-sm font-black text-white shadow-[0_14px_30px_rgba(19,32,40,0.18)] transition hover:-translate-y-0.5 hover:bg-[#b5532f]">
+            <Link href="/contact" className="inline-flex justify-center rounded-full bg-[#132028] px-6 py-3 text-sm font-black text-white shadow-[0_14px_30px_rgba(19,32,40,0.18)] transition hover:-translate-y-0.5 hover:bg-[#b8793c]">
               Request custom tour
             </Link>
           </article>
@@ -214,7 +202,7 @@ export default function Home() {
 
       <section className="bg-white px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="tripadvisor-rating">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-6 rounded-lg border border-stone-200 bg-[#fbf7ef] p-7 text-center shadow-[0_18px_55px_rgba(32,25,19,0.08)] sm:grid-cols-[auto_1fr] sm:items-center sm:text-left lg:p-8">
+          <div className="grid gap-6 rounded-lg border border-stone-200 bg-white p-7 text-center shadow-[0_18px_55px_rgba(32,25,19,0.08)] sm:grid-cols-[auto_1fr] sm:items-center sm:text-left lg:p-8">
             <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-white p-4 shadow-[0_12px_35px_rgba(32,25,19,0.08)] sm:mx-0">
               <Image
                 src="/tripadvisor.png"
@@ -227,7 +215,7 @@ export default function Home() {
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-[#2f6b58]">Tripadvisor rating</p>
               <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-end">
-                <h2 id="tripadvisor-rating" className="text-4xl font-black leading-none text-[#201913]">5.0</h2>
+                <h2 id="tripadvisor-rating" className="text-4xl font-black leading-none text-slate-950">5.0</h2>
                 <div className="flex justify-center gap-1 pb-1 text-xl font-black tracking-[0.12em] text-[#2f6b58] sm:justify-start" aria-label="5 out of 5 rating">
                   <span>*</span>
                   <span>*</span>
@@ -236,8 +224,8 @@ export default function Home() {
                   <span>*</span>
                 </div>
               </div>
-              <p className="mt-3 text-base font-black text-[#201913]">Our customers love us!</p>
-              <p className="mt-2 max-w-2xl text-sm leading-7 text-[#6d6256]">
+              <p className="mt-3 text-base font-black text-slate-950">Our customers love us!</p>
+              <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-800">
                 Travelers choose us for clear communication, careful driving, comfortable pacing, and memorable Merzouga desert tour experiences.
               </p>
             </div>
@@ -246,13 +234,13 @@ export default function Home() {
       </section>
 
       <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-lg bg-[linear-gradient(135deg,#b5532f,#8f3e27)] p-8 text-white shadow-[0_26px_80px_rgba(143,62,39,0.24)] md:grid-cols-[1fr_auto] md:items-center lg:p-12">
+        <div className="mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-lg bg-[linear-gradient(135deg,#b8793c,#96612f)] p-8 text-white shadow-[0_26px_80px_rgba(150,97,47,0.24)] md:grid-cols-[1fr_auto] md:items-center lg:p-12">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f1dfbf]">Ready when you are</p>
             <h2 className="mt-3 text-2xl font-black tracking-tight sm:text-4xl">Tell us your dates. We will shape the right Merzouga desert route.</h2>
             <p className="mt-5 max-w-2xl leading-7 text-white/78">Fast answers, clear pricing, and honest advice on the best Marrakech to Merzouga itinerary for your time.</p>
           </div>
-          <Link href="/contact" className="rounded-full bg-white px-7 py-4 text-center font-black text-[#201913] transition hover:bg-[#f1dfbf]">
+          <Link href="/contact" className="rounded-full bg-white px-7 py-4 text-center font-black text-slate-950 transition hover:bg-slate-100">
             Start Booking
           </Link>
         </div>

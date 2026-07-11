@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.publishedAt,
-      images: [{ url: post.heroImage, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: post.heroImage, width: 1200, height: 630, alt: post.heroImageAlt }],
     },
     twitter: {
       card: "summary_large_image",
@@ -100,8 +100,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       <Header />
       <article>
         <section className="relative isolate overflow-hidden bg-[#132028] px-4 py-20 text-white sm:px-6 lg:px-8">
-          <Image src={post.heroImage} alt={post.title} fill priority sizes="100vw" className="-z-20 object-cover" />
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.92),rgba(19,32,40,0.62)_52%,rgba(19,32,40,0.22)),linear-gradient(0deg,rgba(19,32,40,0.75),rgba(19,32,40,0.08))]" />
+          <Image src={post.heroImage} alt={post.heroImageAlt} fill priority sizes="100vw" className="-z-20 object-cover" />
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.7),rgba(19,32,40,0.42)_52%,rgba(19,32,40,0.11)),linear-gradient(0deg,rgba(19,32,40,0.46),rgba(19,32,40,0.03))]" />
           <div className="mx-auto max-w-4xl">
             <Link href="/blog" className="text-sm font-black text-white/70 transition hover:text-white">Back to blog</Link>
             <p className="mt-8 text-xs font-black uppercase tracking-[0.22em] text-[#e8b86f]">{post.readingTime}</p>
@@ -115,20 +115,20 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="rounded-lg border border-stone-200 bg-white p-6 shadow-[0_18px_55px_rgba(32,25,19,0.08)] sm:p-8">
               {post.sections.map((section) => (
                 <section key={section.heading} className="border-t border-stone-200 py-7 first:border-t-0 first:pt-0 last:pb-0">
-                  <h2 className="text-2xl font-black tracking-tight text-[#201913]">{section.heading}</h2>
-                  <div className="mt-4 grid gap-4 text-base leading-8 text-[#6d6256]">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-950">{section.heading}</h2>
+                  <div className="mt-4 grid gap-4 text-base leading-8 text-slate-800">
                     {section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                   </div>
                 </section>
               ))}
             </div>
 
-            <aside className="rounded-lg border border-stone-200 bg-[#fffaf3] p-5 shadow-[0_14px_42px_rgba(32,25,19,0.06)] lg:sticky lg:top-24">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">Recommended tour</p>
-              <h2 className="mt-3 text-lg font-black leading-tight text-[#201913]">
+            <aside className="rounded-lg border border-stone-200 bg-white p-5 shadow-[0_14px_42px_rgba(32,25,19,0.06)] lg:sticky lg:top-24">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b8793c]">Recommended tour</p>
+              <h2 className="mt-3 text-lg font-black leading-tight text-slate-950">
                 {featuredTour?.title ?? "3-Day Marrakech to Merzouga Desert Tour"}
               </h2>
-              <p className="mt-3 text-sm leading-7 text-[#6d6256]">
+              <p className="mt-3 text-sm leading-7 text-slate-800">
                 Our classic Sahara loop that starts and ends in Marrakech, with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and a desert camp night.
               </p>
               {featuredTour ? (
@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               ) : null}
               <Link
                 href="/tours/3-day-marrakech-to-merzouga-desert-tour"
-                className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b5532f]"
+                className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b8793c]"
               >
                 View this tour
               </Link>

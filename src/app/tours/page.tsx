@@ -72,7 +72,7 @@ export default function ToursPage() {
           sizes="100vw"
           className="-z-20 object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.92),rgba(19,32,40,0.62)_52%,rgba(19,32,40,0.24)),linear-gradient(0deg,rgba(19,32,40,0.72),rgba(19,32,40,0.08))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.7),rgba(19,32,40,0.42)_52%,rgba(19,32,40,0.12)),linear-gradient(0deg,rgba(19,32,40,0.44),rgba(19,32,40,0.03))]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
           <div className="max-w-3xl">
             <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#e8b86f] backdrop-blur">
@@ -85,7 +85,7 @@ export default function ToursPage() {
               Three focused Sahara routes: Marrakech to Fes, the classic 3-day Marrakech to Merzouga desert tour, and a slower 4-day Erg Chebbi adventure with more time in the dunes.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#tour-list" className="rounded-full bg-[#b5532f] px-6 py-3 text-center text-sm font-black text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] transition hover:-translate-y-0.5 hover:bg-[#8f3e27]">
+              <Link href="#tour-list" className="rounded-full bg-[#b8793c] px-6 py-3 text-center text-sm font-black text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] transition hover:-translate-y-0.5 hover:bg-[#96612f]">
                 View tours
               </Link>
               <Link href="/contact" className="rounded-full border border-white/45 bg-white/5 px-6 py-3 text-center text-sm font-black text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white hover:bg-white/15">

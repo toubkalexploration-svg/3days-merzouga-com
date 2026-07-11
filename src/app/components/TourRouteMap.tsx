@@ -29,8 +29,8 @@ export function TourRouteMap({ route, duration, overnightStops = [] }: TourRoute
   return (
     <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-stone-100 px-5 py-4 sm:px-6">
-        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">Route map</p>
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[11px] font-bold text-[#6d6256]">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b8793c]">Route map</p>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[11px] font-bold text-slate-800">
           <span>From Marrakech</span>
           <span className="text-stone-300">|</span>
           <span>&asymp; {totalKm} km total</span>
@@ -66,7 +66,7 @@ export function TourRouteMap({ route, duration, overnightStops = [] }: TourRoute
         {/* compass */}
         <g transform={`translate(${WIDTH - 58} 58)`}>
           <circle r="20" fill="#ffffff" stroke="#e7dcc6" strokeWidth="1.5" />
-          <path d="M0 -14 L5 2 L0 -3 L-5 2 Z" fill="#b5532f" />
+          <path d="M0 -14 L5 2 L0 -3 L-5 2 Z" fill="#b8793c" />
           <text x="0" y="17" textAnchor="middle" fontSize="9" fontWeight="800" fill="#6d6256">
             N
           </text>
@@ -77,7 +77,7 @@ export function TourRouteMap({ route, duration, overnightStops = [] }: TourRoute
         <path
           d={linePath}
           fill="none"
-          stroke="#b5532f"
+          stroke="#b8793c"
           strokeWidth="2.6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -101,11 +101,11 @@ export function TourRouteMap({ route, duration, overnightStops = [] }: TourRoute
                 </g>
               ) : isEnd ? (
                 <g>
-                  <circle cx={point.x} cy={point.y} r="8" fill="#b5532f" />
+                  <circle cx={point.x} cy={point.y} r="8" fill="#b8793c" />
                   <circle cx={point.x} cy={point.y} r="3" fill="#ffffff" />
                 </g>
               ) : (
-                <circle cx={point.x} cy={point.y} r="6" fill="#ffffff" stroke="#b5532f" strokeWidth="2.4" />
+                <circle cx={point.x} cy={point.y} r="6" fill="#ffffff" stroke="#b8793c" strokeWidth="2.4" />
               )}
 
               <text
@@ -141,7 +141,7 @@ export function TourRouteMap({ route, duration, overnightStops = [] }: TourRoute
           <circle cx="12" cy="12" r="10" fill="#ffffff" stroke="#d9c39e" strokeWidth="1.6" />
           <path d="M13.4 6.8 A6.4 6.4 0 1 0 13.4 17.2 A4.7 4.7 0 1 1 13.4 6.8 Z" fill="#132028" />
         </svg>
-        <span className="text-[11px] font-bold text-[#6d6256]">Moon marks an overnight stay</span>
+        <span className="text-[11px] font-bold text-slate-800">Moon marks an overnight stay</span>
       </div>
     </div>
   );

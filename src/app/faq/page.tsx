@@ -45,7 +45,7 @@ export default function FaqPage() {
       name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: faq.link ? `${faq.answer} ${faq.link.label}: ${faq.link.href}` : faq.answer,
       },
     })),
   };
@@ -70,19 +70,29 @@ export default function FaqPage() {
                 <section key={tour.slug} className="rounded-lg border border-stone-200 bg-white p-5 shadow-[0_18px_55px_rgba(32,25,19,0.08)] sm:p-6">
                   <div className="grid gap-4 border-b border-stone-200 pb-5 md:grid-cols-[1fr_auto] md:items-center">
                     <div>
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">{tour.duration}</p>
-                      <h2 className="mt-2 text-2xl font-black tracking-tight text-[#201913]">{tour.title}</h2>
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b8793c]">{tour.duration}</p>
+                      <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950">{tour.title}</h2>
                     </div>
-                    <Link href={`/tours/${tour.slug}`} className="inline-flex justify-center rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b5532f]">
+                    <Link href={`/tours/${tour.slug}`} className="inline-flex justify-center rounded-full bg-[#132028] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b8793c]">
                       View tour
                     </Link>
                   </div>
 
                   <div className="mt-5 grid gap-3">
                     {tourFaqs.map((faq) => (
-                      <details key={faq.question} className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-5 transition hover:border-[#d8b778]">
-                        <summary className="cursor-pointer font-black text-[#201913]">{faq.question}</summary>
-                        <p className="mt-4 leading-8 text-[#6d6256]">{faq.answer}</p>
+                      <details key={faq.question} className="rounded-lg border border-stone-200 bg-white p-5 transition hover:border-[#d8b778]">
+                        <summary className="cursor-pointer font-black text-slate-950">{faq.question}</summary>
+                        <p className="mt-4 leading-8 text-slate-800">
+                          {faq.answer}
+                          {faq.link ? (
+                            <>
+                              {" "}
+                              <a href={faq.link.href} className="font-black text-[#b8793c] underline underline-offset-4 transition hover:text-[#96612f]">
+                                {faq.link.label}
+                              </a>
+                            </>
+                          ) : null}
+                        </p>
                       </details>
                     ))}
                   </div>
@@ -92,14 +102,24 @@ export default function FaqPage() {
 
             <section className="rounded-lg border border-stone-200 bg-white p-5 shadow-[0_18px_55px_rgba(32,25,19,0.08)] sm:p-6">
               <div className="border-b border-stone-200 pb-5">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b5532f]">All routes</p>
-                <h2 className="mt-2 text-2xl font-black tracking-tight text-[#201913]">General Merzouga desert tour questions</h2>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b8793c]">All routes</p>
+                <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950">General Merzouga desert tour questions</h2>
               </div>
               <div className="mt-5 grid gap-3">
                 {sharedFaqs.map((faq) => (
-                  <details key={faq.question} className="rounded-lg border border-stone-200 bg-[#fbf7ef] p-5 transition hover:border-[#d8b778]">
-                    <summary className="cursor-pointer font-black text-[#201913]">{faq.question}</summary>
-                    <p className="mt-4 leading-8 text-[#6d6256]">{faq.answer}</p>
+                  <details key={faq.question} className="rounded-lg border border-stone-200 bg-white p-5 transition hover:border-[#d8b778]">
+                    <summary className="cursor-pointer font-black text-slate-950">{faq.question}</summary>
+                    <p className="mt-4 leading-8 text-slate-800">
+                      {faq.answer}
+                      {faq.link ? (
+                        <>
+                          {" "}
+                          <a href={faq.link.href} className="font-black text-[#b8793c] underline underline-offset-4 transition hover:text-[#96612f]">
+                            {faq.link.label}
+                          </a>
+                        </>
+                      ) : null}
+                    </p>
                   </details>
                 ))}
               </div>
