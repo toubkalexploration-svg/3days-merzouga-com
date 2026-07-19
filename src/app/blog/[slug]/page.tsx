@@ -67,6 +67,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       datePublished: post.publishedAt,
       dateModified: post.publishedAt,
       mainEntityOfPage: { "@type": "WebPage", "@id": `${siteUrl}/blog/${post.slug}` },
+      inLanguage: "en",
       author: {
         "@type": "Organization",
         name: "3 Days Merzouga",
@@ -81,6 +82,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           url: `${siteUrl}/logo-transparent.png`,
         },
       },
+      citation: post.sourceLinks?.map((source) => source.href),
       url: `${siteUrl}/blog/${post.slug}`,
     },
     {
@@ -121,6 +123,25 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </div>
                 </section>
               ))}
+              {post.sourceLinks?.length ? (
+                <section className="border-t border-stone-200 py-7 last:pb-0">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-950">Sources and further reading</h2>
+                  <ul className="mt-4 grid gap-3 text-base leading-7 text-slate-800">
+                    {post.sourceLinks.map((source) => (
+                      <li key={source.href}>
+                        <a
+                          href={source.href}
+                          className="font-bold text-[#b8793c] underline-offset-4 transition hover:text-[#132028] hover:underline"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
             </div>
 
             <aside className="rounded-lg border border-stone-200 bg-white p-5 shadow-[0_14px_42px_rgba(32,25,19,0.06)] lg:sticky lg:top-24">

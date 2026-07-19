@@ -38,12 +38,21 @@ export default function BlogPage() {
     "@type": "Blog",
     name: "3 Days Merzouga Blog",
     url: `${siteUrl}/blog`,
+    inLanguage: "en",
+    publisher: {
+      "@type": "Organization",
+      name: "3 Days Merzouga",
+      url: siteUrl,
+      logo: `${siteUrl}/logo-transparent.png`,
+    },
     blogPost: blogPosts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       description: post.excerpt,
       url: `${siteUrl}/blog/${post.slug}`,
       datePublished: post.publishedAt,
+      dateModified: post.publishedAt,
+      image: post.heroImage,
     })),
   };
 

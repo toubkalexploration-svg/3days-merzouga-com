@@ -8,6 +8,10 @@ export type BlogPost = {
   readingTime: string;
   heroImage: string;
   heroImageAlt: string;
+  sourceLinks?: {
+    label: string;
+    href: string;
+  }[];
   sections: {
     heading: string;
     body: string[];
@@ -291,6 +295,83 @@ export const blogPosts: BlogPost[] = [
         body: [
           "Wear comfortable shoes, dress modestly, ask before photographing people, and carry small cash for a local guide, tea, crafts, or tips. Some paths are uneven and dusty, so take your time rather than rushing to the top.",
           "If someone offers help, agree clearly on whether it is paid before accepting. Most visits are smooth and welcoming when expectations are clear. Respect the families and workers who still depend on the village, and treat the site as heritage rather than a film set.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "merzouga-vs-zagora-desert-tour",
+    title: "Merzouga vs Zagora: Which Morocco Desert Tour Should You Choose?",
+    excerpt:
+      "A clear, honest comparison of Merzouga and Zagora desert tours from Marrakech, covering dunes, drive time, camp experience, budget, comfort, and which route is better for your trip.",
+    publishedAt: "2026-07-14",
+    readingTime: "8 min read",
+    heroImage: photos.camelCaravanSunset.src,
+    heroImageAlt: photos.camelCaravanSunset.alt,
+    sourceLinks: [
+      {
+        label: "Moroccan National Tourist Office: Errachidia-Midelt-Merzouga",
+        href: "https://www.visitmorocco.com/en/travel/errachidia-midelt-merzouga",
+      },
+      {
+        label: "Erg Chebbi overview",
+        href: "https://en.wikipedia.org/wiki/Erg_Chebbi",
+      },
+      {
+        label: "Erg Chigaga overview",
+        href: "https://en.wikipedia.org/wiki/Erg_Chigaga",
+      },
+    ],
+    sections: [
+      {
+        heading: "The short answer",
+        body: [
+          "Choose Merzouga if you want the classic Sahara image: high golden dunes, a camel trek into Erg Chebbi, and a proper desert camp night that feels worth the long road from Marrakech. Choose Zagora if you only have two days, want a lower-cost route, or prefer a lighter desert taste without driving all the way to the far southeast.",
+          "The mistake many travelers make is comparing them as if they are the same thing. They are not. Zagora is easier to reach, but the dunes are smaller and the experience is more about the Draa Valley and pre-Sahara atmosphere. Merzouga takes longer, but the Erg Chebbi dunes are the reason most people picture Morocco when they imagine a Sahara trip.",
+        ],
+      },
+      {
+        heading: "Dunes and desert feeling",
+        body: [
+          "Merzouga sits beside Erg Chebbi, one of Morocco's best-known dune fields. The dunes rise high enough to change the whole feeling of the landscape: when you walk or ride a camel between them, the village and road disappear quickly, and the silence becomes part of the experience.",
+          "Zagora is different. It has desert scenery, palms, rocky plains, and a real southern-Morocco mood, but it does not usually deliver the same sea-of-sand feeling. Many Zagora camps use smaller dune areas or stony desert settings. That can still be beautiful, especially at sunset, but it is not the big Erg Chebbi postcard.",
+        ],
+      },
+      {
+        heading: "Driving time from Marrakech",
+        body: [
+          "Zagora is the easier option for time. A 2-day Marrakech to Zagora desert tour is still a long trip because you cross the High Atlas Mountains and continue through Ouarzazate and the Draa Valley, but it is possible as a fast overnight.",
+          "Merzouga is farther. A comfortable Merzouga route needs at least three days from Marrakech, with the first night usually in Dades Valley and the second night in the desert camp. Our 3-Day Marrakech to Merzouga Desert Tour follows that structure because it breaks the road into realistic sections instead of turning the journey into one exhausting push.",
+          "If you have four days, Merzouga becomes even better. The 4-Day Marrakech to Merzouga Desert Tour gives you the same big dunes with less pressure and more time around the desert itself.",
+        ],
+      },
+      {
+        heading: "Which is better for a first Morocco trip?",
+        body: [
+          "For most first-time visitors who have three or four days, Merzouga is the better choice. It answers the dream clearly: camels at sunset, orange dunes, stars, campfire music, sunrise over Erg Chebbi, and a road trip through Ait Ben Haddou, Dades Valley, and Todra Gorge.",
+          "Zagora makes sense when your schedule is tight. If you only have one spare night and cannot add a third day, it is better to do Zagora calmly than to force Merzouga into two days. A rushed Merzouga trip from Marrakech is possible on paper, but it is not kind to your body or your holiday.",
+        ],
+      },
+      {
+        heading: "Private or shared changes the decision",
+        body: [
+          "A shared Zagora tour is often the cheapest desert experience from Marrakech. It works for backpackers, solo travelers, and anyone who mainly wants a simple overnight adventure. The tradeoff is less flexibility and a more fixed pace.",
+          "A private Merzouga tour costs more, but it gives you control over pickup time, stops, accommodation level, camel or 4x4 camp transfer, and the route back. For couples, families, photographers, and travelers with limited Morocco time, that control often matters more than saving a small amount per day.",
+        ],
+      },
+      {
+        heading: "Camp comfort and expectations",
+        body: [
+          "Both routes can offer basic and upgraded camps, but Merzouga generally has a wider range because Erg Chebbi is a mature desert destination with many camp styles. You can keep it simple with a standard camp or choose a luxury camp with private bathroom comfort, better bedding, and a quieter setting.",
+          "In Zagora, ask very clearly what the camp setting is like before booking. Some travelers expect large dunes and are disappointed because the landscape is flatter. That is not the camp's fault; it is a mismatch between expectation and geography.",
+        ],
+      },
+      {
+        heading: "Our honest recommendation",
+        body: [
+          "If your trip allows three days, choose Merzouga. If your trip allows four days, choose Merzouga even more confidently. The long road becomes part of the story because you are not only going to the dunes; you are crossing the High Atlas, kasbah country, palm valleys, gorges, and oasis towns.",
+          "Choose Zagora only when time is the main limit. It is a good short desert break, but it should be sold honestly as a pre-Sahara experience rather than a substitute for Erg Chebbi.",
+          "A simple rule works well: two days means Zagora, three or four days means Merzouga, and one-way travel from Marrakech to Fes means the 3-Day Marrakech to Fes Desert Tour via Merzouga.",
         ],
       },
     ],
