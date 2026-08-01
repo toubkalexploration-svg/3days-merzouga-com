@@ -222,7 +222,7 @@ export const tours: Tour[] = [
     title: "3-Day Marrakech to Fes Desert Tour",
     shortTitle: "Marrakech to Fes Tour",
     duration: "3 days / 2 nights",
-    startingPrice: 135,
+    startingPrice: 170,
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.todraGorge.src,
     gallery: [photos.todraGorge],
@@ -303,10 +303,10 @@ export const tours: Tour[] = [
     ],
     excluded: commonExcluded,
     priceTiers: [
-      { minPeople: 1, maxPeople: 1, pricePerPerson: 430 },
-      { minPeople: 2, maxPeople: 2, pricePerPerson: 275 },
-      { minPeople: 3, maxPeople: 4, pricePerPerson: 185 },
-      { minPeople: 5, pricePerPerson: 135 },
+      { minPeople: 1, maxPeople: 1, pricePerPerson: 465 },
+      { minPeople: 2, maxPeople: 2, pricePerPerson: 310 },
+      { minPeople: 3, maxPeople: 4, pricePerPerson: 220 },
+      { minPeople: 5, pricePerPerson: 170 },
     ],
     faqs: [
       {
@@ -357,7 +357,7 @@ export const tours: Tour[] = [
     title: "3-Day Marrakech to Merzouga Desert Tour",
     shortTitle: "3-Day Merzouga Tour",
     duration: "3 days / 2 nights",
-    startingPrice: 115,
+    startingPrice: 150,
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.travelerDunes.src,
     gallery: [photos.travelerDunes],
@@ -436,10 +436,10 @@ export const tours: Tour[] = [
     included: commonIncluded,
     excluded: commonExcluded,
     priceTiers: [
-      { minPeople: 1, maxPeople: 1, pricePerPerson: 390 },
-      { minPeople: 2, maxPeople: 2, pricePerPerson: 245 },
-      { minPeople: 3, maxPeople: 4, pricePerPerson: 165 },
-      { minPeople: 5, pricePerPerson: 115 },
+      { minPeople: 1, maxPeople: 1, pricePerPerson: 425 },
+      { minPeople: 2, maxPeople: 2, pricePerPerson: 280 },
+      { minPeople: 3, maxPeople: 4, pricePerPerson: 200 },
+      { minPeople: 5, pricePerPerson: 150 },
     ],
     faqs: [
       {
@@ -490,7 +490,7 @@ export const tours: Tour[] = [
     title: "4-Day Marrakech to Merzouga Desert Tour",
     shortTitle: "4-Day Merzouga Adventure",
     duration: "4 days / 3 nights",
-    startingPrice: 185,
+    startingPrice: 220,
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.groupCamelTrek.src,
     gallery: [photos.groupCamelTrek],
@@ -569,10 +569,10 @@ export const tours: Tour[] = [
     included: commonIncluded,
     excluded: commonExcluded,
     priceTiers: [
-      { minPeople: 1, maxPeople: 1, pricePerPerson: 520 },
-      { minPeople: 2, maxPeople: 2, pricePerPerson: 335 },
-      { minPeople: 3, maxPeople: 4, pricePerPerson: 245 },
-      { minPeople: 5, pricePerPerson: 185 },
+      { minPeople: 1, maxPeople: 1, pricePerPerson: 555 },
+      { minPeople: 2, maxPeople: 2, pricePerPerson: 370 },
+      { minPeople: 3, maxPeople: 4, pricePerPerson: 280 },
+      { minPeople: 5, pricePerPerson: 220 },
     ],
     faqs: [
       {
