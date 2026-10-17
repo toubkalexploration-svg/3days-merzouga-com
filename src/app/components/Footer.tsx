@@ -9,6 +9,7 @@ const pageLinks = [
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
   { href: "/booking-policy", label: "Booking Policy" },
+  { href: "/privacy", label: "Privacy Policy" },
 ];
 
 export function Footer() {
@@ -64,7 +65,10 @@ export function Footer() {
       <div className="border-t border-white/10 px-4 py-4">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 text-xs text-white/48 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {year} 3 Days Merzouga. All rights reserved.</p>
-          <Link href="/booking-policy" className="transition hover:text-white">Booking and refund policy</Link>
+          <div className="flex gap-4">
+            <Link href="/booking-policy" className="transition hover:text-white">Booking and refund policy</Link>
+            <Link href="/privacy" className="transition hover:text-white">Privacy policy</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Header } from "../components/Header";
 import { JsonLd } from "../components/JsonLd";
 import { SectionHeading } from "../components/SectionHeading";
@@ -82,6 +83,9 @@ export default function ContactPage() {
             </div>
             <label className="grid gap-2 text-sm font-bold text-white/75">Tour request<textarea name="Message" rows={6} placeholder="Tour name, group size, hotel or riad, pickup city, private or shared tour, camp preference, and custom route requests" className="rounded-md border border-white/10 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
             <button className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black shadow-[0_16px_34px_rgba(184,121,60,0.25)] transition hover:-translate-y-0.5 hover:bg-[#96612f]" type="submit">Send Desert Tour Request</button>
+            <p className="text-xs leading-5 text-white/65">
+              This form opens your email application; the website does not store your message. By sending it, you agree that we may use your details to answer your tour request. Read our <Link href="/privacy" className="font-bold text-[#e8b86f] underline underline-offset-2">privacy policy</Link>.
+            </p>
           </form>
         </div>
       </section>
