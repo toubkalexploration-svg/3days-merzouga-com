@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/tours", label: "Tours" },
+  { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
   { href: "/booking-policy", label: "Booking Policy" },
@@ -14,16 +15,27 @@ const navItems = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstMenuLinkRef = useRef<HTMLAnchorElement>(null);
 
   // Prevent background scrolling when the mobile menu is active
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (!isOpen) return;
+
+    document.body.style.overflow = "hidden";
+    firstMenuLinkRef.current?.focus();
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
+      }
     }
+
+    document.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", closeOnEscape);
     };
   }, [isOpen]);
 
@@ -47,7 +59,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-[0.76rem] font-bold uppercase tracking-wider md:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-5 text-[0.72rem] font-bold uppercase tracking-wider md:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className="shrink-0 text-white transition hover:text-brand-slate">
               {item.label}
@@ -56,14 +68,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link href="/contact" className="shrink-0 rounded-xl bg-brand-terracotta px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition duration-300 hover:scale-105 hover:bg-brand-terracotta-dark">
+          <Link href="/contact" className="shrink-0 rounded-xl bg-brand-slate px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition duration-300 hover:scale-105 hover:bg-[#213946]">
             Book Now
           </Link>
 
           <button
+            ref={menuButtonRef}
             onClick={() => setIsOpen(!isOpen)}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-white transition hover:bg-white/15 focus:outline-none md:hidden"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:hidden"
             aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
             aria-label="Toggle navigation menu"
           >
             <svg
@@ -84,14 +98,16 @@ export function Header() {
       </div>
 
       <div
+        id="mobile-navigation"
         className={`absolute left-0 top-full z-20 w-full border-t border-white/10 bg-[#b8793c] shadow-xl transition-all duration-300 ease-in-out md:hidden ${
           isOpen ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-2"
         }`}
       >
         <nav className="flex flex-col gap-1 p-4" aria-label="Mobile navigation">
-          {navItems.map((item) => (
+          {navItems.map((item, index) => (
             <Link
               key={item.href}
+              ref={index === 0 ? firstMenuLinkRef : undefined}
               href={item.href}
               onClick={() => setIsOpen(false)}
               className="rounded-md px-4 py-3 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white/15 hover:text-brand-slate"

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { contactEmail, contactMailtoUrl, contactPhoneDisplay, contactWhatsAppUrl } from "../data/contact";
+import { operatorName, operatorUrl } from "../data/site";
 
 const pageLinks = [
   { href: "/", label: "Home" },
   { href: "/tours", label: "Tours" },
+  { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
@@ -36,6 +38,9 @@ export function Footer() {
           </Link>
           <p className="mt-4 text-sm leading-6 text-white/62">
             Focused Marrakech to Merzouga desert tours for families, solo travelers, and private groups, with Dades Valley, Todra Gorge, Erg Chebbi dunes, and Sahara camp nights.
+          </p>
+          <p className="mt-3 text-xs leading-5 text-white/55">
+            3 Days Merzouga is operated by <a href={operatorUrl} className="font-bold text-[#e8b86f] transition hover:text-white">{operatorName}</a>.
           </p>
         </div>
 

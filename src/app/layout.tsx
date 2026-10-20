@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   description:
     "Book Marrakech to Merzouga desert tours with local specialists. Compare 3-day and 4-day Sahara itineraries, Erg Chebbi camel treks, Dades Valley, Todra Gorge, private transport, and desert camps.",
   applicationName: "3 Days Merzouga",
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
+    shortcut: "/favicon.png",
+    apple: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
+  },
   authors: [{ name: "3 Days Merzouga" }],
   creator: "3 Days Merzouga",
   publisher: "3 Days Merzouga",

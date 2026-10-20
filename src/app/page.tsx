@@ -5,8 +5,8 @@ import { Header } from "./components/Header";
 import { JsonLd } from "./components/JsonLd";
 import { SectionHeading } from "./components/SectionHeading";
 import { TourCard } from "./components/TourCard";
-import { contactEmail, contactPhoneDisplay } from "./data/contact";
-import { photos } from "./data/site";
+import { contactEmail, contactPhoneDisplay, contactWhatsAppUrl } from "./data/contact";
+import { operatorGoogleProfileUrl, operatorName, operatorUrl, photos } from "./data/site";
 import { siteUrl, tours } from "./data/tours";
 
 export const metadata: Metadata = {
@@ -36,6 +36,12 @@ const reasons = [
   ["Clear Pricing", "Simple per-person prices with private upgrades and custom tour advice before you confirm."],
 ];
 
+const operatorReviews = [
+  ["Clear communication and information.", "Magdalena Misztal-Piasny"],
+  ["Amazing experience with Hassan and Youssef!", "Sergio Cuenca Garcia"],
+  ["Professional, attentive, and always responsive.", "Manon Andre"],
+] as const;
+
 const schema = [
   {
     "@context": "https://schema.org",
@@ -43,21 +49,32 @@ const schema = [
     name: "3 Days Merzouga",
     url: siteUrl,
     inLanguage: "en",
-    publisher: { "@type": "Organization", name: "3 Days Merzouga", url: siteUrl },
+    publisher: { "@id": `${siteUrl}/#organization` },
   },
   {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness", "TravelAgency"],
+    "@id": `${siteUrl}/#organization`,
     name: "3 Days Merzouga",
     url: siteUrl,
-    logo: `${siteUrl}/logo-transparent.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/favicon.png`,
+      width: 192,
+      height: 192,
+    },
     image: `${siteUrl}/logo-transparent.png`,
     description:
       "Specialist Morocco desert tour company focused on Marrakech to Merzouga desert tours.",
     telephone: contactPhoneDisplay,
     email: contactEmail,
     areaServed: ["Marrakech", "Merzouga", "Dades Valley", "Todra Gorge", "Erg Chebbi"],
-    sameAs: ["https://www.instagram.com/", "https://www.facebook.com/"],
+    parentOrganization: {
+      "@type": "Organization",
+      name: operatorName,
+      url: operatorUrl,
+      sameAs: [operatorGoogleProfileUrl],
+    },
     makesOffer: tours.map((tour) => ({
       "@type": "Offer",
       priceCurrency: "EUR",
@@ -104,12 +121,12 @@ export default function Home() {
               Compare focused 3-day and 4-day Sahara tours from Marrakech to Merzouga, including Dades Valley, Todra Gorge, Erg Chebbi camel trekking, comfortable transport, private or shared options, and authentic desert camp nights.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/contact" className="w-full rounded-xl border border-brand-terracotta bg-brand-terracotta px-8 py-4 text-center text-sm font-black uppercase tracking-wider text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] ring-2 ring-white/20 transition-all duration-300 hover:scale-105 hover:bg-brand-terracotta-dark sm:w-auto">
-                Book Now
-              </Link>
               <Link href="/tours" className="w-full rounded-xl border border-brand-terracotta bg-brand-terracotta px-8 py-4 text-center text-sm font-black uppercase tracking-wider text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] ring-2 ring-white/20 transition-all duration-300 hover:scale-105 hover:bg-brand-terracotta-dark sm:w-auto">
                 View Tours
               </Link>
+              <a href={contactWhatsAppUrl} className="w-full rounded-xl border border-white/60 bg-brand-slate/45 px-8 py-4 text-center text-sm font-black uppercase tracking-wider text-white shadow-[0_18px_45px_rgba(0,0,0,0.24)] backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white hover:bg-brand-slate/70 sm:w-auto">
+                Ask on WhatsApp
+              </a>
             </div>
           </div>
         </div>
@@ -141,6 +158,9 @@ export default function Home() {
             <p>
               We specialize in Marrakech to Merzouga desert tours because a focused route creates better trips. Families get comfort, safety, and clear planning from the first message. Solo travelers can ask about shared desert tour departures, while couples and small groups can choose private pacing or camp upgrades. Our local drivers know the High Atlas road, the valleys, and the desert rhythm, so every itinerary is practical, memorable, and easy to book with confidence.
             </p>
+            <p>
+              3 Days Merzouga is operated by <a href={operatorUrl} className="font-bold text-brand-terracotta underline decoration-brand-terracotta/35 underline-offset-4 transition hover:decoration-brand-terracotta">Atlas Toubkal Trek</a>, our established local Morocco travel team.
+            </p>
           </SectionHeading>
           <div className="grid gap-4 sm:grid-cols-2">
             {trustItems.map((item, index) => (
@@ -158,8 +178,40 @@ export default function Home() {
           <SectionHeading eyebrow="Merzouga Desert Tours" title="Choose your Marrakech to Merzouga desert tour." center>
             <p>Find the Sahara itinerary that fits your time: a 3-day Marrakech to Fes desert tour, a classic 3-day Marrakech to Merzouga desert tour, or a slower 4-day private Sahara trip with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and desert camp accommodation.</p>
           </SectionHeading>
-          <div className="mt-12 grid gap-8 lg:grid-cols-3">
-            {tours.map((tour, index) => <TourCard key={tour.slug} tour={tour} priority={index === 0} />)}
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {tours.map((tour, index) => (
+              <TourCard
+                key={tour.slug}
+                tour={tour}
+                priority={index === 0}
+                sizes="(max-width: 1023px) 100vw, 50vw"
+              />
+            ))}
+          </div>
+          <div className="mt-10 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-[0_12px_40px_rgba(28,45,55,0.05)]">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+              <caption className="sr-only">Compare Marrakech to Merzouga desert tours by duration, destination, and starting price</caption>
+              <thead className="bg-brand-slate text-white">
+                <tr>
+                  <th scope="col" className="px-5 py-4 font-black">Tour</th>
+                  <th scope="col" className="px-5 py-4 font-black">Duration</th>
+                  <th scope="col" className="px-5 py-4 font-black">Finishes in</th>
+                  <th scope="col" className="px-5 py-4 font-black">From</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {tours.map((tour) => (
+                  <tr key={tour.slug} className="transition hover:bg-orange-50/50">
+                    <th scope="row" className="px-5 py-4 font-bold text-slate-900">
+                      <Link href={`/tours/${tour.slug}`} className="transition hover:text-brand-terracotta">{tour.shortTitle}</Link>
+                    </th>
+                    <td className="px-5 py-4 text-slate-700">{tour.duration}</td>
+                    <td className="px-5 py-4 text-slate-700">{tour.route[tour.route.length - 1]}</td>
+                    <td className="px-5 py-4 font-black text-brand-terracotta">&euro;{tour.startingPrice} per person</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -200,35 +252,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="tripadvisor-rating">
+      <section className="bg-white px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="operator-reviews">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-6 rounded-lg border border-stone-200 bg-white p-7 text-center shadow-[0_18px_55px_rgba(32,25,19,0.08)] sm:grid-cols-[auto_1fr] sm:items-center sm:text-left lg:p-8">
-            <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-white p-4 shadow-[0_12px_35px_rgba(32,25,19,0.08)] sm:mx-0">
-              <Image
-                src="/tripadvisor.png"
-                alt="Tripadvisor"
-                width={88}
-                height={88}
-                className="h-auto w-full object-contain"
-              />
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-brand-terracotta">Reviews of the team behind 3 Days Merzouga</p>
+              <h2 id="operator-reviews" className="mt-3 text-3xl font-black tracking-tight text-slate-950">Travelers recommend Atlas Toubkal Trek.</h2>
+              <p className="mt-4 leading-7 text-slate-700">These comments were posted about Atlas Toubkal Trek, the local travel company that operates 3 Days Merzouga. They reflect guests&apos; experience with the team and are not presented as reviews of a specific Merzouga tour.</p>
             </div>
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#2f6b58]">Tripadvisor rating</p>
-              <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-end">
-                <h2 id="tripadvisor-rating" className="text-4xl font-black leading-none text-slate-950">5.0</h2>
-                <div className="flex justify-center gap-1 pb-1 text-xl font-black tracking-[0.12em] text-[#2f6b58] sm:justify-start" aria-label="5 out of 5 rating">
-                  <span>*</span>
-                  <span>*</span>
-                  <span>*</span>
-                  <span>*</span>
-                  <span>*</span>
-                </div>
-              </div>
-              <p className="mt-3 text-base font-black text-slate-950">Our customers love us!</p>
-              <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-800">
-                Travelers choose us for clear communication, careful driving, comfortable pacing, and memorable Merzouga desert tour experiences.
-              </p>
-            </div>
+            <a href={operatorGoogleProfileUrl} className="shrink-0 rounded-full bg-brand-slate px-6 py-3 text-center text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#213946]">Read original Google reviews</a>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {operatorReviews.map(([quote, author]) => (
+              <figure key={author} className="rounded-2xl border border-slate-100 bg-background p-6 shadow-[0_12px_40px_rgba(28,45,55,0.05)]">
+                <div className="text-sm tracking-[0.16em] text-brand-terracotta" aria-label="Five-star Google review">★★★★★</div>
+                <blockquote className="mt-4 text-lg font-bold leading-7 text-slate-900">&ldquo;{quote}&rdquo;</blockquote>
+                <figcaption className="mt-5 text-sm text-slate-600"><span className="font-bold text-slate-800">{author}</span><span className="block">Google review of Atlas Toubkal Trek</span></figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>

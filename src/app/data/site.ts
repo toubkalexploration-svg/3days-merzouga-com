@@ -2,6 +2,10 @@ export const siteUrl = "https://3days-merzouga.com";
 
 export const siteName = "3 Days Merzouga";
 
+export const operatorName = "Atlas Toubkal Trek";
+export const operatorUrl = "https://www.atlas-toubkal-trek.com/";
+export const operatorGoogleProfileUrl = "https://maps.app.goo.gl/D2VD57C9oV4qTRv36?g_st=ic";
+
 export const cloudinaryCloudName = "dg13m8nf0";
 
 /**

@@ -88,6 +88,20 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
           WhatsApp
           <input name="WhatsApp" type="tel" placeholder="+212 ..." className="min-h-12 rounded-md border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2" />
         </label>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="grid gap-2 text-sm font-bold text-slate-800">
+            Tour style
+            <select name="Tour style" defaultValue="Not sure" className="min-h-12 rounded-md border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2">
+              <option>Not sure</option><option>Private tour</option><option>Shared tour</option>
+            </select>
+          </label>
+          <label className="grid gap-2 text-sm font-bold text-slate-800">
+            Camp preference
+            <select name="Camp preference" defaultValue="Not sure" className="min-h-12 rounded-md border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2">
+              <option>Not sure</option><option>Standard camp</option><option>Luxury camp</option>
+            </select>
+          </label>
+        </div>
         <label className="grid gap-2 text-sm font-bold text-slate-800">
           Tour notes
           <textarea name="Message" rows={4} placeholder="Hotel or riad, pickup location, private or shared tour, luxury camp upgrade, dietary needs, or custom route" className="rounded-md border border-stone-200 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2" />

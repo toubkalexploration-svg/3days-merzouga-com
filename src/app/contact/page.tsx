@@ -69,7 +69,6 @@ export default function ContactPage() {
             <div className="mt-8 grid gap-4 text-sm font-bold">
               <a href={contactWhatsAppUrl} className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#b8793c]">WhatsApp: {contactPhoneDisplay}</a>
               <a href={contactMailtoUrl} className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)] transition hover:-translate-y-0.5 hover:border-[#b8793c]">Email: {contactEmail}</a>
-              <div className="rounded-lg border border-stone-200 bg-white/95 p-5 shadow-[0_12px_34px_rgba(32,25,19,0.06)]">Social: Instagram / Facebook</div>
             </div>
           </div>
           <form className="grid gap-4 rounded-lg bg-[linear-gradient(135deg,#132028,#213946)] p-5 text-white shadow-[0_30px_90px_rgba(19,32,40,0.2)] ring-1 ring-white/10 sm:p-6" action={contactMailtoUrl} method="post" encType="text/plain">
@@ -80,6 +79,30 @@ export default function ContactPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm font-bold text-white/75">WhatsApp<input name="WhatsApp" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
               <label className="grid gap-2 text-sm font-bold text-white/75">Preferred date<input name="Date" type="date" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="grid gap-2 text-sm font-bold text-white/75">Preferred tour
+                <select name="Tour" defaultValue="" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2">
+                  <option value="" disabled>Select a tour</option>
+                  <option>3-Day Marrakech to Fes Desert Tour</option>
+                  <option>3-Day Marrakech to Merzouga Desert Tour</option>
+                  <option>4-Day Marrakech to Merzouga Desert Tour</option>
+                  <option>Custom Morocco desert tour</option>
+                </select>
+              </label>
+              <label className="grid gap-2 text-sm font-bold text-white/75">Number of travelers<input name="Travelers" type="number" min="1" inputMode="numeric" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="grid gap-2 text-sm font-bold text-white/75">Tour style
+                <select name="Tour style" defaultValue="Not sure" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2">
+                  <option>Not sure</option><option>Private tour</option><option>Shared tour</option>
+                </select>
+              </label>
+              <label className="grid gap-2 text-sm font-bold text-white/75">Camp preference
+                <select name="Camp preference" defaultValue="Not sure" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2">
+                  <option>Not sure</option><option>Standard camp</option><option>Luxury camp</option>
+                </select>
+              </label>
             </div>
             <label className="grid gap-2 text-sm font-bold text-white/75">Tour request<textarea name="Message" rows={6} placeholder="Tour name, group size, hotel or riad, pickup city, private or shared tour, camp preference, and custom route requests" className="rounded-md border border-white/10 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
             <button className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black shadow-[0_16px_34px_rgba(184,121,60,0.25)] transition hover:-translate-y-0.5 hover:bg-[#96612f]" type="submit">Send Desert Tour Request</button>

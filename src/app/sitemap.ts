@@ -4,11 +4,10 @@ import { siteUrl } from "./data/site";
 import { tours } from "./data/tours";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastUpdated = new Date();
-
   const staticPages = [
     { path: "", priority: 1, changeFrequency: "weekly" as const },
     { path: "/tours", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.8, changeFrequency: "yearly" as const },
     { path: "/contact", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/faq", priority: 0.85, changeFrequency: "monthly" as const },
     { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
@@ -19,13 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages.map((page) => ({
       url: `${siteUrl}${page.path}`,
-      lastModified: lastUpdated,
       changeFrequency: page.changeFrequency,
       priority: page.priority,
     })),
     ...tours.map((tour) => ({
       url: `${siteUrl}/tours/${tour.slug}`,
-      lastModified: lastUpdated,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
