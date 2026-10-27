@@ -58,7 +58,7 @@ export default function FaqPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading eyebrow="FAQ" title="Marrakech to Merzouga desert tour questions." level="h1">
             <p>
-              Quick answers for travelers comparing private and shared Sahara tours, camel trekking, desert camps, Marrakech to Fes routes, and 3-day versus 4-day itineraries.
+              Quick answers about private Sahara tours, camel trekking, desert camps, Marrakech to Fes routes, and 3-day versus 4-day itineraries.
             </p>
           </SectionHeading>
 

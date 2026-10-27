@@ -22,14 +22,14 @@ const trustItems = [
   "Specialists in Marrakech to Merzouga desert tours",
   "Professional local drivers for Atlas and Sahara roads",
   "Comfortable air-conditioned vehicles for long desert routes",
-  "Small groups, private tours, and flexible pacing",
+  "Private tours with flexible pacing for your group",
 ];
 
 const reasons = [
   ["Merzouga Specialists", "We focus on Marrakech to Merzouga tours, Sahara camps, and the classic southern Morocco route."],
   ["Professional Drivers", "Calm, experienced drivers who know the High Atlas, Dades Valley, Todra Gorge, and desert roads."],
   ["Comfortable Vehicles", "Air-conditioned transport sized properly for your group, luggage, and long travel days."],
-  ["Small Groups", "A quieter, more personal Sahara tour than crowded coach-style departures."],
+  ["Private Groups", "Your own comfortable vehicle and a more personal pace without unrelated travelers."],
   ["Flexible Private Tours", "Adjust pickup, hotel level, camp category, pace, and scenic stops when you book privately."],
   ["Fast Communication", "Clear answers before booking, with WhatsApp and email support for your Morocco itinerary."],
   ["Authentic Experiences", "Kasbahs, valleys, Erg Chebbi dunes, desert camp evenings, and meaningful local stops."],
@@ -118,7 +118,7 @@ export default function Home() {
               Marrakech to <span className="text-brand-terracotta">Merzouga</span> desert tours
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base font-semibold leading-relaxed text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)] md:text-lg">
-              Compare focused 3-day and 4-day Sahara tours from Marrakech to Merzouga, including Dades Valley, Todra Gorge, Erg Chebbi camel trekking, comfortable transport, private or shared options, and authentic desert camp nights.
+              Compare private 3-day and 4-day Sahara tours from Marrakech to Merzouga, including Dades Valley, Todra Gorge, Erg Chebbi camel trekking, comfortable air-conditioned transport, and authentic desert camp nights.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/tours" className="w-full rounded-xl border border-brand-terracotta bg-brand-terracotta px-8 py-4 text-center text-sm font-black uppercase tracking-wider text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] ring-2 ring-white/20 transition-all duration-300 hover:scale-105 hover:bg-brand-terracotta-dark sm:w-auto">
@@ -137,7 +137,7 @@ export default function Home() {
           {[
             ["Local desert experts", "Native Moroccan driving team for the Atlas and Sahara road"],
             ["Erg Chebbi camps", "Camel trekking, sunset dunes, and Merzouga camp nights"],
-            ["Flexible planning", "Private routes, small groups, and clear custom support"],
+            ["Flexible planning", "Private routes, customized stops, and clear support"],
           ].map(([title, text], index) => (
             <div key={title} className={`flex items-center gap-4 ${index === 1 ? "md:border-x md:border-slate-100 md:px-8" : ""}`}>
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-terracotta/10 text-sm font-black text-brand-terracotta">
@@ -156,7 +156,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
           <SectionHeading eyebrow="Welcome to 3 Days Merzouga" title="A local team for clear, comfortable Sahara travel.">
             <p>
-              We specialize in Marrakech to Merzouga desert tours because a focused route creates better trips. Families get comfort, safety, and clear planning from the first message. Solo travelers can ask about shared desert tour departures, while couples and small groups can choose private pacing or camp upgrades. Our local drivers know the High Atlas road, the valleys, and the desert rhythm, so every itinerary is practical, memorable, and easy to book with confidence.
+              We specialize in private Marrakech to Merzouga desert tours because a focused route creates better trips. Solo travelers, couples, families, and groups travel with a professional team in a comfortable air-conditioned vehicle, with flexible pacing, customized stops, and camp upgrades when requested. Our local drivers know the High Atlas road, the valleys, and the desert rhythm, so every itinerary is practical, memorable, and easy to book with confidence.
             </p>
             <p>
               3 Days Merzouga is operated by <a href={operatorUrl} className="font-bold text-brand-terracotta underline decoration-brand-terracotta/35 underline-offset-4 transition hover:decoration-brand-terracotta">Atlas Toubkal Trek</a>, our established local Morocco travel team.

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Book a Marrakech to Merzouga Desert Tour",
     description:
-      "Contact 3 Days Merzouga to plan a private or shared Marrakech to Merzouga desert tour, Sahara camp, camel trek, or custom Morocco route.",
+      "Contact 3 Days Merzouga to plan a private Marrakech to Merzouga desert tour, Sahara camp, camel trek, or custom Morocco route.",
     url: `${siteUrl}/contact`,
     siteName,
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Book a Marrakech to Merzouga Desert Tour",
     description:
-      "Contact 3 Days Merzouga for private or shared Marrakech to Merzouga desert tour planning.",
+      "Contact 3 Days Merzouga for private Marrakech to Merzouga desert tour planning.",
     images: [defaultOgImage],
   },
 };
@@ -63,7 +63,7 @@ export default function ContactPage() {
           <div>
             <SectionHeading eyebrow="Contact 3 Days Merzouga" title="Book your Marrakech to Merzouga desert tour." level="h1">
               <p>
-                Send your travel dates, group size, preferred route, and hotel pickup location. We reply with availability, clear pricing, and the best private or shared Merzouga desert tour option for your travel rhythm.
+                Send your travel dates, group size, preferred route, and hotel pickup location. We reply with availability, clear pricing, and a private Merzouga desert tour planned around your group.
               </p>
             </SectionHeading>
             <div className="mt-8 grid gap-4 text-sm font-bold">
@@ -93,18 +93,15 @@ export default function ContactPage() {
               <label className="grid gap-2 text-sm font-bold text-white/75">Number of travelers<input name="Travelers" type="number" min="1" inputMode="numeric" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="grid gap-2 text-sm font-bold text-white/75">Tour style
-                <select name="Tour style" defaultValue="Not sure" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2">
-                  <option>Not sure</option><option>Private tour</option><option>Shared tour</option>
-                </select>
-              </label>
+              <label className="grid gap-2 text-sm font-bold text-white/75">Pickup location<input name="Pickup location" type="text" placeholder="Hotel, riad, or address" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
               <label className="grid gap-2 text-sm font-bold text-white/75">Camp preference
                 <select name="Camp preference" defaultValue="Not sure" className="min-h-12 rounded-md border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2">
                   <option>Not sure</option><option>Standard camp</option><option>Luxury camp</option>
                 </select>
               </label>
             </div>
-            <label className="grid gap-2 text-sm font-bold text-white/75">Tour request<textarea name="Message" rows={6} placeholder="Tour name, group size, hotel or riad, pickup city, private or shared tour, camp preference, and custom route requests" className="rounded-md border border-white/10 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
+            <input type="hidden" name="Tour format" value="Private tour" />
+            <label className="grid gap-2 text-sm font-bold text-white/75">Tour request<textarea name="Message" rows={6} placeholder="Preferred stops, accommodation needs, dietary requirements, return plans, and custom route requests" className="rounded-md border border-white/10 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2" /></label>
             <button className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black shadow-[0_16px_34px_rgba(184,121,60,0.25)] transition hover:-translate-y-0.5 hover:bg-[#96612f]" type="submit">Send Desert Tour Request</button>
             <p className="text-xs leading-5 text-white/65">
               This form opens your email application; the website does not store your message. By sending it, you agree that we may use your details to answer your tour request. Read our <Link href="/privacy" className="font-bold text-[#e8b86f] underline underline-offset-2">privacy policy</Link>.

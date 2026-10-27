@@ -90,10 +90,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         </label>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="grid gap-2 text-sm font-bold text-slate-800">
-            Tour style
-            <select name="Tour style" defaultValue="Not sure" className="min-h-12 rounded-md border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2">
-              <option>Not sure</option><option>Private tour</option><option>Shared tour</option>
-            </select>
+            Pickup location
+            <input name="Pickup location" type="text" placeholder="Hotel, riad, or address" className="min-h-12 rounded-md border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2" />
           </label>
           <label className="grid gap-2 text-sm font-bold text-slate-800">
             Camp preference
@@ -104,7 +102,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         </div>
         <label className="grid gap-2 text-sm font-bold text-slate-800">
           Tour notes
-          <textarea name="Message" rows={4} placeholder="Hotel or riad, pickup location, private or shared tour, luxury camp upgrade, dietary needs, or custom route" className="rounded-md border border-stone-200 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2" />
+          <textarea name="Message" rows={4} placeholder="Luxury camp upgrade, dietary needs, preferred stops, return plans, or other custom requests" className="rounded-md border border-stone-200 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2" />
         </label>
         <button type="submit" className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black text-white shadow-[0_16px_34px_rgba(184,121,60,0.24)] transition hover:-translate-y-0.5 hover:bg-[#96612f] hover:shadow-[0_18px_40px_rgba(184,121,60,0.32)]">
           Send Desert Tour Request

@@ -93,7 +93,7 @@ const commonFaqs = [
   {
     question: "Is there a minimum number of participants?",
     answer:
-      "Private tours can run for one traveler. Shared departures depend on availability for your date, but we will always explain the options clearly before you confirm.",
+      "Private tours can run for one traveler, subject to vehicle, accommodation, and camp availability for the requested date.",
   },
   {
     question: "Do you provide tours in different languages?",
@@ -202,7 +202,7 @@ const commonFaqs = [
   {
     question: "Can this Merzouga desert tour be private?",
     answer:
-      "Yes. Every itinerary can be arranged privately with flexible stops, pickup time, accommodation level, and pace for couples, families, or small groups.",
+      "Yes. We operate private tours, with a dedicated vehicle and flexible stops, pickup time, accommodation level, and pace for solo travelers, couples, families, or groups.",
   },
   {
     question: "Can you adapt the itinerary?",
@@ -368,7 +368,7 @@ export const tours: Tour[] = [
     bestFor: [
       "First-time visitors who want the classic Sahara loop from Marrakech",
       "Travelers on a tight schedule who still want a real desert-camp night",
-      "Couples, friends and solo travelers comparing private and shared options",
+      "Couples, friends and solo travelers who want a private vehicle and flexible pace",
       "Anyone returning to Marrakech for an onward flight or riad stay",
     ],
     route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Draa Valley"],
@@ -403,10 +403,10 @@ export const tours: Tour[] = [
         ],
       },
       {
-        heading: "Private or shared, and how pricing works",
+        heading: "How private-tour pricing works",
         body: [
-          "Prices on this page are per person and drop as the group grows, because the cost of the vehicle and driver is shared between everyone travelling. Two people pay more each than a group of five. Private departures give you your own vehicle, flexible pickup and the freedom to change the pace, while shared departures are a lower-cost option for solo travelers happy to join a small group.",
-          "If you are unsure which suits you, send us your dates and group size and we will quote both clearly before you commit.",
+          "Prices on this page are per person and drop as your private group grows, because the vehicle and driver cost is divided among the people booking together. Two people pay more each than a private group of five.",
+          "Every departure is private, giving your group its own vehicle, flexible pickup, customized stops, and freedom to adjust the pace. Send us your dates and group size and we will provide a clear quote before you commit.",
         ],
       },
     ],

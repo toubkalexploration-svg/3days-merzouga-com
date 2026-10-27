@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "4 day Merzouga desert tour",
     "Erg Chebbi desert camp",
     "private Marrakech to Merzouga tour",
-    "shared Merzouga desert tour",
+    "private Merzouga desert tour",
   ],
   alternates: {
     canonical: "/tours",

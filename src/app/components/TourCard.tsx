@@ -32,7 +32,7 @@ export function TourCard({ tour, priority = false, sizes = "(max-width: 1023px) 
               Merzouga route
             </span>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-              Private / shared
+              Private tour
             </span>
           </div>
 
