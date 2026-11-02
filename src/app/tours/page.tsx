@@ -9,19 +9,9 @@ import { defaultOgImage, photos, siteName } from "../data/site";
 import { siteUrl, tours } from "../data/tours";
 
 export const metadata: Metadata = {
-  title: "Marrakech to Merzouga Desert Tours",
+  title: "Marrakech to Merzouga Desert Tours | 3 Days Merzouga",
   description:
-    "Compare Marrakech to Merzouga desert tours, including a 3-day Marrakech to Fes Sahara route, classic 3-day Marrakech to Merzouga tour, and slower 4-day Erg Chebbi desert adventure.",
-  keywords: [
-    "Marrakech to Merzouga desert tour",
-    "Merzouga desert tours from Marrakech",
-    "3 day Merzouga desert tour",
-    "Marrakech to Fes desert tour",
-    "4 day Merzouga desert tour",
-    "Erg Chebbi desert camp",
-    "private Marrakech to Merzouga tour",
-    "private Merzouga desert tour",
-  ],
+    "Compare Marrakech to Merzouga desert tours: 3-day Marrakech to Fes route, classic 3-day Marrakech to Merzouga round trip, and slower 4-day Erg Chebbi desert adventure.",
   alternates: {
     canonical: "/tours",
   },
@@ -72,36 +62,36 @@ export default function ToursPage() {
           sizes="100vw"
           className="-z-20 object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(19,32,40,0.7),rgba(19,32,40,0.42)_52%,rgba(19,32,40,0.12)),linear-gradient(0deg,rgba(19,32,40,0.44),rgba(19,32,40,0.03))]" />
+        <div className="absolute inset-0 -z-10 bg-brand-slate/75" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
           <div className="max-w-3xl">
-            <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#e8b86f] backdrop-blur">
+            <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#e8b86f] backdrop-blur">
               All Marrakech desert tours
             </p>
-            <h1 className="mt-5 text-4xl font-black uppercase leading-[0.98] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-4xl font-black uppercase leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               Compare Merzouga desert tours from Marrakech
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/82">
-              Three focused Sahara routes: Marrakech to Fes, the classic 3-day Marrakech to Merzouga desert tour, and a slower 4-day Erg Chebbi adventure with more time in the dunes.
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/85">
+              Three focused Sahara routes: Marrakech to Fes, the classic 3-day Marrakech to Merzouga desert tour, and a slower 4-day Erg Chebbi adventure with a full discovery day in the dunes.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#tour-list" className="rounded-full bg-[#b8793c] px-6 py-3 text-center text-sm font-black text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] transition hover:-translate-y-0.5 hover:bg-[#96612f]">
+              <Link href="#tour-list" className="rounded-full bg-[#b8793c] px-6 py-3 text-center text-sm font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f]">
                 View tours
               </Link>
               <Link href="/contact" className="rounded-full border border-white/45 bg-white/5 px-6 py-3 text-center text-sm font-black text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white hover:bg-white/15">
-                Ask for advice
+                Ask for route advice
               </Link>
             </div>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-lg border border-white/15 bg-white/15 text-sm shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/15 text-sm shadow-lg backdrop-blur">
             {[
-              ["Best for connection", "Marrakech to Fes via Merzouga"],
-              ["Best classic route", "3 days to Erg Chebbi camp"],
-              ["Best relaxed pace", "4 days with desert discovery"],
+              ["Best for north-bound trips", "Marrakech to Fes via Merzouga"],
+              ["Best classic round trip", "3-Day Marrakech to Merzouga"],
+              ["Best relaxed desert pace", "4-Day with Sahara discovery day"],
             ].map(([label, value]) => (
-              <div key={label} className="bg-[#132028]/68 p-5">
-                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-white/48">{label}</p>
-                <p className="mt-2 text-lg font-black text-white">{value}</p>
+              <div key={label} className="bg-[#132028]/85 p-5">
+                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#e8b86f]">{label}</p>
+                <p className="mt-1 text-base font-bold text-white">{value}</p>
               </div>
             ))}
           </div>
@@ -112,11 +102,18 @@ export default function ToursPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading eyebrow="Tour collection" title="Choose the Sahara route that fits your trip.">
             <p>
-              We keep the catalog small on purpose. Each route solves a real travel need, with clear timing, route stops, and pricing before you send a booking request.
+              We keep the catalog focused on purpose. Every route is staffed by experienced local drivers with private vehicles, dedicated support, and verified pricing.
             </p>
           </SectionHeading>
-          <div className="mt-9 grid gap-6 lg:grid-cols-3">
-            {tours.map((tour, index) => <TourCard key={tour.slug} tour={tour} priority={index === 0} />)}
+          <div className="mt-10 grid gap-8 lg:grid-cols-3">
+            {tours.map((tour, index) => (
+              <TourCard
+                key={tour.slug}
+                tour={tour}
+                priority={index === 0}
+                sizes="(max-width: 640px) 100vw, (max-width: 1023px) 50vw, 33vw"
+              />
+            ))}
           </div>
         </div>
       </section>

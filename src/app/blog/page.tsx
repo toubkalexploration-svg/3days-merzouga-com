@@ -51,7 +51,7 @@ export default function BlogPage() {
       description: post.excerpt,
       url: `${siteUrl}/blog/${post.slug}`,
       datePublished: post.publishedAt,
-      dateModified: post.publishedAt,
+      dateModified: post.modifiedAt ?? post.publishedAt,
       image: post.heroImage,
     })),
   };

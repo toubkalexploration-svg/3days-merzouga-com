@@ -1,20 +1,25 @@
 import type { ImageLoaderProps } from "next/image";
 
 /**
- * Custom next/image loader that serves responsive, right-sized images directly
- * from the Cloudinary CDN. This avoids double-optimizing already-hosted images
- * through the built-in Next optimizer and lets Cloudinary generate correctly
- * sized variants (better LCP and smaller transfer sizes).
- *
- * Non-Cloudinary URLs are returned untouched.
+ * Custom next/image loader serving responsive, right-sized images directly
+ * from Cloudinary with automatic format and economical compression.
+ * Avoids serving massive 3840px assets to mobile devices and removes redundant transforms.
  */
-export default function cloudinaryLoader({ src, width }: ImageLoaderProps): string {
+export default function cloudinaryLoader({ src, width, quality }: ImageLoaderProps): string {
   if (!src.includes("res.cloudinary.com") || !src.includes("/upload/")) {
     return src;
   }
 
   const [base, rest] = src.split("/upload/");
-  const transform = `c_limit,w_${width},q_auto,f_auto,dpr_auto`;
+  // Strip any existing inline transforms (e.g. f_auto,q_auto or w_1200...) from the public ID
+  const segments = rest.split("/");
+  const cleanSegments = segments.filter(
+    (seg) => !/^(?:[a-z]{1,2}_[a-zA-Z0-9_.:-]+,?)+$/.test(seg)
+  );
+  const publicId = cleanSegments.join("/");
 
-  return `${base}/upload/${transform}/${rest}`;
+  const q = quality ? `q_${quality}` : "q_auto:eco";
+  const transform = `c_limit,w_${width},${q},f_auto`;
+
+  return `${base}/upload/${transform}/${publicId}`;
 }

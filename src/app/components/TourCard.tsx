@@ -8,14 +8,18 @@ type TourCardProps = {
   sizes?: string;
 };
 
-export function TourCard({ tour, priority = false, sizes = "(max-width: 1023px) 100vw, 33vw" }: TourCardProps) {
+export function TourCard({
+  tour,
+  priority = false,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1023px) 50vw, 33vw",
+}: TourCardProps) {
   return (
-    <article className="group mx-auto flex h-full w-full max-w-sm overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_4px_30px_rgba(28,45,55,0.02)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(28,45,55,0.06)] lg:max-w-none">
+    <article className="group mx-auto flex h-full w-full max-w-sm overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md lg:max-w-none">
       <div className="flex min-h-full w-full flex-col">
         <div className="relative aspect-video overflow-hidden bg-slate-100">
           <Image
             src={tour.cardImage}
-            alt={`${tour.title} landscape and route`}
+            alt={`${tour.title} landscape and desert route`}
             fill
             priority={priority}
             sizes={sizes}
@@ -28,20 +32,20 @@ export function TourCard({ tour, priority = false, sizes = "(max-width: 1023px) 
 
         <div className="flex flex-1 flex-col p-6">
           <div className="mb-2 flex items-center gap-2">
-            <span className="rounded-full border border-orange-200/70 bg-orange-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-800">
+            <span className="rounded-full border border-orange-200/70 bg-orange-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900">
               Merzouga route
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">
               Private tour
             </span>
           </div>
 
-          <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800 transition-colors duration-200 group-hover:text-brand-terracotta">
+          <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-900 transition-colors duration-200 group-hover:text-brand-terracotta">
             <Link href={`/tours/${tour.slug}`}>
               {tour.title}
             </Link>
           </h3>
-          <p className="mb-4 flex-1 overflow-hidden text-sm leading-relaxed text-slate-800 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
+          <p className="mb-4 flex-1 overflow-hidden text-sm leading-relaxed text-slate-700 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
             {tour.summary}
           </p>
 
@@ -56,20 +60,25 @@ export function TourCard({ tour, priority = false, sizes = "(max-width: 1023px) 
             </ul>
           </div>
 
-          <div className="mt-auto flex items-center justify-between border-t border-slate-100/70 pt-3">
+          <div className="mt-auto flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">From</span>
-              <div className="flex items-baseline gap-0.5">
+              <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                Starting from
+              </span>
+              <div className="flex items-baseline gap-1">
                 <span className="text-2xl font-black text-brand-slate">&euro;{tour.startingPrice}</span>
-                <span className="text-xs font-semibold uppercase text-slate-400">/ person</span>
+                <span className="text-xs font-semibold uppercase text-slate-600">/ person</span>
               </div>
+              <span className="block text-[11px] text-slate-500">
+                {tour.startingPriceCondition}
+              </span>
             </div>
             <Link
               href={`/tours/${tour.slug}`}
-              className="inline-flex items-center justify-center gap-1 rounded-xl border border-slate-200/80 bg-slate-50 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 transition-all duration-200 hover:border-brand-terracotta hover:bg-brand-terracotta hover:text-white"
+              className="inline-flex items-center justify-center gap-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-800 transition-all duration-200 hover:border-brand-terracotta hover:bg-brand-terracotta hover:text-white"
             >
-              <span>Details</span>
-              <span aria-hidden="true">-&gt;</span>
+              <span>View tour</span>
+              <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
         </div>

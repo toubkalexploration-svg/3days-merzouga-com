@@ -4,15 +4,9 @@ import { SectionHeading } from "../components/SectionHeading";
 import { defaultOgImage, siteName, siteUrl } from "../data/site";
 
 export const metadata: Metadata = {
-  title: "Merzouga Tour Booking and Refund Policy",
+  title: "Merzouga Tour Booking and Refund Policy | 3 Days Merzouga",
   description:
     "Read the 3 Days Merzouga booking, refund, cancellation, included services, and custom tour policy for Marrakech to Merzouga desert tours.",
-  keywords: [
-    "Merzouga tour booking policy",
-    "Morocco desert tour cancellation",
-    "Marrakech to Merzouga refund policy",
-    "private desert tour terms",
-  ],
   alternates: {
     canonical: "/booking-policy",
   },
@@ -34,16 +28,23 @@ export const metadata: Metadata = {
   },
 };
 
-const included = [
-  "Air-conditioned transportation from Marrakech and back",
-  "Professional local driver",
-  "Breakfasts",
-  "Dinners",
-  "Desert camp accommodation",
-  "Hotel accommodation",
-  "Guided visits",
-  "Scenic stops throughout the journey",
-  "Stops such as Ait Ben Haddou, Ouarzazate, Dades Valley, Todra Gorge, and Merzouga Desert",
+const includedServices = [
+  "Air-conditioned transportation for your private group from Marrakech",
+  "Professional local driver experienced with High Atlas and Sahara roads",
+  "Breakfasts and dinners during all overnight stays",
+  "Desert camp accommodation in Merzouga (standard or luxury option)",
+  "Hotel or kasbah accommodation during the journey (e.g. Dades Valley)",
+  "Erg Chebbi camel trek at sunset and sunrise",
+  "Scenic stops, photo opportunities, and rest breaks throughout the route",
+];
+
+const excludedServices = [
+  "Midday lunches and beverages",
+  "Personal travel insurance and personal shopping expenses",
+  "Entrance fees at monuments (e.g. ticket to enter Ait Ben Haddou ksar)",
+  "Licensed local monument guides at historical sites (available on request)",
+  "Optional Sahara activities such as quad biking, sandboarding, or buggies",
+  "Tips for the driver and desert camp staff",
 ];
 
 export default function BookingPolicyPage() {
@@ -54,30 +55,51 @@ export default function BookingPolicyPage() {
         <div className="mx-auto max-w-4xl">
           <SectionHeading eyebrow="Booking policy" title="Clear terms for Marrakech to Merzouga desert tours." level="h1">
             <p>
-              This policy keeps expectations simple before we organize transport, accommodation, Sahara camp logistics, and local services for your Merzouga desert tour from Marrakech.
+              This policy keeps expectations simple and transparent before we organize transport, accommodation, Sahara camp logistics, and local services for your Merzouga desert tour.
             </p>
           </SectionHeading>
           <div className="mt-10 grid gap-6">
-            <section className="rounded-lg border border-stone-200 bg-white/95 p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
-              <h2 className="text-2xl font-black">Refund and cancellation policy</h2>
-              <ul className="mt-5 grid gap-4 leading-8 text-slate-800">
-                <li>Full refund if cancelled at least 7 days before departure.</li>
-                <li>Tours booked only 2-3 days before departure may still be cancelled for a full refund before the tour starts.</li>
-                <li>For bookings made earlier than 4 days before departure, cancellations made less than 4 days before departure receive a 50% refund because transportation, accommodation, and logistics have already been organized.</li>
+            <section className="rounded-2xl border border-stone-200 bg-white/95 p-6 shadow-sm sm:p-8">
+              <h2 className="text-2xl font-black text-slate-900">Refund and cancellation policy</h2>
+              <ul className="mt-5 grid gap-4 leading-8 text-slate-700">
+                <li><strong className="text-slate-900">7+ days before departure:</strong> Full refund with no cancellation fee.</li>
+                <li><strong className="text-slate-900">Late bookings (2–3 days before departure):</strong> May still be cancelled for a full refund before the tour begins.</li>
+                <li><strong className="text-slate-900">Less than 4 days before departure:</strong> 50% refund for earlier confirmed bookings, as vehicle reservations, driver scheduling, and camp/hotel commitments have already been confirmed.</li>
               </ul>
             </section>
-            <section className="rounded-lg border border-stone-200 bg-white/95 p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
-              <h2 className="text-2xl font-black">Private and custom desert tours</h2>
-              <p className="mt-5 leading-8 text-slate-800">
-                Marrakech to Merzouga itineraries can be customized on request. We can adapt hotel level, desert camp category, route stops, pickup time, private pacing, and extra nights in Merzouga, Dades Valley, or other southern Morocco stops.
+
+            <section className="rounded-2xl border border-stone-200 bg-white/95 p-6 shadow-sm sm:p-8">
+              <h2 className="text-2xl font-black text-slate-900">Private and custom desert tours</h2>
+              <p className="mt-5 leading-8 text-slate-700">
+                Every commercial itinerary can be customized on request. We adapt hotel category, desert camp style (standard or luxury), route stops, departure timing, and extra rest nights in Dades Valley or Merzouga according to your party&apos;s preferences.
               </p>
             </section>
-            <section className="rounded-lg border border-stone-200 bg-white/95 p-6 shadow-[0_14px_42px_rgba(32,25,19,0.06)]">
-              <h2 className="text-2xl font-black">Common services included</h2>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                {included.map((item) => <li key={item} className="rounded-lg border border-stone-200 bg-white p-4 font-bold text-slate-950">{item}</li>)}
-              </ul>
-            </section>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+                <h2 className="text-xl font-black text-slate-900">Included services</h2>
+                <ul className="mt-5 space-y-3 text-sm text-slate-700">
+                  {includedServices.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="font-bold text-green-700">&#10003;</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+                <h2 className="text-xl font-black text-slate-900">Not included</h2>
+                <ul className="mt-5 space-y-3 text-sm text-slate-700">
+                  {excludedServices.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="font-bold text-brand-terracotta">&times;</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </div>
           </div>
         </div>
       </section>

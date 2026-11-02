@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
+import { Analytics } from "./components/Analytics";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { Footer } from "./components/Footer";
 import { defaultOgImage, siteName, siteUrl } from "./data/site";
 import "./globals.css";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit-font",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -21,22 +30,9 @@ export const metadata: Metadata = {
   authors: [{ name: "3 Days Merzouga" }],
   creator: "3 Days Merzouga",
   publisher: "3 Days Merzouga",
-  keywords: [
-    "Merzouga tour",
-    "Merzouga from Marrakech",
-    "Marrakech to Merzouga desert tour",
-    "Marrakech to Merzouga 3 day desert tour",
-    "3 days Marrakech to Merzouga",
-    "Marrakech to Fes desert tour",
-    "Merzouga 3 day tour",
-    "Dades Valley tour",
-    "Todra Gorge tour",
-    "Erg Chebbi camel trek",
-    "Sahara desert camp Morocco",
-    "private desert tour Morocco",
-    "private Merzouga desert tour",
-    "luxury desert camp Merzouga",
-  ],
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   alternates: {
     canonical: "/",
   },
@@ -62,9 +58,7 @@ export const metadata: Metadata = {
     title: "Marrakech to Merzouga Desert Tours | 3 Days Merzouga",
     description:
       "Plan a focused Merzouga desert trip from Marrakech with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, and Sahara camp nights.",
-    images: [
-      defaultOgImage,
-    ],
+    images: [defaultOgImage],
   },
   robots: {
     index: true,
@@ -88,12 +82,13 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className="h-full antialiased"
+      className={`h-full antialiased ${outfit.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         {children}
         <Footer />
         <FloatingWhatsApp />
+        <Analytics />
       </body>
     </html>
   );

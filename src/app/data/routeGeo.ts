@@ -25,6 +25,7 @@ const roadDistances: Record<string, number> = {
   "Fes|Merzouga": 470,
   "Draa Valley|Merzouga": 265,
   "Merzouga|Ouarzazate": 360,
+  "Marrakech|Merzouga": 560,
   "Marrakech|Skoura": 235,
   "Marrakech|Ouarzazate": 200,
 };

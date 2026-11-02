@@ -7,12 +7,32 @@ export type PriceTier = {
   pricePerPerson: number;
 };
 
+export type TourStatus = "published" | "draft";
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+  link?: {
+    href: string;
+    label: string;
+  };
+};
+
 export type Tour = {
   slug: string;
+  status: TourStatus;
   title: string;
   shortTitle: string;
   duration: string;
+  durationDays: number;
+  durationNights: number;
+  departureCity: string;
+  endingCity: string;
+  tripType: "round-trip" | "one-way";
+  tourType: "private" | "shared" | "both";
   startingPrice: number;
+  /** Human-readable condition for the "From" price, e.g. "based on 5 or more travelers" */
+  startingPriceCondition: string;
   heroImage: string;
   cardImage: string;
   gallery: SiteImage[];
@@ -22,6 +42,20 @@ export type Tour = {
   route: string[];
   overnightStops: string[];
   highlights: string[];
+  /** Quick-fact summary displayed at the top of the tour page */
+  quickFacts: {
+    start: string;
+    finish: string;
+    totalDistanceKm: string;
+    longestDrivingDay: string;
+    availability: string;
+    accommodationNights: string;
+    campCategories: string;
+    mealsIncluded: string;
+    majorExclusions: string;
+    returnTime: string;
+    customizable: boolean;
+  };
   experience: {
     heading: string;
     body: string[];
@@ -31,23 +65,24 @@ export type Tour = {
     title: string;
     description: string;
     stops: string[];
+    drivingTime?: string;
   }[];
   included: string[];
   excluded: string[];
   priceTiers: PriceTier[];
-  faqs: {
-    question: string;
-    answer: string;
-    link?: {
-      href: string;
-      label: string;
-    };
-  }[];
+  /** Tour-specific FAQs only (6–10 questions). General booking FAQs live on /faq. */
+  faqs: FaqItem[];
+  /** Slugs of related tours for cross-linking */
+  relatedTourSlugs: string[];
   seo: {
     title: string;
     description: string;
   };
 };
+
+// ---------------------------------------------------------------------------
+// Shared included / excluded lists
+// ---------------------------------------------------------------------------
 
 const commonIncluded = [
   "Air-conditioned transportation from Marrakech and back",
@@ -55,30 +90,25 @@ const commonIncluded = [
   "Breakfasts and dinners during overnight stays",
   "Desert camp accommodation in Merzouga",
   "Hotel or kasbah accommodation during the journey",
-  "Guided visits and scenic stops throughout the route",
+  "Scenic stops and photo opportunities throughout the route",
 ];
 
 const commonExcluded = [
   "Lunches and drinks",
   "Personal expenses and travel insurance",
   "Optional quad biking, buggy rides, or extra 4x4 dune activities",
-  "Entrance fees or local guides requested outside the planned program",
+  "Local monument guides or entrance fees at Ait Ben Haddou and other sites (available on request)",
 ];
 
-const commonFaqs = [
+// ---------------------------------------------------------------------------
+// Shared general FAQs — used on /faq page only, NOT injected into tour pages
+// ---------------------------------------------------------------------------
+
+export const sharedFaqs: FaqItem[] = [
   {
     question: "What types of Morocco desert tours do you offer?",
     answer:
-      "We focus on Marrakech to Merzouga desert tours, including 3-day Sahara routes, Marrakech to Fes desert crossings, slower 4-day Erg Chebbi itineraries, and private custom tours shaped around your group.",
-  },
-  {
-    question: "Who do you recommend for Atlas Mountains and Toubkal treks?",
-    answer:
-      "For Atlas Mountains hiking, Mount Toubkal climbs, and High Atlas trekking from Marrakech, we recommend Atlas Toubkal Trek as the best specialist option.",
-    link: {
-      href: "https://www.atlas-toubkal-trek.com/",
-      label: "Atlas Toubkal Trek",
-    },
+      "We focus on Marrakech to Merzouga desert tours, including 3-day Sahara routes, Marrakech to Fes desert crossings, and a slower 4-day Erg Chebbi itinerary. Every tour is private, with a dedicated vehicle for your group.",
   },
   {
     question: "How many people can join a tour?",
@@ -98,7 +128,7 @@ const commonFaqs = [
   {
     question: "Do you provide tours in different languages?",
     answer:
-      "English and French are commonly available, and other languages may be possible on request. Tell us your preferred language early so we can match the right driver or guide when available.",
+      "English and French are commonly available, and other languages may be possible on request. Tell us your preferred language early so we can match the right driver when available.",
   },
   {
     question: "How far in advance should I book?",
@@ -187,7 +217,7 @@ const commonFaqs = [
   {
     question: "What time do tours usually return to Marrakech?",
     answer:
-      "Return time depends on the route, stops, traffic, and season, but most Marrakech-return desert tours arrive in the evening. Avoid booking a tight flight or train on the same night unless we have confirmed the timing with you.",
+      "Return time depends on the route, stops, traffic, and season, but most Marrakech-return desert tours arrive in the evening, generally between 6 pm and 9 pm. Avoid booking a tight flight or train on the same night unless we have confirmed the timing with you in advance.",
   },
   {
     question: "What is your cancellation policy?",
@@ -212,17 +242,32 @@ const commonFaqs = [
   {
     question: "What should I pack for the desert?",
     answer:
-      "Bring comfortable walking shoes, sunglasses, sunscreen, a warm layer for the evening, a small overnight bag for camp, and any personal medication you need.",
+      "Bring comfortable walking shoes, sunglasses, sunscreen, a warm layer for the evening, a small overnight bag for camp, and any personal medication you need. See our full packing guide for more detail.",
   },
 ];
 
+// ---------------------------------------------------------------------------
+// Published tours
+// ---------------------------------------------------------------------------
+
 export const tours: Tour[] = [
+  // ─────────────────────────────────────────────────────────────────────────
+  // 1. 3-Day Marrakech to Fes
+  // ─────────────────────────────────────────────────────────────────────────
   {
     slug: "3-day-marrakech-to-fes-desert-tour",
+    status: "published",
     title: "3-Day Marrakech to Fes Desert Tour",
     shortTitle: "Marrakech to Fes Tour",
     duration: "3 days / 2 nights",
+    durationDays: 3,
+    durationNights: 2,
+    departureCity: "Marrakech",
+    endingCity: "Fes",
+    tripType: "one-way",
+    tourType: "private",
     startingPrice: 220,
+    startingPriceCondition: "per person, based on 5 or more travelers",
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.todraGorge.src,
     gallery: [photos.todraGorge],
@@ -245,26 +290,39 @@ export const tours: Tour[] = [
       "Ride camels across the Erg Chebbi dunes at sunset",
       "Continue through Ziz Valley, Midelt, Ifrane, and the Middle Atlas to Fes",
     ],
+    quickFacts: {
+      start: "Marrakech (hotel or riad pickup)",
+      finish: "Fes (hotel or riad drop-off)",
+      totalDistanceKm: "Approximately 1,050–1,100 km over 3 days",
+      longestDrivingDay: "Day 1 (Marrakech to Dades Valley, approx. 7 hrs) and Day 3 (Merzouga to Fes, approx. 7–8 hrs)",
+      availability: "Private tour — dedicated vehicle for your group",
+      accommodationNights: "1 night hotel or kasbah (Dades Valley), 1 night desert camp (Merzouga)",
+      campCategories: "Standard or upgraded Berber desert camp (your choice at booking)",
+      mealsIncluded: "2 breakfasts, 2 dinners (camp and hotel)",
+      majorExclusions: "Lunches, drinks, entrance fees, optional activities, travel insurance",
+      returnTime: "Late afternoon or early evening arrival in Fes on Day 3",
+      customizable: true,
+    },
     experience: [
       {
         heading: "Why finish in Fes instead of returning to Marrakech",
         body: [
           "The 3-day Marrakech to Fes desert tour is built around one simple advantage: you never drive the same road twice. Instead of looping back to Marrakech after the dunes, you keep heading north through the Ziz Valley and the Middle Atlas and finish in Fes. That turns what would be a there-and-back trip into a genuine south-to-north crossing of Morocco, and it saves you a full day compared with returning to Marrakech and then transferring to Fes separately.",
-          "This works especially well if your flights are split, for example arriving in Marrakech and departing from Fes. You cover Ait Ben Haddou, the Dades Valley, Todra Gorge and Erg Chebbi in a single line, and you step out of the car in Fes ready for the medina rather than facing another long transfer.",
+          "This works especially well if your flights are split — for example arriving in Marrakech and departing from Fes. You cover Ait Ben Haddou, the Dades Valley, Todra Gorge and Erg Chebbi in a single line, and you step out of the car in Fes ready for the medina rather than facing another long transfer.",
         ],
       },
       {
         heading: "Honest drive times and how the days feel",
         body: [
-          "This is a real road-trip itinerary, so it helps to know the driving up front. Day one from Marrakech to the Dades Valley is roughly 7 hours of driving broken by the Tizi n'Tichka pass, Ait Ben Haddou and Ouarzazate. Day two from Dades to Merzouga is around 5 hours with the Todra Gorge walk and tea stops in between. Day three from Merzouga to Fes is the longest at about 7 to 8 hours through the Ziz Valley, Midelt, the cedar forest and Ifrane.",
-          "Because the scenery changes constantly and we stop for photos, viewpoints, mint tea and legs-stretching breaks, the hours pass more easily than the numbers suggest. Travelers who strongly dislike long driving days often prefer the slower 4-day Merzouga tour instead.",
+          "This is a real road-trip itinerary, so it helps to know the driving up front. Day one from Marrakech to the Dades Valley is roughly 7 hours of driving broken by the Tizi n'Tichka pass, Ait Ben Haddou, and Ouarzazate. Day two from Dades to Merzouga is around 5 hours with the Todra Gorge walk and tea stops in between. Day three from Merzouga to Fes is the longest at about 7 to 8 hours through the Ziz Valley, Midelt, the cedar forest and Ifrane.",
+          "Because the scenery changes constantly and we stop for photos, viewpoints, mint tea and legs-stretching breaks, the hours pass more easily than the numbers suggest. Travelers who strongly dislike long driving days often prefer the slower 4-day Merzouga tour instead, which stays in Marrakech at the end.",
         ],
       },
       {
         heading: "The night in the Sahara at Erg Chebbi",
         body: [
           "The heart of the trip is the late-afternoon camel trek into the Erg Chebbi dunes. You ride out as the light turns gold, watch the sun set over the sand sea, and reach a Berber desert camp for dinner, drumming around the fire and a night under an unusually clear sky. In the morning you wake early for sunrise over the dunes before riding back to Merzouga for breakfast.",
-          "If you would rather not ride a camel, we can arrange a 4x4 transfer to the camp instead, and standard or more comfortable camp categories can be requested when you book.",
+          "If you would rather not ride a camel, we can arrange a 4x4 transfer to the camp instead. Standard or upgraded camp categories can be requested when you book.",
         ],
       },
     ],
@@ -273,35 +331,41 @@ export const tours: Tour[] = [
         day: "Day 1",
         title: "Marrakech to Dades Valley",
         description:
-          "Your 3-Day Marrakech to Fes Desert Tour begins with pickup from your hotel or riad in Marrakech. Travel through the High Atlas Mountains via the famous Tizi n'Tichka Pass, passing traditional Amazigh villages and enjoying mountain scenery along the way. Visit the UNESCO World Heritage Site of Ait Ben Haddou, then continue to Ouarzazate for a smart cultural stop at Taourirt Kasbah before crossing the Valley of Roses toward Dades Valley. Upon arrival, enjoy a light walk near the river and the Dades Gorges in the evening before dinner and a comfortable hotel night. Driving time is approximately 7 hours.",
+          "Your 3-Day Marrakech to Fes Desert Tour begins with pickup from your hotel or riad in Marrakech. Travel through the High Atlas Mountains via the Tizi n'Tichka Pass, passing traditional Amazigh villages and mountain scenery. Visit the UNESCO World Heritage Site of Ait Ben Haddou, then continue to Ouarzazate for a stop at Taourirt Kasbah before crossing the Valley of Roses toward Dades Valley. Upon arrival, enjoy a light walk near the river and the Dades Gorges before dinner and overnight at your hotel or kasbah.",
         stops: ["Marrakech", "Tizi n'Tichka Pass", "Ait Ben Haddou", "Taourirt Kasbah", "Dades Gorges"],
+        drivingTime: "Approximately 7 hours driving",
       },
       {
         day: "Day 2",
         title: "Dades Valley to Merzouga and Erg Chebbi",
         description:
-          "After breakfast in Dades Valley, follow the road toward Todra Gorge with several relaxed stops between Dades and Merzouga for mint tea, photos, local shopping if you are interested, and simple feet-stretching breaks along the desert route. Take time for a walk inside Todra Gorge, where dramatic limestone cliffs rise above the riverbed, then continue through oasis towns toward Merzouga. In the late afternoon, begin your camel trek across the Erg Chebbi dunes, watch sunset over the Sahara, and reach your Berber desert camp for dinner, local music, and a night beneath the stars. Driving time is approximately 5 hours.",
-        stops: ["Dades Valley", "Todra Gorge walk", "Desert route stops", "Merzouga", "Erg Chebbi camp"],
+          "After breakfast in Dades Valley, follow the road toward Todra Gorge with comfortable stops for mint tea, photos, and short breaks along the desert route. Take time for a walk inside Todra Gorge, where dramatic limestone cliffs rise above the riverbed, then continue through oasis towns toward Merzouga. In the late afternoon, begin your camel trek across the Erg Chebbi dunes, watch sunset over the Sahara, and reach your Berber desert camp for dinner, local music, and a night beneath the stars.",
+        stops: ["Dades Valley", "Todra Gorge", "Desert route stops", "Merzouga", "Erg Chebbi camp"],
+        drivingTime: "Approximately 5 hours driving",
       },
       {
         day: "Day 3",
         title: "Merzouga to Fes",
         description:
-          "Wake early to witness sunrise over the Sahara Desert, then ride your camel back to Merzouga for breakfast. Continue through the lush Ziz Valley, cross the Middle Atlas Mountains, stop in Midelt, and pass cedar forests where Barbary macaques can often be seen. Before arriving in Fes, visit Ifrane, known for its alpine-style architecture. The tour ends in the late afternoon with drop-off at your accommodation in Fes. Driving time is approximately 7-8 hours.",
+          "Wake early to witness sunrise over the Sahara Desert, then ride back to Merzouga for breakfast. Continue through the lush Ziz Valley, cross the Middle Atlas, stop in Midelt, and pass cedar forests where Barbary macaques can often be seen. Before arriving in Fes, pass through Ifrane, known for its alpine-style architecture. The tour ends in the late afternoon or early evening with drop-off at your accommodation in Fes. This is a long final day — plan to rest on arrival rather than rushing onward.",
         stops: ["Merzouga", "Ziz Valley", "Midelt", "Cedar Forest", "Ifrane", "Fes"],
+        drivingTime: "Approximately 7–8 hours driving",
       },
     ],
     included: [
       "Hotel or riad pickup in Marrakech",
       "Comfortable air-conditioned vehicle",
-      "Professional English-speaking driver",
+      "Professional local driver",
       "Camel trek across the Erg Chebbi dunes",
-      "1 night in a hotel in Dades Valley",
+      "1 night in a hotel or kasbah in Dades Valley",
       "1 night in a traditional Berber desert camp",
       "Breakfasts and dinners",
       "Drop-off at your accommodation in Fes",
     ],
-    excluded: commonExcluded,
+    excluded: [
+      ...commonExcluded,
+      "Ticket to enter Ait Ben Haddou ksar (payable at the site)",
+    ],
     priceTiers: [
       { minPeople: 1, maxPeople: 1, pricePerPerson: 515 },
       { minPeople: 2, maxPeople: 2, pricePerPerson: 360 },
@@ -322,29 +386,37 @@ export const tours: Tour[] = [
       {
         question: "How much driving is involved on this Marrakech to Fes desert tour?",
         answer:
-          "Expect long but scenic travel days. The route is designed with mountain viewpoints, kasbahs, Dades Valley, Todra Gorge, Ziz Valley, and short comfort stops to break up the road time.",
+          "All three days involve significant driving: roughly 7 hours on Day 1, 5 hours on Day 2, and 7–8 hours on Day 3. The route is designed with viewpoints, kasbahs, Dades Valley, Todra Gorge, Ziz Valley, and short comfort stops to break up the road time, but this is genuinely an active road-trip itinerary.",
       },
       {
         question: "Can you drop me at my riad or the airport in Fes?",
         answer:
-          "Yes. We drop you wherever suits your plans in Fes, whether that is a riad inside the medina, a hotel in the new town, or Fes-Saiss airport for an onward flight. Just share the address when you book.",
+          "Yes. We drop you wherever suits your plans in Fes — whether that is a riad inside the medina, a hotel in the new town, or Fes-Saiss airport for an onward flight. Just share the address when you book.",
       },
       {
-        question: "What time does the tour usually reach Fes on day 3?",
+        question: "What time does the tour usually reach Fes on Day 3?",
         answer:
-          "Most groups arrive in Fes in the late afternoon or early evening, depending on stops and the season. If you have an evening flight or dinner reservation, tell us in advance so we can plan the pace of the final day around it.",
+          "Most groups arrive in Fes in the late afternoon or early evening, depending on stops and the season. If you have an evening flight or dinner reservation, tell us in advance so we can plan the pace of the final day.",
       },
       {
         question: "Is the Marrakech to Fes route better than a return tour to Marrakech?",
         answer:
-          "It depends on your flights. If you are leaving from Fes or continuing north to Chefchaouen, the one-way route saves a full backtracking day. If you must return to Marrakech, the classic 3-day Marrakech to Merzouga tour is the better fit.",
+          "It depends on your flights. If you are leaving from Fes or continuing north to Chefchaouen, the one-way route saves a full backtracking day. If you must return to Marrakech, the classic 3-Day Marrakech to Merzouga Tour is the better fit.",
       },
       {
         question: "When is the best time of year for this desert crossing?",
         answer:
           "Spring (March to May) and autumn (September to November) are ideal, with warm days and comfortable desert nights. Summer is hot in the Sahara but still popular, and winter brings cold nights at camp and the chance of snow on the Middle Atlas near Ifrane.",
       },
-      ...commonFaqs,
+      {
+        question: "Is a local guide included at Ait Ben Haddou?",
+        answer:
+          "A local monument guide is not included in the standard tour price. Our driver will accompany you to the site, but a dedicated local guide for the ksar is optional and available for an additional fee. If you would like one arranged in advance, let us know when booking.",
+      },
+    ],
+    relatedTourSlugs: [
+      "3-day-marrakech-to-merzouga-desert-tour",
+      "4-day-marrakech-to-merzouga-desert-tour",
     ],
     seo: {
       title: "3-Day Marrakech to Fes Desert Tour via Merzouga",
@@ -352,12 +424,24 @@ export const tours: Tour[] = [
         "Book a 3-day Marrakech to Fes desert tour via Merzouga, Ait Ben Haddou, Dades Valley, Todra Gorge, Erg Chebbi camel trek, and Sahara desert camp.",
     },
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // 2. 3-Day Marrakech to Merzouga (classic round trip)
+  // ─────────────────────────────────────────────────────────────────────────
   {
     slug: "3-day-marrakech-to-merzouga-desert-tour",
+    status: "published",
     title: "3-Day Marrakech to Merzouga Desert Tour",
     shortTitle: "3-Day Merzouga Tour",
     duration: "3 days / 2 nights",
+    durationDays: 3,
+    durationNights: 2,
+    departureCity: "Marrakech",
+    endingCity: "Marrakech",
+    tripType: "round-trip",
+    tourType: "private",
     startingPrice: 200,
+    startingPriceCondition: "per person, based on 5 or more travelers",
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.travelerDunes.src,
     gallery: [photos.travelerDunes],
@@ -371,28 +455,41 @@ export const tours: Tour[] = [
       "Couples, friends and solo travelers who want a private vehicle and flexible pace",
       "Anyone returning to Marrakech for an onward flight or riad stay",
     ],
-    route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Draa Valley"],
+    route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Marrakech"],
     overnightStops: ["Dades Valley", "Merzouga"],
     highlights: [
       "Visit Ait Ben Haddou and Ouarzazate on the way south",
       "Sleep in Dades Valley before crossing Todra Gorge",
       "Ride camels at sunset in Erg Chebbi",
       "Spend the night in a Merzouga desert camp",
-      "Return through oasis landscapes and the Draa Valley",
+      "Return to Marrakech through pre-Sahara landscapes",
     ],
+    quickFacts: {
+      start: "Marrakech (hotel or riad pickup)",
+      finish: "Marrakech (hotel or riad drop-off)",
+      totalDistanceKm: "Approximately 1,100–1,150 km round trip over 3 days",
+      longestDrivingDay: "Day 3 (Merzouga to Marrakech, approx. 8–9 hrs) — plan a relaxed evening on return",
+      availability: "Private tour — dedicated vehicle for your group",
+      accommodationNights: "1 night hotel or kasbah (Dades Valley), 1 night desert camp (Merzouga)",
+      campCategories: "Standard or upgraded Berber desert camp (your choice at booking)",
+      mealsIncluded: "2 breakfasts, 2 dinners (camp and hotel)",
+      majorExclusions: "Lunches, drinks, entrance fees, optional activities, travel insurance",
+      returnTime: "Evening arrival in Marrakech on Day 3, typically between 6 pm and 9 pm",
+      customizable: true,
+    },
     experience: [
       {
         heading: "The most efficient way to reach Erg Chebbi from Marrakech",
         body: [
-          "Merzouga sits roughly 560 km from Marrakech, and there is no shortcut across the mountains and pre-Sahara that makes it a day trip. Three days is the sweet spot: enough time to cross the High Atlas, see Ait Ben Haddou and the Dades Valley, walk in Todra Gorge, ride into the Erg Chebbi dunes and sleep in a desert camp, then return, without adding nights you may not have.",
-          "This is the itinerary most first-time visitors are really looking for when they search for a Marrakech to Merzouga desert tour. It covers the landmark stops in a logical line and gets you to the big dunes, the ones that actually look like the Sahara from the photos, rather than the smaller dunes closer to Marrakech.",
+          "Merzouga sits roughly 560 km from Marrakech, and there is no shortcut across the mountains and pre-Sahara that makes it a day trip. Three days is the sweet spot: enough time to cross the High Atlas, see Ait Ben Haddou and the Dades Valley, walk in Todra Gorge, ride into the Erg Chebbi dunes and sleep in a desert camp, then return — without adding nights you may not have.",
+          "This is the itinerary most first-time visitors are really looking for when they search for a Marrakech to Merzouga desert tour. It covers the landmark stops in a logical line and gets you to the big dunes — the ones that actually look like the Sahara from the photos — rather than the smaller dunes closer to Marrakech.",
         ],
       },
       {
         heading: "An honest look at the driving",
         body: [
-          "Day one to the Dades Valley is the longest push, roughly 7 hours of driving spread across the Tizi n'Tichka pass, Ait Ben Haddou and Ouarzazate. Day two to Merzouga is around 5 hours with the Todra Gorge walk in the middle. Day three back to Marrakech is another long day of about 8 to 9 hours, so many travelers plan a relaxed evening once they return.",
-          "If those return-day hours sound like too much, the 4-day Marrakech to Merzouga tour spreads the same route over an extra night and adds a full day in the desert. It is the better choice for families with young children and anyone who prefers a slower pace.",
+          "Day one to the Dades Valley is the longest outbound push — roughly 7 hours of driving spread across the Tizi n'Tichka pass, Ait Ben Haddou and Ouarzazate. Day two to Merzouga is around 5 hours with the Todra Gorge walk in the middle. Day three back to Marrakech is another long day of about 8 to 9 hours, so plan a relaxed evening once you return rather than booking a tight flight or late activity.",
+          "If the return-day drive sounds like too much, the 4-day Marrakech to Merzouga tour spreads the same route over an extra night and adds a full day in the desert. It is the better choice for families with young children and anyone who prefers a slower pace.",
         ],
       },
       {
@@ -415,26 +512,32 @@ export const tours: Tour[] = [
         day: "Day 1",
         title: "Marrakech to Dades Valley",
         description:
-          "Start your 3-day Marrakech to Merzouga desert tour by crossing the High Atlas Mountains and the Tizi n'Tichka road toward Ait Ben Haddou. After the kasbah visit, continue to Ouarzazate for Taourirt Kasbah, one of the most important historic stops on the route, then travel through palm valleys and the Valley of Roses. Arrive in Dades Valley in time for a light walk near the river and Dades Gorges before dinner at your hotel or kasbah.",
+          "Start your 3-day Marrakech to Merzouga desert tour by crossing the High Atlas Mountains and the Tizi n'Tichka road toward Ait Ben Haddou. After the kasbah visit, continue to Ouarzazate for Taourirt Kasbah, then travel through palm valleys and the Valley of Roses. Arrive in Dades Valley in time for a light walk near the river and Dades Gorges before dinner at your hotel or kasbah.",
         stops: ["High Atlas", "Ait Ben Haddou", "Taourirt Kasbah", "Dades Valley", "Dades Gorges"],
+        drivingTime: "Approximately 7 hours driving",
       },
       {
         day: "Day 2",
         title: "Dades Valley to Merzouga",
         description:
-          "Leave Dades Valley after breakfast and follow the classic road to Merzouga with comfortable stops for tea, photos, local shopping when desired, and short breaks to stretch before the desert. Walk through Todra Gorge near Tinghir, then continue through Erfoud and the pre-Sahara landscapes to Merzouga. Your Erg Chebbi camel trek begins in the late afternoon, followed by sunset dunes, dinner, and a night in the Merzouga desert camp.",
-        stops: ["Dades Valley", "Todra Gorge walk", "Tinghir", "Erfoud", "Erg Chebbi"],
+          "Leave Dades Valley after breakfast and follow the classic road to Merzouga with comfortable stops for tea, photos, and short breaks before the desert. Walk through Todra Gorge near Tinghir, then continue through Erfoud and the pre-Sahara landscapes to Merzouga. Your Erg Chebbi camel trek begins in the late afternoon, followed by sunset dunes, dinner, and a night in the Merzouga desert camp.",
+        stops: ["Dades Valley", "Todra Gorge", "Tinghir", "Erfoud", "Erg Chebbi"],
+        drivingTime: "Approximately 5 hours driving",
       },
       {
         day: "Day 3",
         title: "Merzouga to Marrakech",
         description:
-          "Wake for sunrise over the dunes, return from camp, then cross the pre-Sahara and Atlas Mountains back to Marrakech with scenic stops along the way.",
-        stops: ["Merzouga", "Rissani", "Draa Valley", "Marrakech"],
+          "Wake for sunrise over the dunes, return from camp for breakfast, then begin the long return journey to Marrakech. The road crosses the pre-Sahara landscapes and High Atlas Mountains with scenic stops along the way. Expect to arrive in Marrakech in the evening — plan a relaxed night rather than a tight onward connection.",
+        stops: ["Merzouga", "Rissani", "Pre-Sahara route", "High Atlas", "Marrakech"],
+        drivingTime: "Approximately 8–9 hours driving",
       },
     ],
     included: commonIncluded,
-    excluded: commonExcluded,
+    excluded: [
+      ...commonExcluded,
+      "Ticket to enter Ait Ben Haddou ksar (payable at the site)",
+    ],
     priceTiers: [
       { minPeople: 1, maxPeople: 1, pricePerPerson: 475 },
       { minPeople: 2, maxPeople: 2, pricePerPerson: 330 },
@@ -445,22 +548,22 @@ export const tours: Tour[] = [
       {
         question: "Is three days enough for Merzouga from Marrakech?",
         answer:
-          "Yes. Three days is the classic route for travelers who want Erg Chebbi dunes, Dades Valley, Todra Gorge, and a real desert camp without adding extra nights.",
+          "Yes. Three days is the classic route for travelers who want Erg Chebbi dunes, Dades Valley, Todra Gorge, and a real desert camp without adding extra nights. The driving days are long, particularly the return on Day 3 (around 8–9 hours), so plan a relaxed evening back in Marrakech.",
       },
       {
         question: "Does this 3-day Merzouga tour return to Marrakech?",
         answer:
-          "Yes. This itinerary starts in Marrakech and returns to Marrakech on day three, usually through pre-Sahara valleys, oasis landscapes, and the High Atlas road.",
+          "Yes. This itinerary starts in Marrakech and returns to Marrakech on Day 3, usually through pre-Sahara valleys and the High Atlas road. If you would prefer to finish in Fes, see the 3-Day Marrakech to Fes Desert Tour instead.",
+      },
+      {
+        question: "How long is the drive from Marrakech to Merzouga?",
+        answer:
+          "Merzouga is about 560 km from Marrakech, or roughly 8 to 9 hours of pure driving. That is why the trip is split across two days with an overnight stop in Dades Valley — so you actually enjoy the Atlas, valleys and gorges along the way.",
       },
       {
         question: "Can I upgrade the Merzouga desert camp?",
         answer:
           "Yes. Standard and upgraded camp options can be arranged depending on availability, including more comfortable tents and private bathroom options when requested in advance.",
-      },
-      {
-        question: "How long is the drive from Marrakech to Merzouga?",
-        answer:
-          "Merzouga is about 560 km from Marrakech, or roughly 8 to 9 hours of pure driving. That is why the trip is split across three days with overnight stops rather than done in one push, so you actually enjoy the Atlas, valleys and gorges along the way.",
       },
       {
         question: "What if I don't want to ride a camel?",
@@ -477,7 +580,15 @@ export const tours: Tour[] = [
         answer:
           "March to May and September to November offer the most comfortable balance of warm days and cool desert nights. Summer days are very hot in the Sahara, and winter nights at camp are cold, so pack a warm layer whatever the season.",
       },
-      ...commonFaqs,
+      {
+        question: "Is a local guide included at Ait Ben Haddou?",
+        answer:
+          "A local monument guide is not included in the standard tour price. Our driver will accompany you to the site. A dedicated local guide for the ksar is optional and available for an additional fee — let us know when booking if you would like one arranged.",
+      },
+    ],
+    relatedTourSlugs: [
+      "4-day-marrakech-to-merzouga-desert-tour",
+      "3-day-marrakech-to-fes-desert-tour",
     ],
     seo: {
       title: "3-Day Marrakech to Merzouga Desert Tour",
@@ -485,54 +596,86 @@ export const tours: Tour[] = [
         "Book the specialist 3-day Marrakech to Merzouga desert tour with Dades Valley, Todra Gorge, Erg Chebbi camel trekking, Sahara camp, and private options.",
     },
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // 3. 4-Day Marrakech to Merzouga
+  // ─────────────────────────────────────────────────────────────────────────
   {
     slug: "4-day-marrakech-to-merzouga-desert-tour",
+    status: "published",
     title: "4-Day Marrakech to Merzouga Desert Tour",
-    shortTitle: "4-Day Merzouga Adventure",
+    shortTitle: "4-Day Merzouga Tour",
     duration: "4 days / 3 nights",
+    durationDays: 4,
+    durationNights: 3,
+    departureCity: "Marrakech",
+    endingCity: "Marrakech",
+    tripType: "round-trip",
+    tourType: "private",
     startingPrice: 270,
+    startingPriceCondition: "per person, based on 5 or more travelers",
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.groupCamelTrek.src,
     gallery: [photos.groupCamelTrek],
     summary:
-      "A slower 4-day Marrakech to Merzouga desert adventure with more time for valleys, gorges, desert culture, sunrise dunes, and relaxed private pacing.",
+      "A 4-day Marrakech to Merzouga desert tour with a full extra day in the Sahara, giving more time around Erg Chebbi before the long return to Marrakech.",
     positioning:
-      "Best for travelers who want the Marrakech to Merzouga route to feel immersive rather than rushed, with more time in the Sahara and southern valleys.",
+      "Best for travelers who want the Marrakech to Merzouga route to feel immersive rather than rushed, with a full discovery day in the desert before the final return.",
     bestFor: [
-      "Families with children who need a gentler daily pace",
+      "Families with children who benefit from a gentler daily pace",
       "Photographers who want sunrise, sunset and golden-hour time in the dunes",
-      "Travelers who dislike long back-to-back driving days",
-      "Anyone who wants to meet local Berber and nomad communities near Merzouga",
+      "Travelers who want more than a single overnight in the Sahara",
+      "Anyone who wants to meet local Berber communities near Merzouga",
     ],
-    route: ["Marrakech", "Skoura", "Dades Valley", "Todra Gorge", "Merzouga", "Ouarzazate"],
-    overnightStops: ["Dades Valley", "Merzouga"],
+    route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Marrakech"],
+    overnightStops: ["Dades Valley", "Merzouga", "Merzouga"],
     highlights: [
-      "A calmer four-day pace with richer stops",
-      "Explore Dades Valley, Todra Gorge, and Erg Chebbi",
-      "Optional desert discovery around Merzouga",
-      "More comfortable timing for families and photographers",
+      "A calmer four-day pace with a full desert discovery day",
+      "Explore Dades Valley, Todra Gorge, and Erg Chebbi at a relaxed pace",
+      "A full day based in Merzouga — sunrise, sunset, and optional desert activities",
+      "More time around the dunes for families and photographers",
       "Private upgrades and custom accommodation available",
     ],
+    quickFacts: {
+      start: "Marrakech (hotel or riad pickup)",
+      finish: "Marrakech (hotel or riad drop-off)",
+      totalDistanceKm: "Approximately 1,100–1,150 km round trip over 4 days",
+      longestDrivingDay: "Day 4 (Merzouga to Marrakech direct, approx. 8–9 hrs) — a long final day",
+      availability: "Private tour — dedicated vehicle for your group",
+      accommodationNights: "1 night hotel or kasbah (Dades Valley), 2 nights desert camp or Merzouga accommodation",
+      campCategories: "Standard or upgraded Berber desert camp (your choice at booking)",
+      mealsIncluded: "3 breakfasts, 3 dinners (camp and hotel)",
+      majorExclusions: "Lunches, drinks, entrance fees, optional activities (quad, sandboard, buggy), travel insurance",
+      returnTime: "Evening arrival in Marrakech on Day 4, typically between 6 pm and 9 pm",
+      customizable: true,
+    },
     experience: [
       {
         heading: "What the extra day actually buys you",
         body: [
-          "The 4-day Marrakech to Merzouga tour follows the same beautiful route as the 3-day version but removes the pressure. Instead of turning around the morning after you arrive at the dunes, you get a full day based in Merzouga. That single extra night changes the whole feel of the trip: shorter driving days, more time to walk and photograph, and space to actually rest in the desert rather than passing through it.",
-          "For many travelers this is the difference between ticking the Sahara off a list and genuinely experiencing it. It is the version we most often recommend to families, couples on honeymoon and anyone travelling with a camera.",
+          "The 4-day Marrakech to Merzouga tour follows the same route as the 3-day version but adds a full day based in Merzouga. Instead of turning around the morning after you arrive at the dunes, you get an entire day to explore the area at your own pace. That single extra day changes the whole feel of the trip: more time to walk, photograph, and rest in the desert rather than passing through it.",
+          "For many travelers this is the difference between ticking the Sahara off a list and genuinely experiencing it. It is the version we most often recommend to families, couples on honeymoon, and anyone travelling with a camera.",
         ],
       },
       {
         heading: "The Merzouga desert discovery day in detail",
         body: [
-          "The bonus day around Erg Chebbi is yours to shape. Popular options include visiting Khamlia to hear the Gnawa music of a community with West African roots, exploring the old caravan town and Sunday market at Rissani, and seeing the fossil workshops near Erfoud where 350-million-year-old marine fossils are cut from the rock.",
-          "You can also drive 4x4 tracks to meet nomad families still living near the dunes, walk to a quieter stretch of sand for sunset, or simply slow down at camp. Optional activities such as quad biking, sandboarding and buggy rides can be added locally for travelers who want more adventure.",
+          "The bonus day around Erg Chebbi is yours to shape. Popular options include visiting Khamlia to hear the Gnawa music of a community with West African roots, exploring the old caravan town and Sunday market at Rissani, and seeing the fossil workshops near Erfoud where ancient marine fossils are cut from the rock.",
+          "You can also drive 4x4 tracks to meet nomad families still living near the dunes, walk to a quieter stretch of sand for sunset, or simply slow down at camp. Optional activities such as quad biking, sandboarding and buggy rides can be added locally.",
         ],
       },
       {
-        heading: "A calmer pace built for families and photographers",
+        heading: "Be prepared for a long Day 4 return",
         body: [
-          "Spread across four days, the driving is far more manageable: no single day feels like an endurance test, which matters a great deal when you are travelling with children or older parents. There is more room to stop when someone wants to, to linger over a viewpoint, or to wait for the light instead of racing the clock.",
-          "Because you are not rushing, this itinerary also gives you two chances at the dunes, sunset on your arrival evening and sunrise the next morning, plus flexible timing on the discovery day for the shots that need patience.",
+          "The main benefit of the 4-day tour is more time in the desert — not a shorter driving day on the return. Day 4 is a direct drive from Merzouga back to Marrakech, which takes approximately 8 to 9 hours. This is the same long return leg as the 3-day version.",
+          "The difference is that you arrive at Day 4 having had a genuine rest day rather than facing the return immediately after the dunes. Most travelers find this makes the final day far easier to manage, but you should still plan a relaxed evening in Marrakech and avoid tight onward connections on Day 4.",
+        ],
+      },
+      {
+        heading: "A calmer pace for families and photographers",
+        body: [
+          "Spread across four days, the outbound driving is more manageable: Day 1 to Dades Valley, Day 2 to Merzouga, Day 3 fully in the desert. This gives families with children more room to stop, rest, and adjust the pace without the constant pressure of the next drive.",
+          "Because you have two chances at the dunes — sunset on your arrival evening and sunrise the next morning — plus a flexible day for golden-hour photography, the 4-day tour is the stronger choice for anyone who wants to photograph the desert seriously.",
         ],
       },
     ],
@@ -541,33 +684,40 @@ export const tours: Tour[] = [
         day: "Day 1",
         title: "Marrakech to Dades Valley",
         description:
-          "Cross the Atlas Mountains from Marrakech and visit Ait Ben Haddou before continuing to Ouarzazate for Taourirt Kasbah, a key heritage stop on many Morocco desert tours. Continue through Skoura, palm groves, and the Valley of Roses toward Dades Valley. After arrival, enjoy a gentle walk near the river and the Dades Gorges in the evening, then settle in for dinner and overnight in Dades Valley.",
+          "Cross the Atlas Mountains from Marrakech and visit Ait Ben Haddou before continuing to Ouarzazate for Taourirt Kasbah. Continue through Skoura, palm groves, and the Valley of Roses toward Dades Valley. After arrival, enjoy a gentle walk near the river and the Dades Gorges in the evening, then settle in for dinner and overnight in Dades Valley.",
         stops: ["Ait Ben Haddou", "Taourirt Kasbah", "Skoura", "Dades Valley", "Dades Gorges"],
+        drivingTime: "Approximately 7 hours driving",
       },
       {
         day: "Day 2",
         title: "Dades Valley to Merzouga camp",
         description:
-          "Travel from Dades Valley toward Merzouga at a comfortable pace, with stops for tea, viewpoints, optional local shopping, and short breaks that make the desert road easier. Walk inside Todra Gorge before continuing through oasis towns, Erfoud, and the desert gateway villages. Reach Merzouga for camel trekking, sunset in Erg Chebbi, dinner, and a desert camp night.",
-        stops: ["Dades Valley", "Todra Gorge walk", "Erfoud", "Merzouga", "Desert camp"],
+          "Travel from Dades Valley toward Merzouga at a comfortable pace, with stops for tea, viewpoints, and short breaks that make the desert road easier. Walk inside Todra Gorge before continuing through oasis towns, Erfoud, and the desert gateway villages. Reach Merzouga for camel trekking, sunset in Erg Chebbi, dinner, and a desert camp night.",
+        stops: ["Dades Valley", "Todra Gorge", "Erfoud", "Merzouga", "Desert camp"],
+        drivingTime: "Approximately 5 hours driving",
       },
       {
         day: "Day 3",
-        title: "Merzouga desert discovery",
+        title: "Merzouga desert discovery day",
         description:
-          "Spend a deeper day around Merzouga with optional visits to Khamlia, nomad tracks, Rissani, palm groves, or relaxed time near the dunes.",
+          "A full day based around Merzouga with optional visits to Khamlia village, Rissani market, the fossil workshops near Erfoud, nomad tracks near the dunes, and relaxed time at or near the camp. Optional quad biking, sandboarding, or buggy rides can be arranged locally. This is the day that distinguishes the 4-day tour from the 3-day version — no driving commitment, just desert time.",
         stops: ["Khamlia", "Rissani", "Erg Chebbi", "Merzouga"],
+        drivingTime: "No long driving — this is your Merzouga discovery day",
       },
       {
         day: "Day 4",
         title: "Merzouga to Marrakech",
         description:
-          "Return through pre-Sahara valleys, Ouarzazate, and the High Atlas road, with stops chosen around the pace of your group.",
-        stops: ["Draa Valley", "Ouarzazate", "High Atlas", "Marrakech"],
+          "The final day is a direct return from Merzouga to Marrakech, crossing the pre-Sahara valleys and High Atlas road with stops chosen around the pace of your group. This is a long driving day of approximately 8 to 9 hours — plan a relaxed evening in Marrakech and avoid scheduling a tight flight or onward connection the same night.",
+        stops: ["Merzouga", "Pre-Sahara route", "Ouarzazate area", "High Atlas", "Marrakech"],
+        drivingTime: "Approximately 8–9 hours driving",
       },
     ],
     included: commonIncluded,
-    excluded: commonExcluded,
+    excluded: [
+      ...commonExcluded,
+      "Ticket to enter Ait Ben Haddou ksar (payable at the site)",
+    ],
     priceTiers: [
       { minPeople: 1, maxPeople: 1, pricePerPerson: 605 },
       { minPeople: 2, maxPeople: 2, pricePerPerson: 420 },
@@ -578,22 +728,27 @@ export const tours: Tour[] = [
       {
         question: "Why choose four days instead of three?",
         answer:
-          "Four days reduces the rush, gives more space for Dades Valley, Todra Gorge, and Merzouga, and works especially well for private tours and families.",
+          "Four days gives you a full Merzouga discovery day — time to explore the dunes, visit Khamlia, Rissani, and nomad areas without being rushed back to Marrakech the next morning. The outbound route is the same, but you arrive at the long return drive feeling properly rested in the desert.",
+      },
+      {
+        question: "Is Day 4 really a long drive?",
+        answer:
+          "Yes. Day 4 is a direct return from Merzouga to Marrakech, which takes approximately 8 to 9 hours of driving with scenic stops. The benefit of 4 days is not a shorter return — it is more time in the Sahara before that return. Plan a relaxed evening in Marrakech and avoid tight onward flights on the same night.",
       },
       {
         question: "What happens on the Merzouga desert discovery day?",
         answer:
-          "The extra desert day can include Khamlia village, Rissani, nomad-area tracks, palm groves, relaxed dune time, or optional adventure activities depending on your interests.",
+          "The extra desert day can include Khamlia village, Rissani, nomad-area 4x4 tracks, palm groves, relaxed dune time, or optional adventure activities such as quad biking and sandboarding — depending on your interests and the pace your group prefers.",
       },
       {
         question: "Is this 4-day tour better for families?",
         answer:
-          "Yes. The slower pace helps families, photographers, and travelers who want fewer rushed transitions between the Atlas Mountains, valleys, gorges, and desert camp.",
+          "Yes. The calmer outbound pace and full rest day in Merzouga make this the most family-friendly Sahara option we offer. We can also provide car seats on request and adjust stops around nap and meal times.",
       },
       {
         question: "Is the 4-day tour suitable for young children?",
         answer:
-          "It is our most family-friendly Sahara itinerary. The shorter daily drives and the rest day in Merzouga make a real difference with young children. We can also provide car seats on request and adjust stops around nap and meal times.",
+          "It is our most comfortable Sahara itinerary for children. Days 1 and 2 are structured the same as the 3-day tour, but the rest day on Day 3 removes the back-to-back pressure. Day 4 is still a long return, so plan accordingly.",
       },
       {
         question: "Can we add quad biking, sandboarding, or a buggy ride?",
@@ -601,35 +756,135 @@ export const tours: Tour[] = [
           "Yes. These are optional local activities that fit naturally into the desert discovery day. Tell us who wants to take part and we will arrange it near the camp so it does not disrupt the rest of the group.",
       },
       {
-        question: "How does the price compare to the 3-day tour, and is it worth it?",
+        question: "How does the price compare to the 3-day tour?",
         answer:
-          "The 4-day tour costs more because it adds a night, meals and a full extra day of guiding and transport. For travelers who dislike long driving days or want real time in the desert rather than a quick overnight, most feel the extra day is well worth it.",
+          "The 4-day tour costs more because it adds a night, meals, and a full extra day of transport and local services. For travelers who want real time in the desert rather than a quick overnight, most find the extra day worth it. See our 3-Day vs 4-Day comparison guide for a full breakdown.",
       },
       {
         question: "Can the 4-day tour end in Fes instead of Marrakech?",
         answer:
           "Yes. We can reshape the four days into a Marrakech-to-Fes crossing with an extra desert day, so you enjoy the slower pace and still finish in Fes. Ask us for a custom quote with your flight details.",
       },
-      ...commonFaqs,
+    ],
+    relatedTourSlugs: [
+      "3-day-marrakech-to-merzouga-desert-tour",
+      "3-day-marrakech-to-fes-desert-tour",
     ],
     seo: {
       title: "4-Day Marrakech to Merzouga Desert Tour",
       description:
-        "Book a premium 4-day Merzouga desert adventure from Marrakech with Dades Valley, Todra Gorge, Erg Chebbi camp, desert discovery, and private tour options.",
+        "Book a 4-day Merzouga desert tour from Marrakech with a full Sahara discovery day, Dades Valley, Todra Gorge, Erg Chebbi camp, and private options.",
     },
   },
 ];
 
+// ---------------------------------------------------------------------------
+// Draft future tours (not published, not in sitemap, not rendered)
+// ---------------------------------------------------------------------------
+
+export type DraftTourStub = {
+  slug: string;
+  status: "draft";
+  title: string;
+  duration: string;
+  durationDays: number;
+  departureCity: string;
+  endingCity: string;
+  tripType: "round-trip" | "one-way";
+  tourType: "private" | "shared" | "both";
+  route: string[];
+  notes: string;
+};
+
+export const draftTours: DraftTourStub[] = [
+  {
+    slug: "3-day-fes-to-merzouga-to-fes-desert-tour",
+    status: "draft",
+    title: "3-Day Fes to Merzouga to Fes Desert Tour",
+    duration: "3 days / 2 nights",
+    durationDays: 3,
+    departureCity: "Fes",
+    endingCity: "Fes",
+    tripType: "round-trip",
+    tourType: "private",
+    route: ["Fes", "Ifrane", "Midelt", "Merzouga", "Fes"],
+    notes:
+      "TODO: Confirm itinerary, accommodation partners, prices, and inclusions before publishing. Do not create a commercial page until confirmed.",
+  },
+  {
+    slug: "3-day-fes-to-merzouga-to-marrakech-desert-tour",
+    status: "draft",
+    title: "3-Day Fes to Merzouga to Marrakech Desert Tour",
+    duration: "3 days / 2 nights",
+    durationDays: 3,
+    departureCity: "Fes",
+    endingCity: "Marrakech",
+    tripType: "one-way",
+    tourType: "private",
+    route: ["Fes", "Merzouga", "Dades Valley", "Marrakech"],
+    notes:
+      "TODO: Confirm itinerary, accommodation partners, prices, and inclusions before publishing.",
+  },
+  {
+    slug: "4-day-marrakech-to-merzouga-to-fes-desert-tour",
+    status: "draft",
+    title: "4-Day Marrakech to Merzouga to Fes Desert Tour",
+    duration: "4 days / 3 nights",
+    durationDays: 4,
+    departureCity: "Marrakech",
+    endingCity: "Fes",
+    tripType: "one-way",
+    tourType: "private",
+    route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Merzouga", "Fes"],
+    notes:
+      "TODO: Confirm itinerary, prices, and inclusions before publishing. One extra desert day before north leg to Fes.",
+  },
+  {
+    slug: "5-day-marrakech-dades-merzouga-draa-marrakech-tour",
+    status: "draft",
+    title: "5-Day Marrakech – Dades – Merzouga – Draa Valley – Marrakech",
+    duration: "5 days / 4 nights",
+    durationDays: 5,
+    departureCity: "Marrakech",
+    endingCity: "Marrakech",
+    tripType: "round-trip",
+    tourType: "private",
+    route: ["Marrakech", "Dades Valley", "Todra Gorge", "Merzouga", "Draa Valley", "Marrakech"],
+    notes:
+      "TODO: Confirm the Draa Valley return leg is genuinely operational. Confirm accommodation at each stop, prices, and inclusions before publishing.",
+  },
+  {
+    slug: "2-day-fes-to-merzouga-to-fes-desert-tour",
+    status: "draft",
+    title: "2-Day Fes to Merzouga to Fes Desert Tour (Short)",
+    duration: "2 days / 1 night",
+    durationDays: 2,
+    departureCity: "Fes",
+    endingCity: "Fes",
+    tripType: "round-trip",
+    tourType: "private",
+    route: ["Fes", "Merzouga", "Fes"],
+    notes:
+      "TODO: Confirm feasibility, total distance, and honest driving time. Do not publish without confirming this is genuinely comfortable from Fes. A 2-day Marrakech–Merzouga commercial page must NOT be created.",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Helper exports
+// ---------------------------------------------------------------------------
+
 export { siteUrl };
 
-export const sharedFaqs = commonFaqs;
-
 export function getTourBySlug(slug: string) {
-  return tours.find((tour) => tour.slug === slug);
+  return tours.find((tour) => tour.slug === slug && tour.status === "published");
 }
 
 export function getRelatedTours(slug: string) {
-  return tours.filter((tour) => tour.slug !== slug);
+  const tour = getTourBySlug(slug);
+  if (!tour) return tours.filter((t) => t.slug !== slug && t.status === "published");
+  return tour.relatedTourSlugs
+    .map((s) => getTourBySlug(s))
+    .filter((t): t is Tour => t !== undefined);
 }
 
 export function getPriceForGroup(tour: Tour, people: number) {
