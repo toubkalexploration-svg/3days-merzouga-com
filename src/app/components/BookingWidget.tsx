@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { contactMailtoUrl } from "../data/contact";
+import { contactEmail } from "../data/contact";
 import type { Tour } from "../data/tours";
 import { getPriceForGroup } from "../data/tours";
 import { trackBookingSubmit } from "../lib/analytics";
@@ -27,8 +27,32 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
     setPeopleInput(String(Math.max(1, Number.parseInt(digits, 10))));
   }
 
-  function handleSubmit() {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     trackBookingSubmit(tour.title, total, people);
+
+    const formData = new FormData(event.currentTarget);
+    const subject = `Desert Tour Booking Request: ${tour.title} (${people} travelers)`;
+    const body = [
+      "Hello 3 Days Merzouga Team,",
+      "",
+      "I would like to request a booking:",
+      `Tour: ${tour.title}`,
+      `Travelers: ${people}`,
+      `Estimated total: EUR ${total} (EUR ${tier.pricePerPerson} per person)`,
+      `Preferred date: ${formData.get("Date") || "To be confirmed"}`,
+      `Camp preference: ${formData.get("Camp preference") || "Not specified"}`,
+      `Pickup location: ${formData.get("Pickup location") || "To be confirmed"}`,
+      "",
+      `Full name: ${formData.get("Name") || ""}`,
+      `Email: ${formData.get("Email") || ""}`,
+      `WhatsApp: ${formData.get("WhatsApp") || "Not provided"}`,
+      "",
+      "Special requests / route questions:",
+      `${formData.get("Message") || "None"}`,
+    ].join("\n");
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   return (
@@ -43,15 +67,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
 
       <form
         className="grid gap-4 bg-white p-6"
-        action={contactMailtoUrl}
-        method="post"
-        encType="text/plain"
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="Tour" value={tour.title} />
-        <input type="hidden" name="Estimated total" value={`EUR ${total}`} />
-        <input type="hidden" name="Price per person" value={`EUR ${tier.pricePerPerson}`} />
-
         <div className="grid gap-2">
           <label htmlFor="people" className="text-sm font-bold text-slate-800">
             Number of travelers (private group)
@@ -167,7 +184,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         </button>
 
         <p className="text-center text-xs leading-5 text-slate-600">
-          This sends your tour inquiry via email directly to our local coordination team. We verify vehicle availability, hotel/camp space, and confirm exact pickup details before any payment is requested.
+          This prepares your tour inquiry and opens your email application. We verify vehicle availability, hotel/camp space, and confirm exact pickup details before any payment is requested.
         </p>
       </form>
     </div>
