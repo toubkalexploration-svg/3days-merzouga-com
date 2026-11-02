@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "../components/Header";
 import { JsonLd } from "../components/JsonLd";
 import { SectionHeading } from "../components/SectionHeading";
+import { SecureMailtoForm } from "../components/SecureMailtoForm";
 import { contactEmail, contactMailtoUrl, contactPhoneDisplay, contactWhatsAppUrl } from "../data/contact";
 import { defaultOgImage, siteName, siteUrl } from "../data/site";
 
@@ -78,11 +79,8 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <form
+          <SecureMailtoForm
             className="grid gap-4 rounded-2xl bg-[linear-gradient(135deg,#132028,#213946)] p-6 text-white shadow-lg ring-1 ring-white/10 sm:p-8"
-            action={contactMailtoUrl}
-            method="post"
-            encType="text/plain"
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm font-bold text-white/85">
@@ -192,7 +190,7 @@ export default function ContactPage() {
             <p className="text-xs leading-5 text-white/70">
               This form opens your email application; the website does not store your message. Read our <Link href="/privacy" className="font-bold text-[#e8b86f] underline underline-offset-2">privacy policy</Link>.
             </p>
-          </form>
+          </SecureMailtoForm>
         </div>
       </section>
 

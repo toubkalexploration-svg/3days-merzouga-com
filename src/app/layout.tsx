@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
 import { Analytics } from "./components/Analytics";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { Footer } from "./components/Footer";
 import { defaultOgImage, siteName, siteUrl } from "./data/site";
 import "./globals.css";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-outfit-font",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -82,7 +74,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`h-full antialiased ${outfit.variable}`}
+      className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         {children}
