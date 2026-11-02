@@ -12,6 +12,14 @@ type BookingWidgetProps = {
 
 export function BookingWidget({ tour }: BookingWidgetProps) {
   const [peopleInput, setPeopleInput] = useState("2");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [date, setDate] = useState("");
+  const [pickup, setPickup] = useState("");
+  const [camp, setCamp] = useState("Standard camp");
+  const [notes, setNotes] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [lastMailtoUrl, setLastMailtoUrl] = useState("");
 
@@ -30,18 +38,22 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
     setPeopleInput(String(Math.max(1, Number.parseInt(digits, 10))));
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    trackBookingSubmit(tour.title, total, people);
+  function handleSendRequest() {
+    if (!name.trim()) {
+      setErrorMessage("Please enter your full name.");
+      return;
+    }
+    if (!email.trim() || !email.includes("@")) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+    if (!date) {
+      setErrorMessage("Please select your preferred departure date.");
+      return;
+    }
 
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get("Name")?.toString().trim() || "";
-    const email = formData.get("Email")?.toString().trim() || "";
-    const whatsapp = formData.get("WhatsApp")?.toString().trim() || "";
-    const date = formData.get("Date")?.toString().trim() || "";
-    const pickup = formData.get("Pickup location")?.toString().trim() || "";
-    const camp = formData.get("Camp preference")?.toString().trim() || "";
-    const notes = formData.get("Message")?.toString().trim() || "";
+    setErrorMessage(null);
+    trackBookingSubmit(tour.title, total, people);
 
     const subject = `Desert Tour Booking Request: ${tour.title} (${people} travelers)`;
     const bodyLines = [
@@ -53,29 +65,28 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
       `- Tour: ${tour.title}`,
       `- Number of travelers: ${people} person(s)`,
       `- Estimated total: EUR ${total} (EUR ${tier.pricePerPerson} per person)`,
-      `- Preferred departure date: ${date || "To be confirmed"}`,
+      `- Preferred departure date: ${date}`,
       `- Camp preference: ${camp}`,
-      `- Pickup location: ${pickup || "To be confirmed"}`,
+      `- Marrakech pickup location: ${pickup.trim() || "To be confirmed"}`,
       ``,
       `CONTACT DETAILS:`,
-      `- Full Name: ${name}`,
-      `- Email address: ${email}`,
-      `- WhatsApp: ${whatsapp || "Not provided"}`,
+      `- Full Name: ${name.trim()}`,
+      `- Email address: ${email.trim()}`,
+      `- WhatsApp: ${whatsapp.trim() || "Not provided"}`,
       ``,
       `SPECIAL REQUESTS / NOTES:`,
-      `${notes || "None"}`,
+      `${notes.trim() || "None"}`,
       ``,
       `Please confirm vehicle availability, pickup timing, and next steps.`,
       ``,
       `Best regards,`,
-      `${name}`,
+      `${name.trim()}`,
     ];
 
     const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
     setLastMailtoUrl(mailto);
     setSubmitted(true);
 
-    // Navigate to mailto link safely without browser insecure form warnings
     window.location.href = mailto;
   }
 
@@ -89,7 +100,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         </p>
       </div>
 
-      <form className="grid gap-4 bg-white p-6" onSubmit={handleSubmit}>
+      <div className="grid gap-4 bg-white p-6">
         <div className="grid gap-2">
           <label htmlFor="people" className="text-sm font-bold text-slate-800">
             Number of travelers (private group)
@@ -125,6 +136,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
           <input
             name="Date"
             type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
             required
           />
@@ -137,6 +150,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               name="Name"
               type="text"
               placeholder="Your full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
               required
             />
@@ -147,6 +162,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               name="Email"
               type="email"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
               required
             />
@@ -159,6 +176,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
             name="WhatsApp"
             type="tel"
             placeholder="+1 / +44 / +33 / +212 ..."
+            value={whatsapp}
+            onChange={(e) => setWhatsapp(e.target.value)}
             className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
           />
         </label>
@@ -170,6 +189,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               name="Pickup location"
               type="text"
               placeholder="Hotel, riad name, or address"
+              value={pickup}
+              onChange={(e) => setPickup(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
             />
           </label>
@@ -177,7 +198,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
             Camp preference
             <select
               name="Camp preference"
-              defaultValue="Standard camp"
+              value={camp}
+              onChange={(e) => setCamp(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
             >
               <option>Standard camp</option>
@@ -193,9 +215,17 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
             name="Message"
             rows={3}
             placeholder="Children's ages, dietary requirements (vegetarian/gluten-free), extra nights, or custom route adjustments..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
             className="rounded-lg border border-stone-200 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
           />
         </label>
+
+        {errorMessage ? (
+          <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-bold text-red-800">
+            {errorMessage}
+          </div>
+        ) : null}
 
         {submitted ? (
           <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-xs leading-5 text-green-900">
@@ -214,8 +244,9 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         ) : null}
 
         <button
-          type="submit"
-          className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f] hover:shadow-lg"
+          type="button"
+          onClick={handleSendRequest}
+          className="min-h-12 cursor-pointer rounded-full bg-[#b8793c] px-6 font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f] hover:shadow-lg"
         >
           Send Desert Tour Request
         </button>
@@ -223,7 +254,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         <p className="text-center text-xs leading-5 text-slate-600">
           This prepares your booking inquiry and opens your email application. We verify vehicle availability, hotel/camp space, and confirm exact pickup details before any payment is requested.
         </p>
-      </form>
+      </div>
     </div>
   );
 }

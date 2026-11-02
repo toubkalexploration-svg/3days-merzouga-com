@@ -6,23 +6,31 @@ import { contactEmail, contactPhoneDisplay, contactWhatsAppUrl } from "../data/c
 import { trackEmailClick } from "../lib/analytics";
 
 export function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [date, setDate] = useState("");
+  const [tour, setTour] = useState("");
+  const [travelers, setTravelers] = useState("2");
+  const [pickup, setPickup] = useState("");
+  const [camp, setCamp] = useState("Standard camp");
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [lastMailtoUrl, setLastMailtoUrl] = useState("");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    trackEmailClick("contact_page_form");
+  function handleSendRequest() {
+    if (!name.trim()) {
+      setErrorMessage("Please enter your full name.");
+      return;
+    }
+    if (!email.trim() || !email.includes("@")) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
 
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get("Name")?.toString().trim() || "";
-    const email = formData.get("Email")?.toString().trim() || "";
-    const whatsapp = formData.get("WhatsApp")?.toString().trim() || "";
-    const date = formData.get("Date")?.toString().trim() || "";
-    const tour = formData.get("Tour")?.toString().trim() || "";
-    const travelers = formData.get("Travelers")?.toString().trim() || "2";
-    const pickup = formData.get("Pickup location")?.toString().trim() || "";
-    const camp = formData.get("Camp preference")?.toString().trim() || "";
-    const message = formData.get("Message")?.toString().trim() || "";
+    setErrorMessage(null);
+    trackEmailClick("contact_page_form");
 
     const subject = `Morocco Desert Tour Inquiry: ${tour || "General"} (${travelers} travelers)`;
     const bodyLines = [
@@ -35,35 +43,31 @@ export function ContactForm() {
       `- Number of travelers: ${travelers}`,
       `- Preferred Date: ${date || "To be confirmed"}`,
       `- Camp Preference: ${camp}`,
-      `- Pickup Location: ${pickup || "To be confirmed"}`,
+      `- Pickup Location: ${pickup.trim() || "To be confirmed"}`,
       ``,
       `CONTACT DETAILS:`,
-      `- Full Name: ${name}`,
-      `- Email: ${email}`,
-      `- WhatsApp: ${whatsapp || "Not provided"}`,
+      `- Full Name: ${name.trim()}`,
+      `- Email: ${email.trim()}`,
+      `- WhatsApp: ${whatsapp.trim() || "Not provided"}`,
       ``,
       `MESSAGE / SPECIAL REQUESTS:`,
-      `${message || "None"}`,
+      `${message.trim() || "None"}`,
       ``,
       `Please let me know your availability, pricing, and recommendations.`,
       ``,
       `Best regards,`,
-      `${name}`,
+      `${name.trim()}`,
     ];
 
     const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
     setLastMailtoUrl(mailto);
     setSubmitted(true);
 
-    // Safely open the user's default email client
     window.location.href = mailto;
   }
 
   return (
-    <form
-      className="grid gap-4 rounded-2xl bg-[linear-gradient(135deg,#132028,#213946)] p-6 text-white shadow-lg ring-1 ring-white/10 sm:p-8"
-      onSubmit={handleSubmit}
-    >
+    <div className="grid gap-4 rounded-2xl bg-[linear-gradient(135deg,#132028,#213946)] p-6 text-white shadow-lg ring-1 ring-white/10 sm:p-8">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-bold text-white/85">
           Full name
@@ -71,6 +75,8 @@ export function ContactForm() {
             name="Name"
             required
             placeholder="Your full name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           />
         </label>
@@ -81,6 +87,8 @@ export function ContactForm() {
             type="email"
             required
             placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           />
         </label>
@@ -91,6 +99,8 @@ export function ContactForm() {
           <input
             name="WhatsApp"
             placeholder="+1 / +44 / +33 / +212 ..."
+            value={whatsapp}
+            onChange={(e) => setWhatsapp(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           />
         </label>
@@ -99,6 +109,8 @@ export function ContactForm() {
           <input
             name="Date"
             type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           />
         </label>
@@ -108,12 +120,11 @@ export function ContactForm() {
           Preferred tour
           <select
             name="Tour"
-            defaultValue=""
+            value={tour}
+            onChange={(e) => setTour(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           >
-            <option value="" disabled>
-              Select a tour
-            </option>
+            <option value="">Select a tour (or general inquiry)</option>
             <option>3-Day Marrakech to Merzouga Desert Tour</option>
             <option>3-Day Marrakech to Fes Desert Tour</option>
             <option>4-Day Marrakech to Merzouga Desert Tour</option>
@@ -126,7 +137,8 @@ export function ContactForm() {
             name="Travelers"
             type="number"
             min="1"
-            defaultValue="2"
+            value={travelers}
+            onChange={(e) => setTravelers(e.target.value)}
             inputMode="numeric"
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           />
@@ -139,6 +151,8 @@ export function ContactForm() {
             name="Pickup location"
             type="text"
             placeholder="Hotel, riad, or address in Marrakech"
+            value={pickup}
+            onChange={(e) => setPickup(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
           />
         </label>
@@ -146,7 +160,8 @@ export function ContactForm() {
           Camp preference
           <select
             name="Camp preference"
-            defaultValue="Standard camp"
+            value={camp}
+            onChange={(e) => setCamp(e.target.value)}
             className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
           >
             <option>Standard camp</option>
@@ -161,9 +176,17 @@ export function ContactForm() {
           name="Message"
           rows={4}
           placeholder="Preferred stops, accommodation needs, dietary requirements, return plans, and custom route requests"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className="rounded-lg border border-white/10 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
         />
       </label>
+
+      {errorMessage ? (
+        <div className="rounded-xl border border-red-400/40 bg-red-950/80 p-3 text-xs font-bold text-red-200">
+          {errorMessage}
+        </div>
+      ) : null}
 
       {submitted ? (
         <div className="rounded-xl border border-green-400/30 bg-green-950/60 p-4 text-xs leading-5 text-green-100">
@@ -182,8 +205,9 @@ export function ContactForm() {
       ) : null}
 
       <button
-        className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f]"
-        type="submit"
+        onClick={handleSendRequest}
+        className="min-h-12 cursor-pointer rounded-full bg-[#b8793c] px-6 font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f]"
+        type="button"
       >
         Send Desert Tour Request
       </button>
@@ -193,7 +217,7 @@ export function ContactForm() {
           privacy policy
         </Link>.
       </p>
-    </form>
+    </div>
   );
 }
 
