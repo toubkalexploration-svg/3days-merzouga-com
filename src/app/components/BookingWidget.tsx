@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { contactEmail, contactPhoneDisplay, contactWhatsAppUrl } from "../data/contact";
+import { contactMailtoUrl } from "../data/contact";
 import type { Tour } from "../data/tours";
 import { getPriceForGroup } from "../data/tours";
 import { trackBookingSubmit } from "../lib/analytics";
@@ -12,17 +12,6 @@ type BookingWidgetProps = {
 
 export function BookingWidget({ tour }: BookingWidgetProps) {
   const [peopleInput, setPeopleInput] = useState("2");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [date, setDate] = useState("");
-  const [pickup, setPickup] = useState("");
-  const [camp, setCamp] = useState("Standard camp");
-  const [notes, setNotes] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [lastMailtoUrl, setLastMailtoUrl] = useState("");
-
   const people = useMemo(() => Math.max(1, Number.parseInt(peopleInput, 10) || 1), [peopleInput]);
   const tier = useMemo(() => getPriceForGroup(tour, people), [people, tour]);
   const total = tier.pricePerPerson * people;
@@ -38,56 +27,8 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
     setPeopleInput(String(Math.max(1, Number.parseInt(digits, 10))));
   }
 
-  function handleSendRequest() {
-    if (!name.trim()) {
-      setErrorMessage("Please enter your full name.");
-      return;
-    }
-    if (!email.trim() || !email.includes("@")) {
-      setErrorMessage("Please enter a valid email address.");
-      return;
-    }
-    if (!date) {
-      setErrorMessage("Please select your preferred departure date.");
-      return;
-    }
-
-    setErrorMessage(null);
+  function handleSubmit() {
     trackBookingSubmit(tour.title, total, people);
-
-    const subject = `Desert Tour Booking Request: ${tour.title} (${people} travelers)`;
-    const bodyLines = [
-      `Hello 3 Days Merzouga Team,`,
-      ``,
-      `I would like to request a booking for the following tour:`,
-      ``,
-      `TOUR DETAILS:`,
-      `- Tour: ${tour.title}`,
-      `- Number of travelers: ${people} person(s)`,
-      `- Estimated total: EUR ${total} (EUR ${tier.pricePerPerson} per person)`,
-      `- Preferred departure date: ${date}`,
-      `- Camp preference: ${camp}`,
-      `- Marrakech pickup location: ${pickup.trim() || "To be confirmed"}`,
-      ``,
-      `CONTACT DETAILS:`,
-      `- Full Name: ${name.trim()}`,
-      `- Email address: ${email.trim()}`,
-      `- WhatsApp: ${whatsapp.trim() || "Not provided"}`,
-      ``,
-      `SPECIAL REQUESTS / NOTES:`,
-      `${notes.trim() || "None"}`,
-      ``,
-      `Please confirm vehicle availability, pickup timing, and next steps.`,
-      ``,
-      `Best regards,`,
-      `${name.trim()}`,
-    ];
-
-    const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-    setLastMailtoUrl(mailto);
-    setSubmitted(true);
-
-    window.location.href = mailto;
   }
 
   return (
@@ -100,7 +41,17 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
         </p>
       </div>
 
-      <div className="grid gap-4 bg-white p-6">
+      <form
+        className="grid gap-4 bg-white p-6"
+        action={contactMailtoUrl}
+        method="post"
+        encType="text/plain"
+        onSubmit={handleSubmit}
+      >
+        <input type="hidden" name="Tour" value={tour.title} />
+        <input type="hidden" name="Estimated total" value={`EUR ${total}`} />
+        <input type="hidden" name="Price per person" value={`EUR ${tier.pricePerPerson}`} />
+
         <div className="grid gap-2">
           <label htmlFor="people" className="text-sm font-bold text-slate-800">
             Number of travelers (private group)
@@ -136,8 +87,6 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
           <input
             name="Date"
             type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
             className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
             required
           />
@@ -150,8 +99,6 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               name="Name"
               type="text"
               placeholder="Your full name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
               required
             />
@@ -162,8 +109,6 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               name="Email"
               type="email"
               placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
               required
             />
@@ -176,8 +121,6 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
             name="WhatsApp"
             type="tel"
             placeholder="+1 / +44 / +33 / +212 ..."
-            value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value)}
             className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
           />
         </label>
@@ -189,8 +132,6 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               name="Pickup location"
               type="text"
               placeholder="Hotel, riad name, or address"
-              value={pickup}
-              onChange={(e) => setPickup(e.target.value)}
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
             />
           </label>
@@ -198,8 +139,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
             Camp preference
             <select
               name="Camp preference"
-              value={camp}
-              onChange={(e) => setCamp(e.target.value)}
+              defaultValue="Standard camp"
               className="min-h-12 rounded-lg border border-stone-200 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
             >
               <option>Standard camp</option>
@@ -215,46 +155,21 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
             name="Message"
             rows={3}
             placeholder="Children's ages, dietary requirements (vegetarian/gluten-free), extra nights, or custom route adjustments..."
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
             className="rounded-lg border border-stone-200 bg-white px-4 py-3 text-[#132028] outline-none ring-[#e8b86f] transition focus:border-[#b8793c] focus:ring-2"
           />
         </label>
 
-        {errorMessage ? (
-          <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-bold text-red-800">
-            {errorMessage}
-          </div>
-        ) : null}
-
-        {submitted ? (
-          <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-xs leading-5 text-green-900">
-            <p className="font-bold">Opening your email application...</p>
-            <p className="mt-1 text-slate-700">
-              If your email client didn&apos;t open automatically,{" "}
-              <a href={lastMailtoUrl} className="font-bold text-brand-terracotta underline">
-                click here to open email
-              </a>{" "}
-              or message us directly on{" "}
-              <a href={contactWhatsAppUrl} className="font-bold text-green-700 underline">
-                WhatsApp ({contactPhoneDisplay})
-              </a>.
-            </p>
-          </div>
-        ) : null}
-
         <button
-          type="button"
-          onClick={handleSendRequest}
-          className="min-h-12 cursor-pointer rounded-full bg-[#b8793c] px-6 font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f] hover:shadow-lg"
+          type="submit"
+          className="min-h-12 rounded-full bg-[#b8793c] px-6 font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#96612f] hover:shadow-lg"
         >
           Send Desert Tour Request
         </button>
 
         <p className="text-center text-xs leading-5 text-slate-600">
-          This prepares your booking inquiry and opens your email application. We verify vehicle availability, hotel/camp space, and confirm exact pickup details before any payment is requested.
+          This sends your tour inquiry via email directly to our local coordination team. We verify vehicle availability, hotel/camp space, and confirm exact pickup details before any payment is requested.
         </p>
-      </div>
+      </form>
     </div>
   );
 }
