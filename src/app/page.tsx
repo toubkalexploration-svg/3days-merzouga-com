@@ -153,7 +153,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
           <SectionHeading eyebrow="Welcome to 3 Days Merzouga" title="A local team for clear, comfortable Sahara travel.">
             <p>
-              We specialize in private Marrakech to Merzouga desert tours because a focused route creates better trips. Solo travelers, couples, families, and groups travel with a professional team in a comfortable air-conditioned vehicle, with flexible pacing, customized stops, and camp upgrades when requested. Our local drivers know the High Atlas road, the valleys, and the desert rhythm, so every itinerary is practical, memorable, and easy to book with confidence.
+              We specialize in private Marrakech to Merzouga desert tours because a focused route creates better trips. Couples, families, friends, and groups travel with a professional team in a comfortable air-conditioned vehicle, with flexible pacing, customized stops, and camp upgrades when requested. Our local drivers know the High Atlas road, the valleys, and the desert rhythm, so every itinerary is practical, memorable, and easy to book with confidence.
             </p>
             <p>
               3 Days Merzouga is operated by <a href={operatorUrl} className="font-bold text-brand-terracotta underline decoration-brand-terracotta/35 underline-offset-4 transition hover:decoration-brand-terracotta">Atlas Toubkal Trek</a>, our established local Morocco travel team based in Imlil and Marrakech.

@@ -12,7 +12,7 @@ type BookingWidgetProps = {
 
 export function BookingWidget({ tour }: BookingWidgetProps) {
   const [peopleInput, setPeopleInput] = useState("2");
-  const people = useMemo(() => Math.max(1, Number.parseInt(peopleInput, 10) || 1), [peopleInput]);
+  const people = useMemo(() => Math.max(2, Number.parseInt(peopleInput, 10) || 2), [peopleInput]);
   const tier = useMemo(() => getPriceForGroup(tour, people), [people, tour]);
   const total = tier.pricePerPerson * people;
 
@@ -24,7 +24,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
       return;
     }
 
-    setPeopleInput(String(Math.max(1, Number.parseInt(digits, 10))));
+    setPeopleInput(String(Math.max(2, Number.parseInt(digits, 10))));
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -84,7 +84,7 @@ export function BookingWidget({ tour }: BookingWidgetProps) {
               onChange={(event) => updatePeopleInput(event.target.value)}
               onBlur={() => {
                 if (!peopleInput) {
-                  setPeopleInput("1");
+                  setPeopleInput("2");
                 }
               }}
               onFocus={(event) => event.currentTarget.select()}

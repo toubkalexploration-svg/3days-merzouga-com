@@ -37,7 +37,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="mt-4 text-sm leading-6 text-white/62">
-            Focused Marrakech to Merzouga desert tours for families, solo travelers, and private groups, with Dades Valley, Todra Gorge, Erg Chebbi dunes, and Sahara camp nights.
+            Focused Marrakech to Merzouga desert tours for couples, families, and private groups, with Dades Valley, Todra Gorge, Erg Chebbi dunes, and Sahara camp nights.
           </p>
           <p className="mt-3 text-xs leading-5 text-white/55">
             3 Days Merzouga is operated by <a href={operatorUrl} className="font-bold text-[#e8b86f] transition hover:text-white">{operatorName}</a>.

@@ -113,7 +113,7 @@ export const sharedFaqs: FaqItem[] = [
   {
     question: "How many people can join a tour?",
     answer:
-      "We can arrange tours for solo travelers, couples, families, friends, and larger private groups. Vehicle size and pricing depend on your group size, so share the number of travelers when you contact us.",
+      "We arrange tours for couples, families, friends, and larger private groups, starting from two travelers. Vehicle size and pricing depend on your group size, so share the number of travelers when you contact us.",
   },
   {
     question: "Are your desert tours suitable for children and families?",
@@ -123,7 +123,7 @@ export const sharedFaqs: FaqItem[] = [
   {
     question: "Is there a minimum number of participants?",
     answer:
-      "Private tours can run for one traveler, subject to vehicle, accommodation, and camp availability for the requested date.",
+      "Our private tours require a minimum of two travelers, subject to vehicle, accommodation, and camp availability for the requested date.",
   },
   {
     question: "Do you provide tours in different languages?",
@@ -232,7 +232,7 @@ export const sharedFaqs: FaqItem[] = [
   {
     question: "Can this Merzouga desert tour be private?",
     answer:
-      "Yes. We operate private tours, with a dedicated vehicle and flexible stops, pickup time, accommodation level, and pace for solo travelers, couples, families, or groups.",
+      "Yes. We operate private tours for two or more travelers, with a dedicated vehicle and flexible stops, pickup time, accommodation level, and pace for couples, families, friends, or groups.",
   },
   {
     question: "Can you adapt the itinerary?",
@@ -266,7 +266,7 @@ export const tours: Tour[] = [
     endingCity: "Fes",
     tripType: "one-way",
     tourType: "private",
-    startingPrice: 220,
+    startingPrice: 250,
     startingPriceCondition: "per person, based on 5 or more travelers",
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.todraGorge.src,
@@ -367,10 +367,9 @@ export const tours: Tour[] = [
       "Ticket to enter Ait Ben Haddou ksar (payable at the site)",
     ],
     priceTiers: [
-      { minPeople: 1, maxPeople: 1, pricePerPerson: 515 },
-      { minPeople: 2, maxPeople: 2, pricePerPerson: 360 },
-      { minPeople: 3, maxPeople: 4, pricePerPerson: 270 },
-      { minPeople: 5, pricePerPerson: 220 },
+      { minPeople: 2, maxPeople: 2, pricePerPerson: 390 },
+      { minPeople: 3, maxPeople: 4, pricePerPerson: 300 },
+      { minPeople: 5, pricePerPerson: 250 },
     ],
     faqs: [
       {
@@ -440,7 +439,7 @@ export const tours: Tour[] = [
     endingCity: "Marrakech",
     tripType: "round-trip",
     tourType: "private",
-    startingPrice: 200,
+    startingPrice: 230,
     startingPriceCondition: "per person, based on 5 or more travelers",
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.travelerDunes.src,
@@ -452,7 +451,7 @@ export const tours: Tour[] = [
     bestFor: [
       "First-time visitors who want the classic Sahara loop from Marrakech",
       "Travelers on a tight schedule who still want a real desert-camp night",
-      "Couples, friends and solo travelers who want a private vehicle and flexible pace",
+      "Couples and friends who want a private vehicle and flexible pace",
       "Anyone returning to Marrakech for an onward flight or riad stay",
     ],
     route: ["Marrakech", "Ait Ben Haddou", "Dades Valley", "Todra Gorge", "Merzouga", "Marrakech"],
@@ -539,10 +538,9 @@ export const tours: Tour[] = [
       "Ticket to enter Ait Ben Haddou ksar (payable at the site)",
     ],
     priceTiers: [
-      { minPeople: 1, maxPeople: 1, pricePerPerson: 475 },
-      { minPeople: 2, maxPeople: 2, pricePerPerson: 330 },
-      { minPeople: 3, maxPeople: 4, pricePerPerson: 250 },
-      { minPeople: 5, pricePerPerson: 200 },
+      { minPeople: 2, maxPeople: 2, pricePerPerson: 360 },
+      { minPeople: 3, maxPeople: 4, pricePerPerson: 280 },
+      { minPeople: 5, pricePerPerson: 230 },
     ],
     faqs: [
       {
@@ -612,7 +610,7 @@ export const tours: Tour[] = [
     endingCity: "Marrakech",
     tripType: "round-trip",
     tourType: "private",
-    startingPrice: 270,
+    startingPrice: 300,
     startingPriceCondition: "per person, based on 5 or more travelers",
     heroImage: photos.camelCaravanSunset.src,
     cardImage: photos.groupCamelTrek.src,
@@ -719,10 +717,9 @@ export const tours: Tour[] = [
       "Ticket to enter Ait Ben Haddou ksar (payable at the site)",
     ],
     priceTiers: [
-      { minPeople: 1, maxPeople: 1, pricePerPerson: 605 },
-      { minPeople: 2, maxPeople: 2, pricePerPerson: 420 },
-      { minPeople: 3, maxPeople: 4, pricePerPerson: 330 },
-      { minPeople: 5, pricePerPerson: 270 },
+      { minPeople: 2, maxPeople: 2, pricePerPerson: 450 },
+      { minPeople: 3, maxPeople: 4, pricePerPerson: 360 },
+      { minPeople: 5, pricePerPerson: 300 },
     ],
     faqs: [
       {
@@ -888,10 +885,11 @@ export function getRelatedTours(slug: string) {
 }
 
 export function getPriceForGroup(tour: Tour, people: number) {
+  const groupSize = Math.max(2, people);
   const tier = tour.priceTiers.find(
     (priceTier) =>
-      people >= priceTier.minPeople &&
-      (priceTier.maxPeople === undefined || people <= priceTier.maxPeople),
+      groupSize >= priceTier.minPeople &&
+      (priceTier.maxPeople === undefined || groupSize <= priceTier.maxPeople),
   );
 
   return tier ?? tour.priceTiers[tour.priceTiers.length - 1];

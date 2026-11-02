@@ -141,7 +141,7 @@ export default function ContactPage() {
                 <input
                   name="Travelers"
                   type="number"
-                  min="1"
+                  min="2"
                   defaultValue="2"
                   inputMode="numeric"
                   className="min-h-12 rounded-lg border border-white/10 bg-white px-4 text-[#132028] outline-none ring-[#e8b86f] transition focus:ring-2"
